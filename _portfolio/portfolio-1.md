@@ -1,7 +1,29 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Traffic Prediction using STD-ConvLSTM"
+excerpt: "Advanced deep learning model for traffic forecasting using spatiotemporal data from the PEMS dataset"
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+## Traffic Prediction using STD-ConvLSTM Model
+
+This project involved developing and validating an advanced STD-ConvLSTM (Spatiotemporal Decomposition Convolutional Long Short-Term Memory) model for traffic prediction using the PEMS dataset.
+
+### Key Achievements
+
+- **Superior Performance**: Successfully validated the STD-ConvLSTM model's superior performance compared to multiple baseline architectures
+- **Data Engineering**: Engineered complete data ingestion and processing pipeline using Apache Spark and PyTorch
+- **Optimization**: Methodically optimized model hyperparameters using robust evaluation frameworks
+- **Comparative Analysis**: Conducted rigorous comparative analysis against existing traffic prediction models
+
+### Technologies Used
+
+- **Deep Learning**: PyTorch for model implementation
+- **Big Data**: Apache Spark for large-scale data processing
+- **Dataset**: PEMS (Performance Measurement System) traffic data
+- **Evaluation**: Custom evaluation frameworks for performance assessment
+
+### Impact
+
+This work demonstrates the application of cutting-edge deep learning techniques to real-world traffic prediction problems, with potential applications in urban planning and intelligent transportation systems.
+
+*Project completed during internship at Symbiosis School of Economics, Pune (May-July 2025)* 
