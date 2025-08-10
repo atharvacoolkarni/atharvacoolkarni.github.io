@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "Atharva Kulkarni's personal website"
+title                    : "Atharva Kulkarni | Economist & Data Analyst"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "personal description"
@@ -25,7 +25,7 @@ author:
   avatar           : "https://avatars.githubusercontent.com/u/106998846?v=4"
   name             : "Atharva Kulkarni"
   pronouns         : # example: "she/her"  
-  bio              : "Welcome to my personal website!"
+  bio              : "Welcome to my website where I share"
   location         : "Pune, India"
   employer         : "Symbiosis School of Economics"
   uri              : # URL
