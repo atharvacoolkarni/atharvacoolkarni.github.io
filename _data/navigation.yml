@@ -13,9 +13,6 @@ main:
 
   - title: "Interests"
     url: /interests/    
-    
-  - title: "Portfolio"
-    url: /portfolio/
         
   - title: "Blog Posts"
     url: /blog-posts/
