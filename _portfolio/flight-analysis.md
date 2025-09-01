@@ -1,5 +1,7 @@
 ---
 title: "Flight Analysis"
+excerpt: "Machine learning analysis of flight delays and prediction patterns using commercial flight data"
+collection: portfolio
 layout: single
 permalink: /projects/flight-analysis/
 date: 2025-09-01
