@@ -40,13 +40,33 @@ To start with, for the purposes of answering the specific questions within this 
 
 ---
 
-### Interactive Delay Prediction Dashboard
-<iframe src="/assets/projects/flight-analysis/prediction_dashboard.html" width="100%" height="600"></iframe>
+### Hourly delay over two years
+<iframe src="/assets/projects/flight-analysis/hourly_delay_plot.html" width="100%" height="600"></iframe>
 
 ---
 
-### Model Performance Analysis
-<iframe src="/assets/projects/flight-analysis/model_performance.html" width="100%" height="800"></iframe>
+### Weekly delay over two years
+<iframe src="/assets/projects/flight-analysis/weekly_delay_plot.html" width="100%" height="800"></iframe>
+
+---
+
+### Monthly delay over two years
+<iframe src="/assets/projects/flight-analysis/monthly_delay_plot.html" width="100%" height="800"></iframe>
+
+---
+
+### Total delay mean by year or manufacture
+<iframe src="/assets/projects/flight-analysis/plane_age_plot.html" width="100%" height="800"></iframe>
+
+---
+
+### Flight distribution by route over two years
+<iframe src="/assets/projects/flight-analysis/route_analysis_plot.html" width="100%" height="800"></iframe>
+
+---
+
+### Airpot delay correlation matrix (top 5 airports)
+<iframe src="/assets/projects/flight-analysis/correlation_heatmap.html" width="100%" height="800"></iframe>
 
 ---
 
