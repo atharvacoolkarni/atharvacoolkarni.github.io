@@ -11,54 +11,31 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* M.Sc. in Economics, Symbiosis School of Economics, Symbiosis International University, 2026 (expected)
+* B.Sc. in Data Science and Applications, Indian Institute of Technology - Madras, 2027 (expected)
+* B.A. in Economics (Hons), Indira Gandhi National Open University, 2024
+* B.Sc. in Economics (Hons), Indian School of Business and Finance, University of London, 2023
 
-Work experience
+Internship
 ======
-* Spring 2024: Academic Pages Collaborator
-  * GitHub University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
-
-* Fall 2015: Research Assistant
-  * GitHub University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-
-* Summer 2015: Research Assistant
-  * GitHub University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Symbiosis School of Economics, Pune (May 5 - July 17 2025): 
+  * Validated the superior performance of an advanced STD-ConvLSTM model on the PEMS dataset, a novel application that successfully outperformed multiple baseline architectures.
+  * Engineered the complete data ingestion and processing pipeline using Apache Spark and PyTorch to enable efficient handling of the large-scale traffic dataset.
+  * Methodically optimized model hyperparameters and implemented a robust evaluation framework to conduct a rigorous comparative analysis of performance.
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
-
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
+* Programming:
+    * Python
+    * R
+    * SQL
+* Business Intelligence:
+    * PowerBI
+    * Excel
+    * Orange
+* Big Data:
+    * Apache Hadoop
+    * Apache Spark
+* Data Skills:
+    * Data Visualization
+    * Data Manipulation
