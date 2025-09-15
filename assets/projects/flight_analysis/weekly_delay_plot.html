@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Flight Delay Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #ffffff;
+      color: #000000;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .toggle-theme.light-btn {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    canvas {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-theme" id="themeBtn">🌙 Dark Mode</button>
+  <canvas id="myChart" width="900" height="500"></canvas>
+
+  <script>
+    let isDark = false;
+    let chart;
+
+    fetch("weekly_delay_data.json")
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.days,
+            datasets: [
+              {
+                label: 'Total Delay',
+                data: data.total_delay,
+                backgroundColor: '#dc3545',
+                barPercentage: 0.5,
+                categoryPercentage: 0.8
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Weekly Flight Delay Analysis',
+                font: { size: 20 },
+                color: '#000000'
+              },
+              legend: { labels: { color: '#000000' } }
+            },
+            scales: {
+              x: {
+                title: { display: true, text: 'Day of Week', color: '#000000' },
+                ticks: { color: '#000000' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              y: {
+                title: { display: true, text: 'Average Delay (minutes)', color: '#000000' },
+                ticks: { color: '#000000' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              }
+            }
+          }
+        });
+      });
+
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      if (!chart) return;
+
+      isDark = !isDark;
+
+      if (isDark) {
+        document.body.style.background = '#1a1a1a';
+        document.body.style.color = '#ffffff';
+        chart.options.plugins.title.color = '#ffffff';
+        chart.options.plugins.legend.labels.color = '#ffffff';
+        chart.options.scales.x.ticks.color = '#ffffff';
+        chart.options.scales.y.ticks.color = '#ffffff';
+        chart.options.scales.x.title.color = '#ffffff';
+        chart.options.scales.y.title.color = '#ffffff';
+        chart.options.scales.x.grid.color = 'rgba(255,255,255,0.2)';
+        chart.options.scales.y.grid.color = 'rgba(255,255,255,0.2)';
+
+        chart.data.datasets[0].backgroundColor = '#fbc02d';
+
+        document.getElementById('themeBtn').textContent = '☀️ Light Mode';
+        document.getElementById('themeBtn').classList.add('light-btn');
+      } else {
+        document.body.style.background = '#ffffff';
+        document.body.style.color = '#000000';
+        chart.options.plugins.title.color = '#000000';
+        chart.options.plugins.legend.labels.color = '#000000';
+        chart.options.scales.x.ticks.color = '#000000';
+        chart.options.scales.y.ticks.color = '#000000';
+        chart.options.scales.x.title.color = '#000000';
+        chart.options.scales.y.title.color = '#000000';
+        chart.options.scales.x.grid.color = 'rgba(0,0,0,0.1)';
+        chart.options.scales.y.grid.color = 'rgba(0,0,0,0.1)';
+
+        chart.data.datasets[0].backgroundColor = '#dc3545';
+
+        document.getElementById('themeBtn').textContent = '🌙 Dark Mode';
+        document.getElementById('themeBtn').classList.remove('light-btn');
+      }
+
+      chart.update();
+    });
+  </script>
+</body>
+</html>
