@@ -133,6 +133,27 @@
       }
     }
   }
+  /* custom LinkedIn hover: blue → black */
+  &--linkedin {
+    background-color: #0A66C2; /* default LinkedIn blue */
+    color: #fff !important;
+
+    &:hover {
+      background-color: #333333; /* flip to black */
+      color: #fff !important;
+    }
+  }
+
+  /* custom X (formerly Twitter) button */
+  &--twitter {
+    background-color: #000; /* black */
+    color: #fff !important;
+
+    &:hover {
+      background-color: #1DA1F2; /* Twitter blue hover */
+      color: #fff !important;
+    }
+  }
 
   /* extra large button */
 
