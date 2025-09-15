@@ -96,10 +96,10 @@ As we can see in the hourly mean arrival and departure delay visualizations from
 The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours). This persists till 04:00 hours where it drops into the negatives. The highest departure delay mean is also in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours).
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/interactive_hourly_delay_canvas.html" width="100%" height="800"></iframe>
+  <iframe src="/assets/projects/flight_analysis/hourly_delay_plot.html" width="100%" height="550px"></iframe>
 </div>
 
-_Figure 1 & 2: Interactive hourly mean delay analysis - Click "Python Analysis" or "R Analysis" to switch between datasets_
+_Figure 1: Interactive hourly mean delay_
 
 In general, the time between 14:00 to 22:00 (2 PM to 10 PM) is when a lot of delays occur. There is also an abnormal increase at 03:00 to 04:00 in the early morning. Hence, the best time of the day to fly, in order to minimise delays, is during the early morning, from 05:00 to 06:00. In order to avoid peak delays, a person should avoid the evening hours of 17:00 to 21:00 and the early morning hour at 04:00.
 
@@ -109,11 +109,11 @@ Next, we have the day of the week. First, the weekly data frame is created by ex
 
 The best day of the week, where total delays are the lowest, is Saturday. The total delay mean is close to ten minutes on Saturday while the second lowest is Tuesday where it is close to 12.5 minutes. The highest total delay mean is on Thursday and Friday with both having more than 17.5 minutes in the total delay mean. The next highest is Monday with just under 17.5 minutes.
 
-<iframe src="/assets/projects/flight-analysis/weekly_delay_plot.html" width="100%" height="800"></iframe>
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/weekly_delay_plot.html" width="100%" height="550px"></iframe>
+</div>
 
-_Figure 5: Weekly mean (Python)_
-
-_Figure 6: Weekly mean (R)_
+_Figure 2: Weekly mean delay_
 
 Hence, the best day of the week is Saturday. To avoid delays, it is best to avoid Thursdays, Fridays, and Mondays.
 
@@ -121,11 +121,11 @@ Hence, the best day of the week is Saturday. To avoid delays, it is best to avoi
 
 The best time of the year to fly, by month, is September which has a mean of about six minutes. The next best month is April which has a mean of about seven minutes. The highest mean is during July, with December and June coming in 2nd and 3rd place for highest mean. This corresponds to the Summer and Winter break, hence the rise in delays. January also has high delays due to spill over from Winter break and New Year’s. It can also include the weather from winter season in December and January. The same can be seen in the R visualization.
 
-<iframe src="/assets/projects/flight-analysis/monthly_delay_plot.html" width="100%" height="800"></iframe>
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/monthly_delay_plot.html" width="100%" height="550px"></iframe>
+</div>
 
-_Figure 5: Monthly mean (Python)_
-
-_Figure 6: Monthly mean (R)_
+_Figure 3: Monthly mean delay_
 
 ## Do older planes suffer more delays?
 
