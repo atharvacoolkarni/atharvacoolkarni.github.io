@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correlation Heatmap</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .legend-container {
+            display: flex;
+            flex-direction: row;
+            margin-left: 20px;
+            height: 400px;
+        }
+        .color-bar {
+            width: 20px;
+            background: linear-gradient(to bottom, red, white, blue);
+        }
+        .legend-values {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-left: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <div style="width: 600px; height: 600px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="legend-container">
+            <div class="color-bar"></div>
+            <div class="legend-values">
+                <span>1.0</span>
+                <span>0.5</span>
+                <span>0.0</span>
+                <span>-0.5</span>
+                <span>-1.0</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const airports = ['ATL', 'DFW', 'DEN', 'ORD', 'LAX'];
+        const correlations = [
+            [1.0, 0.5, 0.2, -0.1, 0.3],
+            [0.5, 1.0, 0.4, 0.6, -0.2],
+            [0.2, 0.4, 1.0, 0.3, 0.1],
+            [-0.1, 0.6, 0.3, 1.0, 0.7],
+            [0.3, -0.2, 0.1, 0.7, 1.0]
+        ];
+        const dataPoints = [];
+        for (let yIdx = 0; yIdx < airports.length; yIdx++) {
+            for (let xIdx = 0; xIdx < airports.length; xIdx++) {
+                dataPoints.push({
+                    x: airports[xIdx],
+                    y: airports[yIdx],
+                    v: correlations[yIdx][xIdx]
+                });
+            }
+        }
+        const config = {
+            type: 'matrix',
+            data: {
+                datasets: [{
+                    label: 'Correlation Matrix',
+                    data: dataPoints,
+                    backgroundColor(context) {
+                        if (!context.dataset) return;
+                        const value = context.dataset.data[context.dataIndex].v;
+                        const white = Chart.helpers.color('white');
+                        if (value < 0) {
+                            return white.mix(Chart.helpers.color('blue'), -value).rgbString();
+                        } else {
+                            return white.mix(Chart.helpers.color('red'), value).rgbString();
+                        }
+                    },
+                    borderColor: 'rgba(0,0,0,0.1)',
+                    borderWidth: 1,
+                    width: ({chart}) => (chart.chartArea || {}).width / airports.length - 1,
+                    height: ({chart}) => (chart.chartArea || {}).height / airports.length - 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title() {
+                                return '';
+                            },
+                            label(context) {
+                                const v = context.dataset.data[context.dataIndex].v;
+                                return 'Corr: ' + v.toFixed(2);
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Correlation Heatmap for the top 5 airports by total delay'
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'category',
+                        labels: airports,
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Destination Airport'
+                        },
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: true
+                        }
+                    },
+                    y: {
+                        type: 'category',
+                        labels: airports,
+                        reverse: true,
+                        offset: true,
+                        title: {
+                            display: true,
+                            text: 'Origin Airport'
+                        },
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            display: true
+                        }
+                    }
+                }
+            }
+        };
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>

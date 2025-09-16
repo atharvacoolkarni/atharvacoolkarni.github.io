@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Percentage Stacked Bar Plot</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fff;
+      color: #000;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .toggle-theme {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      font-weight: 600;
+    }
+    .toggle-theme.light-btn {
+      background: #fff;
+      color: #000;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-theme" id="themeBtn">🌙 Dark Mode</button>
+  <canvas id="myChart" width="900" height="500"></canvas>
+
+  <script>
+    // Light/dark color themes (solid colors, no transparency)
+    const LIGHT = {
+      pageBg: '#ffffff',
+      text: '#111111',
+      grid: 'rgba(0,0,0,0.08)',
+      title: '#111111',
+      dataset: ['#1976d2', '#20c997'],     // 2004 (blue), 2005 (green)
+      hover:   ['#155fa0', '#17a589']
+    };
+
+    const DARK = {
+      pageBg: '#0f1724',
+      text: '#ffffff',
+      grid: 'rgba(255,255,255,0.06)',
+      title: '#ffffff',
+      dataset: ['#64b5f6', '#4dd0e1'],    // lighter variants for dark background
+      hover:   ['#42a5f5', '#26c6da']
+    };
+
+    let isDark = false;
+    let chart = null;
+
+    function createChart(data, theme) {
+      const ctx = document.getElementById('myChart').getContext('2d');
+
+      // Build datasets with solid colors and stacked option
+      const datasets = [
+        {
+          label: '2004',
+          data: data.datasets[0].data,
+          backgroundColor: theme.dataset[0],
+          hoverBackgroundColor: theme.hover[0],
+          stack: 'stack1'
+        },
+        {
+          label: '2005',
+          data: data.datasets[1].data,
+          backgroundColor: theme.dataset[1],
+          hoverBackgroundColor: theme.hover[1],
+          stack: 'stack1'
+        }
+      ];
+
+      return new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Percentage stacked bar plot of 5 connections over two years',
+              font: { size: 18 },
+              color: theme.title
+            },
+            legend: {
+              labels: { color: theme.text }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  // show value with percent sign
+                  const val = context.parsed.y;
+                  return `${context.dataset.label}: ${val}%`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              stacked: true,
+              title: { display: true, text: 'Connection', color: theme.text },
+              ticks: { color: theme.text },
+              grid: { color: theme.grid }
+            },
+            y: {
+              stacked: true,
+              title: { display: true, text: 'Percentage', color: theme.text },
+              min: 0,
+              max: 100,
+              ticks: {
+                callback: function(value) { return value + '%'; },
+                color: theme.text
+              },
+              grid: { color: theme.grid }
+            }
+          }
+        }
+      });
+    }
+
+    // load JSON and initialize chart in light mode
+    fetch('select5_airports.json')
+      .then(r => r.json())
+      .then(data => {
+        // create initial chart with LIGHT theme
+        chart = createChart(data, LIGHT);
+      })
+      .catch(err => {
+        console.error("Error loading JSON:", err);
+      });
+
+    // Theme toggle logic
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      if (!chart) return;
+      isDark = !isDark;
+
+      const theme = isDark ? DARK : LIGHT;
+
+      // update page styles
+      document.body.style.background = theme.pageBg;
+      document.body.style.color = theme.text;
+
+      // update button text + style
+      const btn = document.getElementById('themeBtn');
+      if (isDark) {
+        btn.textContent = '☀️ Light Mode';
+        btn.classList.remove('light-btn');
+      } else {
+        btn.textContent = '🌙 Dark Mode';
+        btn.classList.add('light-btn');
+      }
+
+      // update chart config colors
+      chart.options.plugins.title.color = theme.title;
+      chart.options.plugins.legend.labels.color = theme.text;
+      chart.options.scales.x.title.color = theme.text;
+      chart.options.scales.y.title.color = theme.text;
+      chart.options.scales.x.ticks.color = theme.text;
+      chart.options.scales.y.ticks.color = theme.text;
+      chart.options.scales.x.grid.color = theme.grid;
+      chart.options.scales.y.grid.color = theme.grid;
+
+      // update dataset colors
+      chart.data.datasets.forEach((ds, idx) => {
+        ds.backgroundColor = theme.dataset[idx] || ds.backgroundColor;
+        ds.hoverBackgroundColor = theme.hover[idx] || ds.hoverBackgroundColor;
+      });
+
+      chart.update();
+    });
+  </script>
+</body>
+</html>
