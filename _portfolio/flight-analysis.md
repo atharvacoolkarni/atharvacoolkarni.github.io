@@ -135,7 +135,9 @@ There are two regression lines in each plot. This is done due to the sampling di
 
 The data is much more scattered in pre-1980s as opposed to post-1980s where there is much more data that results in a more gathered plot. Likewise, the confidence interval is much wider for pre-1980s as compared to post-1980s. Since there is a sampling issue with pre-1980s, we cannot reasonably apply the conclusion for all years. Hence, 1980 onwards, data points and analysis show that older planes did suffer more delays. We can see that there is a slow downward trend with much more scatter appearing below the trend line post-1990s and that there is much more scatter above the trend line during the 1980s. Meanwhile, pre-1980, the delays were increasing as seen by the upward sloping regression line.
 
-<iframe src="/assets/projects/flight-analysis/plane_age_plot.html" width="100%" height="800"></iframe>
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plane_age_plot.html" width="100%" height="550px"></iframe>
+</div>
 
 _Figure 9: Regression plot of total delay against year of manufacture (Python)_
 
@@ -149,7 +151,9 @@ In both visualizations, we can see that there is quite a lot of change for most 
 
 DTW – SBN (Detroit, Michigan – South Bend, Indiana) and LGA – STT (Queens, New York – St. Thomas, US Virgin Islands) have about the same amount of change, percentage wise. Both had just below 40% in 2004 which increased to more than 60% in 2005. AKN – DLG (King Salmon, Alaska – Dillingham, Alaska) had the opposite change with 60% in 2004 dropping to 40% in 2005.
 
-<iframe src="/assets/projects/flight-analysis/route_analysis_plot.html" width="100%" height="800"></iframe>
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/select5_airports.html" width="100%" height="550px"></iframe>
+</div>
 
 _Figure 7: Top 5 connections by total flights (Python)_
 
@@ -161,7 +165,9 @@ _Figure 8: Top 5 connections by total flights (R)_
 
 For Question 4, two different data subsets were taken for Python and R. For Python, the top 5 connections, in ascending order, with total flights between 100 and 500 were analysed while for R, the top 5 connections, in ascending order, with total flights between 1000 and 2500 were analysed. This was done due to the fact that at higher levels of total flights, there is very little change since the total flights number is so large. Hence, to find a greater change between 2004 and 2005, the data was filtered and analysed.
 
-<iframe src="/assets/projects/flight-analysis/correlation_heatmap.html" width="100%" height="800"></iframe>
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/correlation_matrix.html" width="100%" height="550px"></iframe>
+</div>
 
 _Figure 13: Triangle correlation heatmap of top 5 airports (Python)_
 

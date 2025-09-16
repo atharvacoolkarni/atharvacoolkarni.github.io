@@ -40,6 +40,7 @@
 </head>
 <body>
   <button class="toggle-theme" id="themeBtn">🌙 Dark Mode</button>
+
   <canvas id="myChart" width="900" height="500"></canvas>
 
   <script>
@@ -57,23 +58,40 @@
             labels: data.hours,
             datasets: [
               {
-                label: 'Arrival Delay',
-                data: data.arrival,
-                backgroundColor: '#dc3545',
-                barPercentage: 0.5,
-                categoryPercentage: 0.8
-              },
-              {
                 label: 'Departure Delay',
                 data: data.departure,
                 backgroundColor: '#17a2b8',
-                barPercentage: 0.5,
+                hoverBackgroundColor: '#138496',
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+              },
+              {
+                label: 'Arrival Delay',
+                data: data.arrival,
+                backgroundColor: '#dc3545',
+                hoverBackgroundColor: '#a71d2a',
+                barPercentage: 0.7,
                 categoryPercentage: 0.8
               }
             ]
           },
           options: {
             responsive: false,
+            onClick: (evt, elements) => {
+              if (elements.length > 0) {
+                const datasetIndex = elements[0].datasetIndex;
+                chart.setDatasetVisibility(datasetIndex, !chart.isDatasetVisible(datasetIndex));
+                chart.update();
+              } else {
+                chart.data.datasets.forEach((_, idx) => {
+                  chart.setDatasetVisibility(idx, true);
+                });
+                chart.update();
+              }
+            },
+            onHover: (evt, elements) => {
+              evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+            },
             plugins: {
               title: {
                 display: true,
@@ -83,6 +101,9 @@
               },
               legend: {
                 labels: { color: '#000000' }
+              },
+              tooltip: {
+                enabled: true
               }
             },
             scales: {
@@ -96,6 +117,11 @@
                 ticks: { color: '#000000' },
                 grid: { color: 'rgba(0,0,0,0.1)' }
               }
+            },
+            interaction: {
+              mode: 'nearest',
+              axis: 'x',
+              intersect: true
             }
           }
         });
@@ -118,8 +144,10 @@
         chart.options.scales.x.grid.color = 'rgba(255,255,255,0.2)';
         chart.options.scales.y.grid.color = 'rgba(255,255,255,0.2)';
 
-        chart.data.datasets[0].backgroundColor = '#fbc02d';
-        chart.data.datasets[1].backgroundColor = '#4fc3f7';
+        chart.data.datasets[0].backgroundColor = '#4fc3f7';
+        chart.data.datasets[0].hoverBackgroundColor = '#039be5';
+        chart.data.datasets[1].backgroundColor = '#fbc02d';
+        chart.data.datasets[1].hoverBackgroundColor = '#f57f17';
 
         document.getElementById('themeBtn').textContent = '☀️ Light Mode';
         document.getElementById('themeBtn').classList.add('light-btn');
@@ -135,8 +163,10 @@
         chart.options.scales.x.grid.color = 'rgba(0,0,0,0.1)';
         chart.options.scales.y.grid.color = 'rgba(0,0,0,0.1)';
 
-        chart.data.datasets[0].backgroundColor = '#dc3545';
-        chart.data.datasets[1].backgroundColor = '#17a2b8';
+        chart.data.datasets[0].backgroundColor = '#17a2b8';
+        chart.data.datasets[0].hoverBackgroundColor = '#138496';
+        chart.data.datasets[1].backgroundColor = '#dc3545';
+        chart.data.datasets[1].hoverBackgroundColor = '#a71d2a';
 
         document.getElementById('themeBtn').textContent = '🌙 Dark Mode';
         document.getElementById('themeBtn').classList.remove('light-btn');

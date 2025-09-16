@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Total Delay mean by year of manufacture</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #ffffff;
+      color: #000;
+    }
+    canvas { display:block; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <canvas id="myChart" width="900" height="500"></canvas>
+
+  <script>
+  function withAlpha(rgbaStr, alpha) {
+    return rgbaStr.replace(/rgba\((\s*\d+,\s*\d+,\s*\d+),\s*[\d.]+\)/, `rgba($1, ${alpha})`);
+  }
+
+  fetch('regression_data.json')
+    .then(r => r.json())
+    .then(raw => {
+      const groups = [
+        { key: '1956-1979', color: 'rgba(0,123,255,1)' },
+        { key: '1980-2007', color: 'rgba(255,123,0,1)' }
+      ];
+
+      const datasets = [];
+
+      groups.forEach(g => {
+        const d = raw[g.key];
+        if (!d) return;
+
+        const points = d.x.map((x,i) => ({
+          x: Number(x),
+          y: Number(d.y[i]),
+          fit: Number(d.fit[i]),
+          ci_low: Number(d.ci_low[i]),
+          ci_high: Number(d.ci_high[i])
+        })).sort((a,b) => a.x - b.x);
+
+        const xs = points.map(p => p.x);
+        const ys = points.map(p => p.y);
+        const fits = points.map(p => p.fit);
+        const ci_low = points.map(p => p.ci_low);
+        const ci_high = points.map(p => p.ci_high);
+
+        // Scatter points (interactive)
+        datasets.push({
+          label: g.key,
+          data: xs.map((x,i) => ({x: x, y: ys[i]})),
+          backgroundColor: g.color,
+          borderColor: g.color,
+          pointRadius: 4,
+          showLine: false,
+          order: 3
+        });
+
+        // Regression fit line (non-interactive)
+        datasets.push({
+          label: `${g.key} fit`,
+          data: xs.map((x,i) => ({x: x, y: fits[i]})),
+          borderColor: g.color,
+          borderWidth: 2,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 0,  // disable hover
+          fill: false,
+          tension: 0,
+          order: 4
+        });
+
+        // CI lower (non-interactive, just fill)
+        datasets.push({
+          label: `${g.key} CI lower`,
+          data: xs.map((x,i) => ({x: x, y: ci_low[i]})),
+          borderColor: 'transparent',
+          backgroundColor: withAlpha(g.color, 0.15),
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 0,
+          borderWidth: 0,
+          fill: '+1',
+          tension: 0,
+          order: 1
+        });
+
+        // CI upper (non-interactive, just fill)
+        datasets.push({
+          label: `${g.key} CI upper`,
+          data: xs.map((x,i) => ({x: x, y: ci_high[i]})),
+          borderColor: 'transparent',
+          backgroundColor: withAlpha(g.color, 0.15),
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 0,
+          borderWidth: 0,
+          fill: false,
+          tension: 0,
+          order: 2
+        });
+      });
+
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: { datasets: datasets },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Total Delay mean by year of manufacture',
+              font: { size: 20 }
+            },
+            tooltip: {
+              callbacks: {
+                title: function(ctx) {
+                  return ctx[0].parsed.x.toFixed(0); // year
+                },
+                label: function(ctx) {
+                  const lbl = ctx.dataset.label || '';
+                  if (lbl.includes('fit') || lbl.includes('CI')) {
+                    return null; // disable tooltip for regression + CI
+                  }
+                  return `Total Delay: ${ctx.parsed.y.toFixed(1)}`;
+                }
+              },
+              filter: function(ctx) {
+                // Only show tooltips for scatter points
+                return !(ctx.dataset.label.includes('fit') || ctx.dataset.label.includes('CI'));
+              }
+            },
+            legend: {
+              labels: {
+                filter: (legendItem) => {
+                  return !(legendItem.text && (legendItem.text.includes('CI') || legendItem.text.includes('fit')));
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              title: { display: true, text: 'Year' },
+              ticks: { 
+                precision: 0,
+                callback: function(value) { return value; }  // no commas
+              }
+            },
+            y: {
+              title: { display: true, text: 'Mean Total Delay' },
+              ticks: {
+                callback: function(value) { return value.toFixed(1); }  // 1 decimal place
+              }
+            }
+          }
+        }
+      });
+
+    })
+    .catch(err => {
+      console.error('Error loading regression_data.json or rendering chart:', err);
+      const pre = document.createElement('pre');
+      pre.textContent = 'Error: ' + err;
+      document.body.appendChild(pre);
+    });
+  </script>
+</body>
+</html>
