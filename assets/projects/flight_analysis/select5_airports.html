@@ -22,11 +22,18 @@
       cursor: pointer;
       border: none;
       border-radius: 6px;
-      background: #222;
-      color: #fff;
       font-weight: 600;
+      transition: background 0.25s, color 0.25s, border 0.25s;
     }
+
+    /* Button in light mode: black */
     .toggle-theme.light-btn {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Button in dark mode: white */
+    .toggle-theme.dark-btn {
       background: #fff;
       color: #000;
       border: 1px solid rgba(0,0,0,0.08);
@@ -39,27 +46,26 @@
   </style>
 </head>
 <body>
-  <button class="toggle-theme" id="themeBtn">🌙 Dark Mode</button>
+  <button class="toggle-theme light-btn" id="themeBtn">🌙 Dark Mode</button>
   <canvas id="myChart" width="900" height="500"></canvas>
 
   <script>
-    // Light/dark color themes (solid colors, no transparency)
     const LIGHT = {
       pageBg: '#ffffff',
       text: '#111111',
-      grid: 'rgba(0,0,0,0.08)',
+      grid: 'rgba(0,0,0,0.1)',
       title: '#111111',
-      dataset: ['#1976d2', '#20c997'],     // 2004 (blue), 2005 (green)
-      hover:   ['#155fa0', '#17a589']
+      dataset: ['#17a2b8', '#dc3545'],
+      hover:   ['#138496', '#a71d2a']
     };
 
     const DARK = {
-      pageBg: '#0f1724',
+      pageBg: '#1a1a1a',
       text: '#ffffff',
-      grid: 'rgba(255,255,255,0.06)',
+      grid: 'rgba(255,255,255,0.2)',
       title: '#ffffff',
-      dataset: ['#64b5f6', '#4dd0e1'],    // lighter variants for dark background
-      hover:   ['#42a5f5', '#26c6da']
+      dataset: ['#4fc3f7', '#fbc02d'],
+      hover:   ['#039be5', '#f57f17']
     };
 
     let isDark = false;
@@ -67,8 +73,6 @@
 
     function createChart(data, theme) {
       const ctx = document.getElementById('myChart').getContext('2d');
-
-      // Build datasets with solid colors and stacked option
       const datasets = [
         {
           label: '2004',
@@ -85,13 +89,9 @@
           stack: 'stack1'
         }
       ];
-
       return new Chart(ctx, {
         type: 'bar',
-        data: {
-          labels: data.labels,
-          datasets: datasets
-        },
+        data: { labels: data.labels, datasets: datasets },
         options: {
           responsive: false,
           plugins: {
@@ -101,13 +101,10 @@
               font: { size: 18 },
               color: theme.title
             },
-            legend: {
-              labels: { color: theme.text }
-            },
+            legend: { labels: { color: theme.text } },
             tooltip: {
               callbacks: {
                 label: function(context) {
-                  // show value with percent sign
                   const val = context.parsed.y;
                   return `${context.dataset.label}: ${val}%`;
                 }
@@ -126,10 +123,7 @@
               title: { display: true, text: 'Percentage', color: theme.text },
               min: 0,
               max: 100,
-              ticks: {
-                callback: function(value) { return value + '%'; },
-                color: theme.text
-              },
+              ticks: { callback: (v) => v + '%', color: theme.text },
               grid: { color: theme.grid }
             }
           }
@@ -137,39 +131,35 @@
       });
     }
 
-    // load JSON and initialize chart in light mode
+    // Initialize chart in light mode
     fetch('select5_airports.json')
       .then(r => r.json())
-      .then(data => {
-        // create initial chart with LIGHT theme
-        chart = createChart(data, LIGHT);
-      })
-      .catch(err => {
-        console.error("Error loading JSON:", err);
-      });
+      .then(data => { chart = createChart(data, LIGHT); })
+      .catch(err => console.error("Error loading JSON:", err));
 
     // Theme toggle logic
     document.getElementById('themeBtn').addEventListener('click', () => {
       if (!chart) return;
       isDark = !isDark;
-
       const theme = isDark ? DARK : LIGHT;
 
       // update page styles
       document.body.style.background = theme.pageBg;
       document.body.style.color = theme.text;
 
-      // update button text + style
+      // update button
       const btn = document.getElementById('themeBtn');
       if (isDark) {
         btn.textContent = '☀️ Light Mode';
         btn.classList.remove('light-btn');
+        btn.classList.add('dark-btn');
       } else {
         btn.textContent = '🌙 Dark Mode';
+        btn.classList.remove('dark-btn');
         btn.classList.add('light-btn');
       }
 
-      // update chart config colors
+      // update chart
       chart.options.plugins.title.color = theme.title;
       chart.options.plugins.legend.labels.color = theme.text;
       chart.options.scales.x.title.color = theme.text;
@@ -179,7 +169,6 @@
       chart.options.scales.x.grid.color = theme.grid;
       chart.options.scales.y.grid.color = theme.grid;
 
-      // update dataset colors
       chart.data.datasets.forEach((ds, idx) => {
         ds.backgroundColor = theme.dataset[idx] || ds.backgroundColor;
         ds.hoverBackgroundColor = theme.hover[idx] || ds.hoverBackgroundColor;

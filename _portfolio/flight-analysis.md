@@ -1,18 +1,22 @@
 ---
 title: "Flight Analysis [work in progress]"
-excerpt: "Machine learning analysis of flight delays and prediction patterns using commercial flight data"
+excerpt: "Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data."
 collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/flight-analysis/
 date: 2025-09-14
-last_modified_at: 2025-09-15
+last_modified_at: 2025-09-17
 ---
 
 <div class="notice">
-  <strong>Note:</strong><br> 
+  <strong>Note:</strong><br>
   <br>
-  This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008). I will be redoing this analysis for the entire dataset soon and updating it here. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
+  1. This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008) due to memory and performance constraints. I will be redoing this analysis for the entire dataset soon using big data tools and updating it here.<br>
+  <br>
+  2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
+  <br>
+  3. I have only attached some R plots as of yet. Once the complete analysis using the full dataset is done, I will be uploading both: Python and R plots for all questions.<br>
   <br>
   Stay tuned!
 </div>
@@ -141,8 +145,6 @@ The data is much more scattered in pre-1980s as opposed to post-1980s where ther
 
 _Figure 9: Regression plot of total delay against year of manufacture (Python)_
 
-_Figure 10: Regression plot of total delay against year of manufacture (R)_
-
 ## How does the number of people (number of flights) flying between different locations change over time?
 
 For Question 3, the data was split in two: pre-1980 year of manufacture and post-1980 year of manufacture. This is due to the sampling variations between the two periods. There are about 8 million observations in post-1980 compared to the 500,000 in pre-1980. Hence, it wouldn’t give an accurate representation if the two were not separated.
@@ -159,19 +161,17 @@ _Figure 7: Top 5 connections by total flights (Python)_
 
 The R visualization is quite interesting, almost resembling a step graph. The largest change is, of course, between MSY – SLC (New Orleans, Louisiana – Salt Lake, Utah) where the percentage change is 100% which means that the flights in 2005 are double of those in 2004. The second largest is between GSO – TPA (Greensboro, North Carolina – Port Alsworth, Alaska) where there was an increase from 25% to 75% of total flights. There is a similar increase between GRB – MQT (Green Bay, Wisconsin – Gwinn, Michigan) where it increased from about 30% to 70% from 2004 to 2005. The connection between AKN – ANC (King Salmon, Alaska – Anchorage, Alaska) had almost no change at all with the percentage increasing from just below 50% to just a little over 50% from 2004 to 2005. A similar change is noted in BDL – IAH (Windsor Locks, Connecticut – Houston, Texas) with the increase being from about 45% to 55%.
 
+![Top 5 connections](/assets/projects/flight_analysis/Q3 R.png)
+
 _Figure 8: Top 5 connections by total flights (R)_
 
 ## Can you detect cascading failures as delays in one airport create delays in others?
 
 For Question 4, two different data subsets were taken for Python and R. For Python, the top 5 connections, in ascending order, with total flights between 100 and 500 were analysed while for R, the top 5 connections, in ascending order, with total flights between 1000 and 2500 were analysed. This was done due to the fact that at higher levels of total flights, there is very little change since the total flights number is so large. Hence, to find a greater change between 2004 and 2005, the data was filtered and analysed.
 
-<div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/correlation_matrix.html" width="100%" height="550px"></iframe>
-</div>
+![Correlation matrix](/assets/projects/flight_analysis/Q4 python.png)
 
 _Figure 13: Triangle correlation heatmap of top 5 airports (Python)_
-
-_Figure 14: Triangle correlation heatmap of top 5 airports (R)_
 
 It is possible to detect cascading failures as delays. The visualizations from Python and R both show the same information. We can see that there are indeed delays which cascade from one airport into another. There is perfect correlation between ORD (O’Hare airport, Chicago) and DFW (Dallas/Fort Worth airport, Dallas-Fort Worth) which means that the delays in ORD constantly cascade to DFW and result in delays in DFW. There are other similarly high correlations between other airports. PHL (Philadelphia airport, Philadelphia) and ATL (Hartsfield-Jackson airport, Atlanta) have a delay correlation of 0.95 while PHL has pretty much the same correlation with EWR (Newark Liberty airport, Newark) that has a correlation of 0.96. ORD and ATL have a correlation of 0.88 while EWR and DFW have a correlation of 0.8. The high positive correlations imply that delays in one airport, like PHL, do translate to or be associated with delays in the other airport, like ATL. This could be an indication that cascading failures are occurring between the airports. There is also much lower correlation such as 0.53 between ORD and EWR as well as 0.41 between PHL and ORD. This means that there is a moderately positive relationship in delays between the airports but does not necessarily mean that cascading failures are occurring. It is also to be noted that there is a correlation of 0.067, about 0, between EWR and ATL. This means that the delays in EWR do not affect the delays in ATL. There are also negative correlations between DFW and ATL, of -0.99, as well as between PHL and DFW, of -0.91. This means delays in DFW and PHL do not translate to delays in ATL and DFW, respectively.
 
@@ -183,9 +183,13 @@ For Question 5, the variables that immediately impact arrival and departure dela
 
 The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [[4]][[5]][[6]]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [[4]]. We can also change the train-test ratio and see if it can improve the model.
 
+![AUC score](/assets/projects/flight_analysis/Q5 python.png)
+
 _Figure 15: Machine learning model (Python)_
 
 On the left is the graph visualizing the various mean squared error (MSE) values for the regression models. The values for each model are given in the table below. As we can see, the MSE values vary quite a bit. The random forest model has the highest MSE with the most range as well. Its mean MSE value is 26.6. The second highest is the ridge regression without any tuning. The third highest is the lasso regression without any tuning. The lowest is the linear regression. A MSE value of zero would imply a perfect model [[7]]. We cannot conclude this with the linear regression as such a small value when variables like `Origin` and `Dest` were dropped. It also threw a warning message that the “prediction from a rank deficient fit may be misleading”. This means that the test data did not work well with the regression [[8]]. The ridge and lasso regressions without tuning are more believable but these are without tuning. Their penalty terms, also called lambdas, have not been calculated when benchmarking [[9]]. We can (see) with the penalty terms that their MSE values fall drastically. We can improve upon the model by including more variables, especially origin and destination.
+
+![MSE values](/assets/projects/flight_analysis/Q5 R.png)
 
 _Figure 16: MSE values of regression models (R)_
 
@@ -217,10 +221,10 @@ Overall, we were able to analyse when delays occur, changes in flight connection
 
 
 ## 📂 Project Files
-- [📄 Full Report (PDF)](/assets/projects/flight-analysis/flight_analysis_report.pdf)  
+- [📄 Full Report (PDF)](/assets/projects/flight_analysis/flight_analysis_report.pdf)  
 - [📓 R Markdown (RMD)](/assets/projects/flight-analysis/flight_analysis.Rmd)  
 - [📔 Jupyter Notebook (IPYNB)](/assets/projects/flight-analysis/flight_analysis.ipynb)  
-- [📂 Dataset (CSV)](/assets/projects/flight-analysis/flight_data.csv)
+- [📂 Dataset (CSV)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7)
 
 ## 🔗 Repository
 Source code and materials are available on GitHub:  

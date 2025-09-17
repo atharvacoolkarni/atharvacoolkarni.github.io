@@ -1,0 +1,365 @@
+# Either the R file should be where the data is or the working directory should be set before running the code
+
+# Substitute the path to where the data is located with the "..."
+
+setwd(r"(...\Data)")
+
+# Loading libraries
+
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(stringr)
+library(tidyverse)
+library(data.table)
+library(heatmaply)
+library(RColorBrewer)
+library(hrbrthemes)
+library(plotly)
+
+# Reading data files and combining them into one data frame
+
+files <- c("2004.csv", "2005.csv")
+
+main_df <- rbindlist(lapply(files, 
+                       function(f) fread(f, select = c("Year", "Month", "DayOfWeek", "CRSDepTime", 
+                                                       "CRSArrTime", "Origin", "Dest", "ArrDelay", 
+                                                       "DepDelay", "TailNum", "DepTime", "ArrTime"))))
+
+# Check for NA values
+
+colSums(is.na(main_df))
+
+# Removing NA values
+
+main_df <- main_df %>% na.omit()
+
+
+# Q1) When is the best time of day, day of the week, and time of year to fly to minimize delays?
+
+q1_df <- main_df[, c("Month", "DayOfWeek", "CRSDepTime", "CRSArrTime", "ArrDelay", 
+                     "DepDelay")]
+
+# Hourly mean
+
+hourly_df <- q1_df[, c("CRSDepTime", "CRSArrTime", "ArrDelay", "DepDelay")]
+
+# Check maximum hour
+
+max(hourly_df$CRSDepTime)
+
+max(hourly_df$CRSArrTime)
+
+hourly_df <- hourly_df %>% na.omit()
+
+hourly_df <- hourly_df %>%
+  mutate(across(c("CRSDepTime", "CRSArrTime"), ~ (round(.x, -2))/100))
+
+hourly_df$CRSDepTime[hourly_df$CRSDepTime == 24] <- 0
+hourly_df$CRSArrTime[hourly_df$CRSArrTime == 24] <- 0
+
+max(hourly_df$CRSDepTime)
+
+max(hourly_df$CRSArrTime)
+
+hourly_depdelay_mean <- hourly_df %>% 
+  group_by(CRSDepTime) %>%
+  summarise(DepDelay_mean = mean(DepDelay))
+
+hourly_depdelay_mean <- rename(hourly_depdelay_mean, Hours = CRSDepTime)
+
+hourly_arrdelay_mean <- hourly_df %>% 
+  group_by(CRSArrTime) %>%
+  summarise(ArrDelay_mean = mean(ArrDelay))
+
+hourly_arrdelay_mean <- rename(hourly_arrdelay_mean, Hours = CRSArrTime)
+
+totaldelay <- merge(hourly_depdelay_mean, hourly_arrdelay_mean, 
+                    by = 'Hours', all = TRUE)
+
+barplot(t(totaldelay[c('ArrDelay_mean', 'DepDelay_mean')]), 
+        col = c("lightblue", "darkblue"), names.arg = totaldelay$Hours,  
+        ylim = c(-1, 16), main = 'Hourly mean arrival and deprature delay over two years', xlab = 'Hours',  
+        ylab = 'Mean delay', axes = TRUE, axisnames = TRUE, font.lab = 2, cex.lab = 1,
+        legend.text = c('Arrival delay', 'Departure delay'),
+        args.legend = list(x = "topright", inset = c(0.7, 0.1)),
+        beside=TRUE); box()
+
+
+#Weekly mean
+
+weekly_df <- q1_df[, c("DayOfWeek", "ArrDelay", "DepDelay")]
+
+weekly_df$Total_Delay <- weekly_df$ArrDelay + weekly_df$DepDelay
+
+weekly_mean_delay <- weekly_df %>% 
+  group_by(DayOfWeek) %>%
+  summarise(TotalDelay_mean = mean(Total_Delay))
+
+Weekdays <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
+weekly_mean_delay$Weekday <- Weekdays[weekly_mean_delay$DayOfWeek]
+
+barplot(t(weekly_mean_delay[c('TotalDelay_mean')]),
+        col = c("darkblue","lightblue"), names.arg = weekly_mean_delay$Weekday, 
+        ylim = c(0, 20), main = 'Weekly mean of total delay', xlab = 'Day of the week',
+        ylab = 'Mean delay', axes = TRUE, axisnames = TRUE, font.lab = 2, cex.lab = 1,
+        beside=TRUE); box()
+
+#Monthly mean
+
+monthly_df <- q1_df[, c("Month", "ArrDelay", "DepDelay")]
+
+monthly_df$Total_Delay <- monthly_df$ArrDelay + monthly_df$DepDelay
+
+monthly_mean_delay <- monthly_df %>% 
+  group_by(Month) %>%
+  summarise(TotalDelay_mean = mean(Total_Delay))
+
+monthly_mean_delay$Month <- month.name[monthly_mean_delay$Month]
+
+barplot(t(monthly_mean_delay[c('TotalDelay_mean')]),
+        col = c("darkblue","lightblue"), names.arg = monthly_mean_delay$Month, 
+        ylim = c(0, 25), main = 'Monthly mean of total delay', xlab = 'Month',
+        ylab = 'Mean delay', axes = TRUE, axisnames = TRUE, font.lab = 2, cex.lab = 1, 
+        beside=TRUE); box()
+
+
+
+# Q2) Do older planes suffer more delays?
+
+plane_data <- fread('plane-data.csv', select = c("tailnum", "year"), fill=TRUE)
+
+colSums(is.na(plane_data))
+
+plane_data <- plane_data %>% na.omit()
+
+q2_df <- main_df[, c("TailNum", "Year", "ArrDelay", "DepDelay")]
+
+q2_df <- left_join(q2_df, plane_data, by = c('TailNum' = 'tailnum'))
+
+q2_df <- q2_df[q2_df$year != "" & q2_df$year != "0000" & q2_df$year != "None", ]
+
+q2_df$TotalDelay <- q2_df$ArrDelay + q2_df$DepDelay
+
+q2_df$year <- as.numeric(q2_df$year)
+
+yearly_mean <- q2_df %>% 
+  group_by(year) %>%
+  summarise(TotalDelay_mean = mean(TotalDelay))
+
+yearly_mean_56_79 <- filter(yearly_mean, year >= 1956 & year <= 1979)
+yearly_mean_80_05 <- filter(yearly_mean, year >= 1980 & year <= 2007)
+
+ggplot(yearly_mean, aes(x = year, y = TotalDelay_mean)) +
+  geom_point() +
+  geom_smooth(data = yearly_mean_56_79, method = "lm", se = TRUE, color="red") +
+  geom_smooth(data = yearly_mean_80_05, method = "lm", se = TRUE, color="blue") +
+  labs(title = "Mean total delay for year of manufacture", x = "Year", 
+       y = "Mean Total Delay (mins)") +
+  theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.5), 
+        axis.text.x = element_text(face = "bold", size = 10),
+        axis.text.y = element_text(face = "bold", size = 10), 
+        axis.title.x = element_text(face = "bold", size = 12),
+        axis.title.y = element_text(face = "bold", size = 12))
+
+
+
+# Q3) How does the number of people (number of flights) flying 
+#      between different locations change over time?
+
+q3_df <- main_df[, c("Year", "Origin", "Dest")]
+
+q3_df$Connection <- paste(q3_df$Origin, q3_df$Dest, sep = "-")
+
+q3_df <- dcast(q3_df, Connection ~ Year, fun.aggregate = length)
+
+connections <- strsplit(as.character(q3_df$Connection), "-")
+q3_df$Connection <- sapply(connections, function(x) paste(sort(x), collapse = "-"))
+
+q3_df <- aggregate(. ~ Connection, q3_df, sum)
+
+q3_df$Total <- rowSums(q3_df[, c('2004', '2005')])
+
+filtered_q3_df <- filter(q3_df, Total < 2500 & Total > 1000)
+
+filtered_q3_df <- head(filtered_q3_df[order(filtered_q3_df$'Total', decreasing = FALSE),], 5)
+
+select10_airports <- subset(filtered_q3_df, select = -Total)
+
+select10_airports <- reshape2::melt(select10_airports, id.vars = "Connection")
+
+ggplot(select10_airports, aes(x = Connection, y = value, fill = variable)) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(title = "Percentage stacked barplot of 5 connections over two years", 
+       x = "Connection", y = "Percentage", fill = "Year") +
+  theme(plot.title = element_text(face = "bold", size = 14),
+        axis.text.x = element_text(face = "bold", size = 12),
+        axis.text.y = element_text(face = "bold", size = 12), 
+        axis.title.x = element_text(face = "bold", size = 12),
+        axis.title.y = element_text(face = "bold", size = 12))
+
+
+
+# Q4) Can you detect cascading failures as delays in one airport create delays in others?
+
+q4_df <- main_df[, c("Origin", "Dest", "ArrDelay", "DepDelay")]
+
+q4_df$Total_Delay <- q4_df$ArrDelay + q4_df$DepDelay
+
+delays <- aggregate(Total_Delay ~ Origin, data = q4_df, FUN = sum)
+
+top5_airports <- head(delays[order(delays$Total_Delay, decreasing = TRUE),], 5)
+
+top5_matrix <- reshape2::dcast(q4_df[q4_df$Origin %in% top5_airports$Origin 
+                                     & q4_df$Dest %in% top5_airports$Origin, ], 
+                                Origin ~ Dest, value.var = "Total_Delay", fun.aggregate = mean)
+
+corr_matrix <- cor(top5_matrix[, -1], use = "pairwise.complete.obs")
+corr_matrix[lower.tri(corr_matrix)] <- NA
+
+melt_corr <- reshape2::melt(corr_matrix)
+
+ggplot(data = melt_corr, aes(x = Var1, y = Var2, fill = value)) + 
+  geom_tile() +
+  geom_text(aes(label = round(value, 2)), color = "black", size = 6) + 
+  scale_fill_distiller(palette = "RdBu", name = "Correlation") +
+  theme_minimal() +
+  labs(title = "Triangle correlation Heatmap of top 5 airports by total delay", 
+       x = "Destination airport", y = "Origin airport") +
+  theme(plot.title = element_text(face = "bold", size = 14),
+        axis.text.x = element_text(face = "bold", size = 13),
+        axis.text.y = element_text(face = "bold", size = 13), 
+        axis.title.x = element_text(face = "bold", size = 14),
+        axis.title.y = element_text(face = "bold", size = 14))
+
+
+
+# Q5) Use the available variables to construct a model that predicts delays.
+
+library(MASS)
+library(skimr)
+library(mlr3)
+library(mlr3learners)
+library(mlr3pipelines)
+library(mlr3tuning)
+library(paradox)
+library(mlr3viz)
+
+future::plan()
+
+q5_df <- main_df[, -c('Year', 'Month', 'DayOfWeek', 'TailNum', 'Origin', 'Dest')]
+
+sample_data <- sample_n(q5_df, 200000)
+
+sample_data$Total_Delay <- sample_data$ArrDelay + sample_data$DepDelay
+
+task <- TaskRegr$new('ML_df', backend = sample_data, target = 'Total_Delay')
+measure <- msr('regr.mse')
+
+# LINEAR REGRESSION
+
+learner_lm <- lrn('regr.lm')
+gr_lm <- po('imputemean') %>>%
+  po(learner_lm)
+glrn_lm <- GraphLearner$new(gr_lm)
+
+set.seed(1)
+train_set <- sample(task$nrow, 0.2 * task$nrow)
+test_set <- setdiff(seq_len(task$nrow), train_set)
+
+glrn_lm$train(task, row_ids = train_set)
+glrn_lm$predict(task, row_ids = test_set)$score()
+
+# RIDGE REGRESSION
+
+learner_ridge <- lrn('regr.glmnet')
+learner_ridge$param_set$values <- list(alpha = 0)
+gr_ridge <- po('scale') %>>%
+  po('imputemean') %>>%
+  po(learner_ridge)
+glrn_ridge <- GraphLearner$new(gr_ridge)
+
+tune_lambda <- ParamSet$new (list(
+  ParamDbl$new('regr.glmnet.lambda', lower = 0.001, upper = 2)
+))
+tuner<-tnr('grid_search')
+terminator <- trm('evals', n_evals = 20)
+at_ridge <- AutoTuner$new(
+  learner = glrn_ridge,
+  resampling = rsmp('cv', folds = 3),
+  measure = measure,
+  search_space = tune_lambda,
+  terminator = terminator,
+  tuner = tuner
+)
+at_ridge$train(task, row_ids = train_set)
+at_ridge$predict(task, row_ids = test_set)$score()
+
+# LASSO REGRESSION
+
+learner_ridge2 <- lrn('regr.glmnet')
+learner_ridge2$param_set$values <- list(alpha = 1)
+gr_ridge2 <- po('scale') %>>%
+  po('imputemean') %>>%
+  po(learner_ridge2)
+glrn_ridge2 <- GraphLearner$new(gr_ridge2)
+
+tune_lambda <- ParamSet$new (list(
+  ParamDbl$new('regr.glmnet.lambda', lower = 0.001, upper = 2)
+))
+tuner<-tnr('grid_search')
+terminator <- trm('evals', n_evals = 20)
+at_ridge2 <- AutoTuner$new(
+  learner = glrn_ridge2,
+  resampling = rsmp('cv', folds = 3),
+  measure = measure,
+  search_space = tune_lambda,
+  terminator = terminator,
+  tuner = tuner
+)
+at_ridge2$train(task, row_ids = train_set)
+at_ridge2$predict(task, row_ids = test_set)$score()
+
+# RANDOM FORESTS
+
+learner_rf <- lrn('regr.ranger')
+learner_rf$param_set$values <- list(min.node.size = 4)
+gr_rf <- po('scale') %>>%
+  po('imputemean') %>>%
+  po(learner_rf)
+glrn_rf <- GraphLearner$new(gr_rf)
+tune_ntrees <- ParamSet$new (list(
+  ParamInt$new('regr.ranger.num.trees', lower = 50, upper = 600)
+))
+at_rf <- AutoTuner$new(
+  learner = glrn_rf,
+  resampling = rsmp('cv', folds = 3),
+  measure = measure,
+  search_space = tune_ntrees,
+  terminator = terminator,
+  tuner = tuner
+)
+at_rf$train(task, row_ids = train_set)
+at_rf$predict(task, row_ids = test_set)$score()
+
+# BENCHMARKING
+
+set.seed(123)
+
+lrn_list <- list(
+  glrn_lm,
+  glrn_ridge,
+  at_ridge,
+  glrn_ridge2,
+  at_ridge2, 
+  at_rf
+)
+
+bm_design <- benchmark_grid(task = task, resamplings = rsmp('cv', folds = 3), 
+                            learners = lrn_list)
+bmr <- benchmark(bm_design, store_models = TRUE)
+
+autoplot(bmr) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+bmr$aggregate(measure)

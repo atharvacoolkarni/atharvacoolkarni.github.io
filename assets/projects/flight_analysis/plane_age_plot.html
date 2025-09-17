@@ -10,168 +10,252 @@
       margin: 0;
       padding: 20px;
       background: #ffffff;
-      color: #000;
+      color: #000000;
+      transition: background 0.3s, color 0.3s;
     }
-    canvas { display:block; margin: 0 auto; }
+
+    .toggle-theme {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      background: #333;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .toggle-theme.light-btn {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    canvas {
+      display: block;
+      margin: auto;
+    }
   </style>
 </head>
 <body>
+  <button class="toggle-theme" id="themeBtn">🌙 Dark Mode</button>
   <canvas id="myChart" width="900" height="500"></canvas>
 
   <script>
-  function withAlpha(rgbaStr, alpha) {
-    return rgbaStr.replace(/rgba\((\s*\d+,\s*\d+,\s*\d+),\s*[\d.]+\)/, `rgba($1, ${alpha})`);
-  }
+    let isDark = false;
+    let chart;
 
-  fetch('regression_data.json')
-    .then(r => r.json())
-    .then(raw => {
-      const groups = [
-        { key: '1956-1979', color: 'rgba(0,123,255,1)' },
-        { key: '1980-2007', color: 'rgba(255,123,0,1)' }
-      ];
+    // Dataset colors for both themes
+    const COLORS = {
+      light: {
+        "1956-1979": { base: "rgba(23,162,184,1)", hover: "rgba(19,132,150,1)" }, // teal
+        "1980-2007": { base: "rgba(220,53,69,1)", hover: "rgba(167,29,42,1)" }   // red
+      },
+      dark: {
+        "1956-1979": { base: "rgba(0,123,255,1)", hover: "rgba(0,86,179,1)" },   // blue
+        "1980-2007": { base: "rgba(255,123,0,1)", hover: "rgba(204,92,0,1)" }    // orange
+      }
+    };
 
-      const datasets = [];
+    function withAlpha(rgbaStr, alpha) {
+      return rgbaStr.replace(/rgba\((\s*\d+,\s*\d+,\s*\d+),\s*[\d.]+\)/, `rgba($1, ${alpha})`);
+    }
 
-      groups.forEach(g => {
-        const d = raw[g.key];
-        if (!d) return;
+    fetch('regression_data.json')
+      .then(r => r.json())
+      .then(raw => {
+        const ctx = document.getElementById('myChart').getContext('2d');
 
-        const points = d.x.map((x,i) => ({
-          x: Number(x),
-          y: Number(d.y[i]),
-          fit: Number(d.fit[i]),
-          ci_low: Number(d.ci_low[i]),
-          ci_high: Number(d.ci_high[i])
-        })).sort((a,b) => a.x - b.x);
+        const makeDatasets = (dark=false) => {
+          const theme = dark ? COLORS.dark : COLORS.light;
+          const groups = Object.keys(theme).map(key => ({
+            key,
+            color: theme[key].base,
+            hover: theme[key].hover
+          }));
 
-        const xs = points.map(p => p.x);
-        const ys = points.map(p => p.y);
-        const fits = points.map(p => p.fit);
-        const ci_low = points.map(p => p.ci_low);
-        const ci_high = points.map(p => p.ci_high);
+          const datasets = [];
+          groups.forEach(g => {
+            const d = raw[g.key];
+            if (!d) return;
 
-        // Scatter points (interactive)
-        datasets.push({
-          label: g.key,
-          data: xs.map((x,i) => ({x: x, y: ys[i]})),
-          backgroundColor: g.color,
-          borderColor: g.color,
-          pointRadius: 4,
-          showLine: false,
-          order: 3
-        });
+            const points = d.x.map((x,i) => ({
+              x: Number(x),
+              y: Number(d.y[i]),
+              fit: Number(d.fit[i]),
+              ci_low: Number(d.ci_low[i]),
+              ci_high: Number(d.ci_high[i])
+            })).sort((a,b) => a.x - b.x);
 
-        // Regression fit line (non-interactive)
-        datasets.push({
-          label: `${g.key} fit`,
-          data: xs.map((x,i) => ({x: x, y: fits[i]})),
-          borderColor: g.color,
-          borderWidth: 2,
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          pointHitRadius: 0,  // disable hover
-          fill: false,
-          tension: 0,
-          order: 4
-        });
+            const xs = points.map(p => p.x);
+            const ys = points.map(p => p.y);
+            const fits = points.map(p => p.fit);
+            const ci_low = points.map(p => p.ci_low);
+            const ci_high = points.map(p => p.ci_high);
 
-        // CI lower (non-interactive, just fill)
-        datasets.push({
-          label: `${g.key} CI lower`,
-          data: xs.map((x,i) => ({x: x, y: ci_low[i]})),
-          borderColor: 'transparent',
-          backgroundColor: withAlpha(g.color, 0.15),
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          pointHitRadius: 0,
-          borderWidth: 0,
-          fill: '+1',
-          tension: 0,
-          order: 1
-        });
+            // Scatter points
+            datasets.push({
+              label: g.key,
+              data: xs.map((x,i) => ({x: x, y: ys[i]})),
+              backgroundColor: g.color,
+              borderColor: g.color,
+              pointRadius: 4,
+              pointHoverBackgroundColor: g.hover,
+              pointHoverBorderColor: g.hover,
+              showLine: false,
+              order: 3
+            });
 
-        // CI upper (non-interactive, just fill)
-        datasets.push({
-          label: `${g.key} CI upper`,
-          data: xs.map((x,i) => ({x: x, y: ci_high[i]})),
-          borderColor: 'transparent',
-          backgroundColor: withAlpha(g.color, 0.15),
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          pointHitRadius: 0,
-          borderWidth: 0,
-          fill: false,
-          tension: 0,
-          order: 2
-        });
-      });
+            // Regression fit line
+            datasets.push({
+              label: `${g.key} fit`,
+              data: xs.map((x,i) => ({x: x, y: fits[i]})),
+              borderColor: g.color,
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              pointHitRadius: 0,
+              fill: false,
+              tension: 0,
+              order: 4
+            });
 
-      const ctx = document.getElementById('myChart').getContext('2d');
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: { datasets: datasets },
-        options: {
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            title: {
-              display: true,
-              text: 'Total Delay mean by year of manufacture',
-              font: { size: 20 }
-            },
-            tooltip: {
-              callbacks: {
-                title: function(ctx) {
-                  return ctx[0].parsed.x.toFixed(0); // year
-                },
-                label: function(ctx) {
-                  const lbl = ctx.dataset.label || '';
-                  if (lbl.includes('fit') || lbl.includes('CI')) {
-                    return null; // disable tooltip for regression + CI
-                  }
-                  return `Total Delay: ${ctx.parsed.y.toFixed(1)}`;
-                }
+            // CI lower
+            datasets.push({
+              label: `${g.key} CI lower`,
+              data: xs.map((x,i) => ({x: x, y: ci_low[i]})),
+              borderColor: 'transparent',
+              backgroundColor: withAlpha(g.color, 0.15),
+              pointRadius: 0,
+              borderWidth: 0,
+              fill: '+1',
+              tension: 0,
+              order: 1
+            });
+
+            // CI upper
+            datasets.push({
+              label: `${g.key} CI upper`,
+              data: xs.map((x,i) => ({x: x, y: ci_high[i]})),
+              borderColor: 'transparent',
+              backgroundColor: withAlpha(g.color, 0.15),
+              pointRadius: 0,
+              borderWidth: 0,
+              fill: false,
+              tension: 0,
+              order: 2
+            });
+          });
+          return datasets;
+        };
+
+        chart = new Chart(ctx, {
+          type: 'line',
+          data: { datasets: makeDatasets(false) }, // light mode initially
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Total Delay mean by year of manufacture',
+                font: { size: 20 },
+                color: '#000000'
               },
-              filter: function(ctx) {
-                // Only show tooltips for scatter points
-                return !(ctx.dataset.label.includes('fit') || ctx.dataset.label.includes('CI'));
-              }
-            },
-            legend: {
-              labels: {
-                filter: (legendItem) => {
-                  return !(legendItem.text && (legendItem.text.includes('CI') || legendItem.text.includes('fit')));
+              tooltip: {
+                callbacks: {
+                  title: (ctx) => ctx[0].parsed.x.toFixed(0),
+                  label: (ctx) => {
+                    const lbl = ctx.dataset.label || '';
+                    if (lbl.includes('fit') || lbl.includes('CI')) return null;
+                    return `Total Delay: ${ctx.parsed.y.toFixed(1)}`;
+                  }
+                },
+                filter: (ctx) => !(ctx.dataset.label.includes('fit') || ctx.dataset.label.includes('CI'))
+              },
+              legend: {
+                labels: {
+                  color: '#000000',
+                  filter: (legendItem) => {
+                    return !(legendItem.text && (legendItem.text.includes('CI') || legendItem.text.includes('fit')));
+                  }
+                },
+                onClick: (e, legendItem, legend) => {
+                  const chart = legend.chart;
+                  const groupKey = legendItem.text;
+
+                  chart.data.datasets.forEach((ds, i) => {
+                    if (
+                      ds.label === groupKey ||
+                      ds.label === `${groupKey} fit` ||
+                      ds.label === `${groupKey} CI lower` ||
+                      ds.label === `${groupKey} CI upper`
+                    ) {
+                      chart.setDatasetVisibility(i, !chart.isDatasetVisible(i));
+                    }
+                  });
+
+                  chart.update();
                 }
               }
-            }
-          },
-          scales: {
-            x: {
-              type: 'linear',
-              title: { display: true, text: 'Year' },
-              ticks: { 
-                precision: 0,
-                callback: function(value) { return value; }  // no commas
-              }
             },
-            y: {
-              title: { display: true, text: 'Mean Total Delay' },
-              ticks: {
-                callback: function(value) { return value.toFixed(1); }  // 1 decimal place
+            scales: {
+              x: {
+                type: 'linear',
+                title: { display: true, text: 'Year', color: '#000000' },
+                ticks: { precision: 0, color: '#000000', callback: (v) => v.toString() },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              y: {
+                title: { display: true, text: 'Mean Total Delay', color: '#000000' },
+                ticks: { color: '#000000' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
               }
             }
           }
-        }
-      });
+        });
 
-    })
-    .catch(err => {
-      console.error('Error loading regression_data.json or rendering chart:', err);
-      const pre = document.createElement('pre');
-      pre.textContent = 'Error: ' + err;
-      document.body.appendChild(pre);
-    });
+        // Theme toggle
+        const btn = document.getElementById('themeBtn');
+        btn.addEventListener('click', () => {
+          isDark = !isDark;
+          if (isDark) {
+            document.body.style.background = '#1a1a1a';
+            document.body.style.color = '#ffffff';
+            chart.options.plugins.title.color = '#ffffff';
+            chart.options.plugins.legend.labels.color = '#ffffff';
+            chart.options.scales.x.ticks.color = '#ffffff';
+            chart.options.scales.y.ticks.color = '#ffffff';
+            chart.options.scales.x.title.color = '#ffffff';
+            chart.options.scales.y.title.color = '#ffffff';
+            chart.options.scales.x.grid.color = 'rgba(255,255,255,0.2)';
+            chart.options.scales.y.grid.color = 'rgba(255,255,255,0.2)';
+            chart.data.datasets = makeDatasets(true);
+            btn.textContent = '☀️ Light Mode';
+            btn.classList.add('light-btn');
+          } else {
+            document.body.style.background = '#ffffff';
+            document.body.style.color = '#000000';
+            chart.options.plugins.title.color = '#000000';
+            chart.options.plugins.legend.labels.color = '#000000';
+            chart.options.scales.x.ticks.color = '#000000';
+            chart.options.scales.y.ticks.color = '#000000';
+            chart.options.scales.x.title.color = '#000000';
+            chart.options.scales.y.title.color = '#000000';
+            chart.options.scales.x.grid.color = 'rgba(0,0,0,0.1)';
+            chart.options.scales.y.grid.color = 'rgba(0,0,0,0.1)';
+            chart.data.datasets = makeDatasets(false);
+            btn.textContent = '🌙 Dark Mode';
+            btn.classList.remove('light-btn');
+          }
+          chart.update('none');
+        });
+      })
+      .catch(err => {
+        console.error('Error loading regression_data.json:', err);
+      });
   </script>
 </body>
 </html>
