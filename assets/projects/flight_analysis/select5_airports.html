@@ -5,177 +5,194 @@
   <title>Percentage Stacked Bar Plot</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    :root {
+      --global-bg-color: #ffffff;
+      --global-text-color: #000000;
+      --chart-bg-color: #ffffff;
+    }
+
     body {
       font-family: "Segoe UI", sans-serif;
       margin: 0;
       padding: 20px;
-      background: #fff;
-      color: #000;
-      transition: background 0.25s, color 0.25s;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      transition: background 0.3s, color 0.3s;
     }
 
-    .toggle-theme {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      padding: 8px 12px;
-      cursor: pointer;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background 0.25s, color 0.25s, border 0.25s;
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      --global-bg-color: #000000;
+      --global-text-color: #ffffff;
+      --chart-bg-color: #000000;
     }
 
-    /* Button in light mode: black */
-    .toggle-theme.light-btn {
-      background: #000;
-      color: #fff;
-    }
-
-    /* Button in dark mode: white */
-    .toggle-theme.dark-btn {
-      background: #fff;
-      color: #000;
-      border: 1px solid rgba(0,0,0,0.08);
+    .chart-container {
+      position: relative;
+      margin: 0 auto;
+      width: 900px;
+      height: 500px;
+      background-color: var(--chart-bg-color);
+      transition: background-color 0.3s;
+      overflow: hidden;
     }
 
     canvas {
       display: block;
-      margin: 0 auto;
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-theme light-btn" id="themeBtn">🌙 Dark Mode</button>
-  <canvas id="myChart" width="900" height="500"></canvas>
+  <div class="chart-container">
+    <canvas id="myChart" width="900" height="500"></canvas>
+  </div>
 
   <script>
-    const LIGHT = {
-      pageBg: '#ffffff',
-      text: '#111111',
-      grid: 'rgba(0,0,0,0.1)',
-      title: '#111111',
-      dataset: ['#17a2b8', '#dc3545'],
-      hover:   ['#138496', '#a71d2a']
-    };
+    let chart;
 
-    const DARK = {
-      pageBg: '#1a1a1a',
-      text: '#ffffff',
-      grid: 'rgba(255,255,255,0.2)',
-      title: '#ffffff',
-      dataset: ['#4fc3f7', '#fbc02d'],
-      hover:   ['#039be5', '#f57f17']
-    };
-
-    let isDark = false;
-    let chart = null;
-
-    function createChart(data, theme) {
-      const ctx = document.getElementById('myChart').getContext('2d');
-      const datasets = [
-        {
-          label: '2004',
-          data: data.datasets[0].data,
-          backgroundColor: theme.dataset[0],
-          hoverBackgroundColor: theme.hover[0],
-          stack: 'stack1'
-        },
-        {
-          label: '2005',
-          data: data.datasets[1].data,
-          backgroundColor: theme.dataset[1],
-          hoverBackgroundColor: theme.hover[1],
-          stack: 'stack1'
-        }
-      ];
-      return new Chart(ctx, {
-        type: 'bar',
-        data: { labels: data.labels, datasets: datasets },
-        options: {
-          responsive: false,
-          plugins: {
-            title: {
-              display: true,
-              text: 'Percentage stacked bar plot of 5 connections over two years',
-              font: { size: 18 },
-              color: theme.title
-            },
-            legend: { labels: { color: theme.text } },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  const val = context.parsed.y;
-                  return `${context.dataset.label}: ${val}%`;
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              stacked: true,
-              title: { display: true, text: 'Connection', color: theme.text },
-              ticks: { color: theme.text },
-              grid: { color: theme.grid }
-            },
-            y: {
-              stacked: true,
-              title: { display: true, text: 'Percentage', color: theme.text },
-              min: 0,
-              max: 100,
-              ticks: { callback: (v) => v + '%', color: theme.text },
-              grid: { color: theme.grid }
-            }
-          }
-        }
-      });
+    // detect dark mode
+    function isDarkMode() {
+      if (localStorage.getItem('theme') === 'dark') return true;
+      if (document.documentElement.getAttribute('data-theme') === 'dark') return true;
+      if (document.body.getAttribute('data-theme') === 'dark') return true;
+      if (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) return true;
+      return false;
     }
 
-    // Initialize chart in light mode
-    fetch('select5_airports.json')
-      .then(r => r.json())
-      .then(data => { chart = createChart(data, LIGHT); })
-      .catch(err => console.error("Error loading JSON:", err));
-
-    // Theme toggle logic
-    document.getElementById('themeBtn').addEventListener('click', () => {
-      if (!chart) return;
-      isDark = !isDark;
-      const theme = isDark ? DARK : LIGHT;
-
-      // update page styles
-      document.body.style.background = theme.pageBg;
-      document.body.style.color = theme.text;
-
-      // update button
-      const btn = document.getElementById('themeBtn');
-      if (isDark) {
-        btn.textContent = '☀️ Light Mode';
-        btn.classList.remove('light-btn');
-        btn.classList.add('dark-btn');
+    // theme palettes
+    function getThemeColors(dark) {
+      if (dark) {
+        return {
+          bg: "#000000",
+          text: "#ffffff",
+          grid: "rgba(255,255,255,0.2)",
+          dataset: ["#4fc3f7", "#fbc02d"],
+          hover: ["#039be5", "#f57f17"]
+        };
       } else {
-        btn.textContent = '🌙 Dark Mode';
-        btn.classList.remove('dark-btn');
-        btn.classList.add('light-btn');
+        return {
+          bg: "#ffffff",
+          text: "#000000",
+          grid: "rgba(0,0,0,0.1)",
+          dataset: ["#17a2b8", "#dc3545"],
+          hover: ["#138496", "#a71d2a"]
+        };
       }
+    }
 
-      // update chart
-      chart.options.plugins.title.color = theme.title;
+    function applyTheme(dark) {
+      if (!chart) return;
+      const theme = getThemeColors(dark);
+
+      document.documentElement.style.setProperty('--global-bg-color', theme.bg);
+      document.documentElement.style.setProperty('--global-text-color', theme.text);
+      document.documentElement.style.setProperty('--chart-bg-color', theme.bg);
+
+      chart.options.plugins.title.color = theme.text;
       chart.options.plugins.legend.labels.color = theme.text;
-      chart.options.scales.x.title.color = theme.text;
-      chart.options.scales.y.title.color = theme.text;
       chart.options.scales.x.ticks.color = theme.text;
       chart.options.scales.y.ticks.color = theme.text;
+      chart.options.scales.x.title.color = theme.text;
+      chart.options.scales.y.title.color = theme.text;
       chart.options.scales.x.grid.color = theme.grid;
       chart.options.scales.y.grid.color = theme.grid;
+      chart.options.backgroundColor = theme.bg;
+      chart.options.chartArea = { backgroundColor: theme.bg };
+      chart.options.plugins.tooltip.backgroundColor = dark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)';
+      chart.options.plugins.tooltip.titleColor = theme.text;
+      chart.options.plugins.tooltip.bodyColor = theme.text;
+      chart.options.plugins.tooltip.borderColor = dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
 
-      chart.data.datasets.forEach((ds, idx) => {
-        ds.backgroundColor = theme.dataset[idx] || ds.backgroundColor;
-        ds.hoverBackgroundColor = theme.hover[idx] || ds.hoverBackgroundColor;
+      chart.data.datasets.forEach((ds, i) => {
+        ds.backgroundColor = theme.dataset[i];
+        ds.hoverBackgroundColor = theme.hover[i];
       });
 
       chart.update();
-    });
+    }
+
+    // Load real dataset
+    fetch("select5_airports.json")
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById("myChart").getContext("2d");
+        const dark = isDarkMode();
+        const theme = getThemeColors(dark);
+
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.labels,
+            datasets: [
+              {
+                label: "2004",
+                data: data.datasets[0].data,
+                backgroundColor: theme.dataset[0],
+                hoverBackgroundColor: theme.hover[0],
+                stack: "stack1"
+              },
+              {
+                label: "2005",
+                data: data.datasets[1].data,
+                backgroundColor: theme.dataset[1],
+                hoverBackgroundColor: theme.hover[1],
+                stack: "stack1"
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              title: {
+                display: true,
+                text: "Percentage stacked bar plot of 5 connections over two years",
+                font: { size: 18 },
+                color: theme.text
+              },
+              legend: { labels: { color: theme.text } },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return `${context.dataset.label}: ${context.parsed.y}%`;
+                  }
+                },
+                backgroundColor: dark ? "rgba(0,0,0,0.8)" : "rgba(255,255,255,0.8)",
+                titleColor: theme.text,
+                bodyColor: theme.text,
+                borderColor: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
+                borderWidth: 1
+              }
+            },
+            scales: {
+              x: {
+                stacked: true,
+                title: { display: true, text: "Connection", color: theme.text },
+                ticks: { color: theme.text },
+                grid: { color: theme.grid }
+              },
+              y: {
+                stacked: true,
+                min: 0,
+                max: 100,
+                title: { display: true, text: "Percentage", color: theme.text },
+                ticks: { color: theme.text, callback: (v) => v + "%" },
+                grid: { color: theme.grid }
+              }
+            },
+            backgroundColor: theme.bg,
+            chartArea: { backgroundColor: theme.bg }
+          }
+        });
+
+        // Watch for theme changes
+        const observer = new MutationObserver(() => applyTheme(isDarkMode()));
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-theme"] });
+        observer.observe(document.body, { attributes: true, attributeFilter: ["class", "data-theme"] });
+        window.addEventListener("storage", () => applyTheme(isDarkMode()));
+      });
   </script>
 </body>
 </html>
