@@ -9,8 +9,8 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background: var(--bg-color, #ffffff);
-      color: var(--text-color, #000000);
+      background: var(--global-bg-color, #eeeeee);
+      color: var(--global-text-color, #222831);
       transition: background 0.3s, color 0.3s;
     }
 
@@ -29,36 +29,8 @@
 
     // Function to detect if the site is in dark mode
     function isDarkMode() {
-      // Check for GitHub Pages theme indicators
-      if (document.documentElement.dataset.theme === 'dark') return true;
-      if (document.documentElement.getAttribute('data-theme') === 'dark') return true;
-      if (document.body.dataset.theme === 'dark') return true;
-      if (document.body.getAttribute('data-theme') === 'dark') return true;
-      
-      // Check for dark mode classes
-      if (document.documentElement.classList.contains('dark-mode')) return true;
-      if (document.body.classList.contains('dark-mode')) return true;
-      
-      // Check for CSS variables that might indicate dark mode
-      const bodyStyles = window.getComputedStyle(document.body);
-      const bgColor = bodyStyles.getPropertyValue('--bg-color') || 
-                      bodyStyles.getPropertyValue('background-color') || '';
-      
-      // If background is dark, assume dark mode
-      if (bgColor.includes('rgb')) {
-        try {
-          const rgbValues = bgColor.match(/\d+/g);
-          if (rgbValues && rgbValues.length >= 3) {
-            const brightness = (parseInt(rgbValues[0]) * 299 + 
-                               parseInt(rgbValues[1]) * 587 + 
-                               parseInt(rgbValues[2]) * 114) / 1000;
-            return brightness < 128;
-          }
-        } catch (e) { /* fallback to default */ }
-      }
-      
-      // Check for prefers-color-scheme media query as fallback
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // Primary check: GitHub Pages theme system uses data-theme attribute on html element
+      return document.documentElement.getAttribute('data-theme') === 'dark';
     }
 
     // Central theme logic for chart
@@ -180,31 +152,17 @@
 
         chart = new Chart(ctx, chartConfig);
 
-        // Set up observers to watch for theme changes on both document and body
+        // Set up observer to watch for theme changes on the html element
         const observerCallback = () => {
           applyTheme(isDarkMode());
         };
 
-        // Watch for attribute changes on both document element and body
-        const docObserver = new MutationObserver(observerCallback);
-        docObserver.observe(document.documentElement, { 
+        // Watch for attribute changes on the html element (primary method)
+        const htmlObserver = new MutationObserver(observerCallback);
+        htmlObserver.observe(document.documentElement, { 
           attributes: true, 
-          attributeFilter: ['class', 'data-theme'] 
+          attributeFilter: ['data-theme'] 
         });
-        
-        const bodyObserver = new MutationObserver(observerCallback);
-        bodyObserver.observe(document.body, { 
-          attributes: true, 
-          attributeFilter: ['class', 'data-theme'] 
-        });
-
-        // Also check for system preference changes
-        if (window.matchMedia) {
-          const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-          if (colorSchemeQuery.addEventListener) {
-            colorSchemeQuery.addEventListener('change', observerCallback);
-          }
-        }
       });
   </script>
 </body>
