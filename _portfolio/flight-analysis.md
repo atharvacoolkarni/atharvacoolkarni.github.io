@@ -73,7 +73,34 @@ _Table 1: Selected variables_
 
 The reason for this selection is because these variables were the only ones determined to be crucial in answering the questions posed. We can also see that it is quite a large dataset since it is reading 3.5 gigabytes even when only 12 (actually 13 including plane manufacture year) variables were selected, so determining the important variables and selecting only those helps with reducing memory errors. The last variable, year of manufacture, is from the `plane-data` file.
 
-![Data information](/assets/projects/flight_analysis/images/info_light.png)
+<div class="theme-aware-image">
+  <img src="/assets/projects/flight_analysis/images/info_light.png" alt="Data information" class="light-theme-image">
+  <img src="/assets/projects/flight_analysis/images/info_dark.png" alt="Data information" class="dark-theme-image">
+</div>
+
+<style>
+.theme-aware-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.theme-aware-image .light-theme-image {
+  display: block;
+}
+
+.theme-aware-image .dark-theme-image {
+  display: none;
+}
+
+/* Dark theme styles */
+html[data-theme="dark"] .theme-aware-image .light-theme-image {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-aware-image .dark-theme-image {
+  display: block;
+}
+</style>
 
 _Table 2: Data information_
 
