@@ -73,6 +73,25 @@
     }
 
     function isDarkMode() {
+      // Check parent frame first if we're in an iframe
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          if (parentDoc.documentElement.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.documentElement.getAttribute('data-theme') === 'light') return false;
+          if (parentDoc.body.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.body.getAttribute('data-theme') === 'light') return false;
+          if (parentDoc.documentElement.classList.contains('dark') || parentDoc.body.classList.contains('dark')) return true;
+          if (window.parent.localStorage) {
+            if (window.parent.localStorage.getItem('theme') === 'dark') return true;
+            if (window.parent.localStorage.getItem('theme') === 'light') return false;
+          }
+        }
+      } catch (e) {
+        // Cross-origin restriction, fall back to local checks
+      }
+      
+      // Detect dark mode from local context
       if (localStorage.getItem('theme') === 'dark') return true;
       if (localStorage.getItem('theme') === 'light') return false;
       if (document.documentElement.getAttribute('data-theme') === 'dark') return true;
@@ -260,6 +279,19 @@
         const observer = new MutationObserver(() => applyTheme(isDarkMode()));
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
         observer.observe(document.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+        
+        // Also observe parent frame if available
+        try {
+          if (window.parent && window.parent !== window) {
+            const parentDoc = window.parent.document;
+            observer.observe(parentDoc.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+            observer.observe(parentDoc.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+            window.parent.addEventListener('storage', () => applyTheme(isDarkMode()));
+          }
+        } catch (e) {
+          // Cross-origin restriction, can't observe parent
+        }
+        
         window.addEventListener('storage', () => applyTheme(isDarkMode()));
         if (window.matchMedia) {
           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyTheme(isDarkMode()));
