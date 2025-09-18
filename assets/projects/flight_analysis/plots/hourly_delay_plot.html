@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hourly Flight Delay Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Light/Dark mode variables */
+    :root {
+      --global-bg-color: #ffffff;
+      --global-text-color: #000000;
+      --chart-bg-color: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      --global-bg-color: #000000;
+      --global-text-color: #ffffff;
+      --chart-bg-color: #000000;
+    }
+
+    .chart-container {
+      position: relative;
+      margin: 0 auto;
+      width: 900px;
+      height: 500px;
+      background-color: var(--chart-bg-color);
+      transition: background-color 0.3s;
+      overflow: hidden; /* Remove any extra white strip */
+    }
+
+    canvas {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="chart-container">
+    <canvas id="myChart" width="900" height="500"></canvas>
+  </div>
+
+  <script>
+    let chart;
+
+    function isDarkMode() {
+      // Check parent frame first if we're in an iframe
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          if (parentDoc.documentElement.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.body.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.documentElement.classList.contains('dark') || parentDoc.body.classList.contains('dark')) return true;
+          if (window.parent.localStorage && window.parent.localStorage.getItem('theme') === 'dark') return true;
+        }
+      } catch (e) {
+        // Cross-origin restriction, fall back to local checks
+      }
+      
+      // Detect dark mode from local context
+      if (localStorage.getItem('theme') === 'dark') return true;
+      if (document.documentElement.getAttribute('data-theme') === 'dark') return true;
+      if (document.body.getAttribute('data-theme') === 'dark') return true;
+      if (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) return true;
+      return false;
+    }
+
+    function applyTheme(dark) {
+      if (!chart) return;
+
+      // Update CSS variables for chart container and body
+      document.documentElement.style.setProperty('--global-bg-color', dark ? '#000000' : '#ffffff');
+      document.documentElement.style.setProperty('--global-text-color', dark ? '#ffffff' : '#000000');
+      document.documentElement.style.setProperty('--chart-bg-color', dark ? '#000000' : '#ffffff');
+
+      // Chart colors
+      chart.options.plugins.title.color = dark ? '#ffffff' : '#000000';
+      chart.options.plugins.legend.labels.color = dark ? '#ffffff' : '#000000';
+      chart.options.scales.x.ticks.color = dark ? '#ffffff' : '#000000';
+      chart.options.scales.y.ticks.color = dark ? '#ffffff' : '#000000';
+      chart.options.scales.x.title.color = dark ? '#ffffff' : '#000000';
+      chart.options.scales.y.title.color = dark ? '#ffffff' : '#000000';
+      chart.options.scales.x.grid.color = dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
+      chart.options.scales.y.grid.color = dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
+      chart.options.backgroundColor = dark ? '#000000' : '#ffffff';
+      chart.options.chartArea = { backgroundColor: dark ? '#000000' : '#ffffff' };
+      chart.options.plugins.tooltip.backgroundColor = dark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)';
+      chart.options.plugins.tooltip.titleColor = dark ? '#ffffff' : '#000000';
+      chart.options.plugins.tooltip.bodyColor = dark ? '#ffffff' : '#000000';
+      chart.options.plugins.tooltip.borderColor = dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)';
+
+      // Dataset colors
+      chart.data.datasets[0].backgroundColor = dark ? '#4fc3f7' : '#17a2b8';
+      chart.data.datasets[0].hoverBackgroundColor = dark ? '#039be5' : '#138496';
+      chart.data.datasets[1].backgroundColor = dark ? '#fbc02d' : '#dc3545';
+      chart.data.datasets[1].hoverBackgroundColor = dark ? '#f57f17' : '#a71d2a';
+
+      chart.update();
+    }
+
+    fetch("q1_time_analysis.json")
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const currentDarkMode = isDarkMode();
+
+        // FIXED: Access data from the correct nested structure
+        const hourlyData = data.hourly;
+
+        chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: hourlyData.hours,
+            datasets: [
+              {
+                label: 'Departure Delay',
+                data: hourlyData.departure_delays,
+                backgroundColor: currentDarkMode ? '#4fc3f7' : '#17a2b8',
+                hoverBackgroundColor: currentDarkMode ? '#039be5' : '#138496',
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+              },
+              {
+                label: 'Arrival Delay',
+                data: hourlyData.arrival_delays,
+                backgroundColor: currentDarkMode ? '#fbc02d' : '#dc3545',
+                hoverBackgroundColor: currentDarkMode ? '#f57f17' : '#a71d2a',
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            onClick: (evt, elements) => {
+              if (elements.length > 0) {
+                const datasetIndex = elements[0].datasetIndex;
+                chart.setDatasetVisibility(datasetIndex, !chart.isDatasetVisible(datasetIndex));
+                chart.update();
+              } else {
+                chart.data.datasets.forEach((_, idx) => chart.setDatasetVisibility(idx, true));
+                chart.update();
+              }
+            },
+            onHover: (evt, elements) => {
+              evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Hourly Flight Delay Analysis',
+                font: { size: 20 },
+                color: currentDarkMode ? '#ffffff' : '#000000'
+              },
+              legend: { labels: { color: currentDarkMode ? '#ffffff' : '#000000' } },
+              tooltip: { 
+                enabled: true,
+                backgroundColor: currentDarkMode ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)',
+                titleColor: currentDarkMode ? '#ffffff' : '#000000',
+                bodyColor: currentDarkMode ? '#ffffff' : '#000000',
+                borderColor: currentDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+                borderWidth: 1
+              }
+            },
+            scales: {
+              x: {
+                title: { display: true, text: 'Hour of Day', color: currentDarkMode ? '#ffffff' : '#000000' },
+                ticks: { color: currentDarkMode ? '#ffffff' : '#000000' },
+                grid: { color: currentDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)' }
+              },
+              y: {
+                title: { display: true, text: 'Average Delay (minutes)', color: currentDarkMode ? '#ffffff' : '#000000' },
+                ticks: { color: currentDarkMode ? '#ffffff' : '#000000' },
+                grid: { color: currentDarkMode ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)' }
+              }
+            },
+            backgroundColor: currentDarkMode ? '#000000' : '#ffffff',
+            chartArea: { backgroundColor: currentDarkMode ? '#000000' : '#ffffff' },
+            layout: { padding: 0 },
+            elements: { rectangle: { borderWidth: 0 } }
+          }
+        });
+
+        // Observe site theme changes
+        const observer = new MutationObserver(() => applyTheme(isDarkMode()));
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+        
+        // Also observe parent frame if available
+        try {
+          if (window.parent && window.parent !== window) {
+            const parentDoc = window.parent.document;
+            observer.observe(parentDoc.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+            observer.observe(parentDoc.body, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+            window.parent.addEventListener('storage', (event) => { if (event.key === 'theme') applyTheme(isDarkMode()); });
+          }
+        } catch (e) {
+          // Cross-origin restriction, can't observe parent
+        }
+        
+        window.addEventListener('storage', (event) => { if (event.key === 'theme') applyTheme(isDarkMode()); });
+      });
+  </script>
+</body>
+</html>

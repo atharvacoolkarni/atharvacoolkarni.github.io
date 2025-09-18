@@ -1,0 +1,761 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>            Flight Analysis [work in progress] - Atharva Kulkarni      Economist &amp; Data Analyst      </title>
+
+
+
+<meta name="description" content="Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.">
+
+
+
+
+
+  <meta property="article:published_time" content="2025-09-14T00:00:00+00:00">
+
+
+
+  <link rel="canonical" href="https://atharvacoolkarni.github.io/projects/flight-analysis/">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Atharva Kulkarni",
+      "url" : "https://atharvacoolkarni.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+<!-- Open Graph protocol data (https://ogp.me/), used by social media -->
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Atharva Kulkarni | Economist & Data Analyst"> 
+<meta property="og:title" content="Flight Analysis [work in progress]">
+
+  <meta property="og:type" content="article">
+
+
+  <meta property="og:description" name="description" content="Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.">
+
+
+  <meta property="og:url" content="https://atharvacoolkarni.github.io/projects/flight-analysis/">
+
+
+
+
+
+<!-- end Open Graph protocol -->
+
+<link href="https://atharvacoolkarni.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Atharva Kulkarni | Economist & Data Analyst Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://atharvacoolkarni.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<!-- Support for Academicons -->
+<link rel="stylesheet" href="https://atharvacoolkarni.github.io/assets/css/academicons.css"/>
+
+<!-- favicon from https://commons.wikimedia.org/wiki/File:OOjs_UI_icon_academic-progressive.svg -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://atharvacoolkarni.github.io/images/apple-touch-icon-180x180.png"/>
+<link rel="icon" type="image/svg+xml" href="https://atharvacoolkarni.github.io/images/favicon.svg"/>
+<link rel="icon" type="image/png" href="https://atharvacoolkarni.github.io/images/favicon-32x32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="https://atharvacoolkarni.github.io/images/favicon-192x192.png" sizes="192x192"/>
+<link rel="manifest" href="https://atharvacoolkarni.github.io/images/manifest.json"/>
+<link rel="icon" href="/images/favicon.ico"/>
+<meta name="theme-color" content="#ffffff"/>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg persist"><a href="https://atharvacoolkarni.github.io/">Atharva Kulkarni | Economist & Data Analyst</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/projects/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/interests/">Interests</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/blog-posts/">Blog Posts</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/cv/">CV</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/about-me/">About me</a></li>
+          
+          <li id="theme-toggle" class="masthead__menu-item persist tail">
+            <a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+          </li>
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="https://atharvacoolkarni.github.io/images/profile.png" class="author__avatar" alt="Atharva Kulkarni"  fetchpriority="high" />
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Atharva Kulkarni</h3>
+    
+    <p class="author__bio">MSc Economics student</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      <!-- Font Awesome icons / Biographic information  -->
+      
+        <li class="author__desktop"><i class="fas fa-fw fa-location-dot icon-pad-right" aria-hidden="true"></i>Pune, India</li>
+      
+      
+        <li class="author__desktop"><i class="fas fa-fw fa-building-columns icon-pad-right" aria-hidden="true"></i>Symbiosis School of Economics</li>
+      
+      
+      
+        <li><a href="mailto:atharva.kulkarni.2024@sse.ac.in"><i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i>Email</a></li>
+      
+
+      <!-- Font Awesome and Academicons icons / Academic websites -->
+      
+            
+      
+      
+      
+      
+                              
+      
+      
+      
+
+      <!-- Font Awesome icons / Repositories and software development -->
+      
+            
+            
+      
+        <li><a href="https://github.com/atharvacoolkarni"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>GitHub</a></li>
+      
+            
+            
+
+      <!-- Font Awesome icons / Social media -->
+              
+      
+      
+            
+      
+                  
+                  
+      
+            
+            
+      
+        <li><a href="https://www.linkedin.com/in/atharva-kulkarni-5588081bb"><i class="fab fa-fw fa-linkedin icon-pad-right" aria-hidden="true"></i>LinkedIn</a></li>
+            
+      
+            
+                  
+            
+      
+            
+            
+      
+              
+      
+                      
+      
+      
+            
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <meta itemprop="headline" content="Flight Analysis [work in progress]">
+    
+    
+      <meta itemprop="description" content="Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.">
+    
+    
+      <meta itemprop="datePublished" content="2025-09-14T00:00:00+00:00">
+    
+    
+      <meta itemprop="dateModified" content="2025-09-17T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          
+            <h1 class="page__title" itemprop="headline">
+              Flight Analysis [work in progress]
+
+            </h1>
+          
+          
+
+          
+            <p class="page__date">
+              <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong>
+              <time datetime="2025-09-17T00:00:00+00:00">
+                September 17, 2025
+              </time>
+            </p>
+          
+
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <div class="notice">
+  <strong>Note:</strong><br />
+  <br />
+  1. This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008) due to memory and performance constraints. I will be redoing this analysis for the entire dataset soon using big data tools and updating it here.<br />
+  <br />
+  2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br />
+  <br />
+  3. I have only attached some R plots as of yet. Once the complete analysis using the full dataset is done, I will be uploading both: Python and R plots for all questions.<br />
+  <br />
+  Stay tuned!
+</div>
+
+<h2 id="project-overview">Project Overview</h2>
+<p>This project explores <strong>flight data analysis and prediction patterns</strong>.<br />
+The main goals were:</p>
+<ul>
+  <li>Analyze flight delay patterns and identify key factors</li>
+  <li>Visualize air traffic trends and seasonal patterns</li>
+  <li>Predict flight delays using machine learning models</li>
+</ul>
+
+<p>The analysis is based on commercial flight data and combines statistical analysis and machine learning to obtain meaningful insights.</p>
+
+<p>This project was done for University of London’s third year course ‘Programming for Data Science’ during my BSc. Economics degree. The full coursework question set can be found here <a href="/assets/projects/flight-analysis/st2195_coursework.pdf">ST2195_Coursework (PDF)</a></p>
+
+<p>The questions are:</p>
+<ol>
+  <li>When is the
+    <ol>
+      <li>best time of day to fly to minimise delays?</li>
+      <li>day of the week to fly to minimise delays?</li>
+      <li>time of year to fly to minimise delays?</li>
+    </ol>
+  </li>
+  <li>Do older planes suffer more delays?</li>
+  <li>How does the number of people flying between different locations change over time?</li>
+  <li>Can you detect cascading failures as delays in one airport create delays in others?</li>
+  <li>Use the available variables to construct a model that predicts delays.</li>
+</ol>
+
+<h2 id="introduction">Introduction</h2>
+<p>Airline travel is an immensely popular mode of transportation, with billions of people taking it every year [<a href="https://www2023.icao.int/annual-report-2019/Pages/the-world-of-air-transport-in-2019.aspx" title="The World of Air Transport in 2019">1</a>]. In 2019, there were approximately 38.3 million flights worldwide, and while the COVID-19 pandemic caused a significant dip in air travel, the numbers are expected to rebound [<a href="https://www2023.icao.int/annual-report-2019/Pages/the-world-of-air-transport-in-2019.aspx" title="The World of Air Transport in 2019">1</a>]. Despite increased efficiency since the start of flight travel, flight delays remain a persistent issue for travellers. Through data exploration and modelling, this study aims to analyse trends in flight delays, connections, and other factors, providing insight into how flight data evolves over time.</p>
+
+<h2 id="data">Data</h2>
+
+<p>The data is from the Data Expo 2009: Airline on time data found in the Harvard Dataverse [<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FHG7NV7" title="Data Expo 2009: Airline On Time Data (Harvard Dataverse)">2</a>]. The data has 29 variables detailing each flight. When reading the data for both Python and R, the files for the code should be in the data folder or the working directory must be set to where the data is located.</p>
+
+<h2 id="data-pre-processing">Data pre-processing</h2>
+
+<p>To start with, for the purposes of answering the specific questions within this report, most of the columns are not needed. Hence, only 13 variables will be used in the main data set that will be used for analysis. These variables and their descriptions are listed below (Table 1).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Variable</th>
+      <th>Description (as stated / inferred)</th>
+      <th>Notes / Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Year</td>
+      <td>1987 – 2008 (only 2004 and 2005 used)</td>
+      <td>Core temporal key</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Month</td>
+      <td>1 – 12</td>
+      <td>Seasonality</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>DayOfWeek</td>
+      <td>1 = Mon to 7 = Sun</td>
+      <td>Day of week key</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>DepTime</td>
+      <td>Actual departure time (local, hhmm)</td>
+      <td>Delay calc</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>CRSDepTime</td>
+      <td>Scheduled departure time (local, hhmm)</td>
+      <td>Baseline schedule</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>ArrTime</td>
+      <td>Actual arrival time (local, hhmm)</td>
+      <td>Delay calc</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>CRSArrTime</td>
+      <td>Scheduled arrival time (local, hhmm)</td>
+      <td>Baseline schedule</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>TailNum</td>
+      <td>Plane tail number</td>
+      <td>Join to plane data</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>ArrDelay</td>
+      <td>Arrival delay, in minutes</td>
+      <td>Target component</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>DepDelay</td>
+      <td>Departure delay, in minutes</td>
+      <td>Target component</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Origin</td>
+      <td>Origin airport code</td>
+      <td>Network effects</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Dest</td>
+      <td>Destination airport code</td>
+      <td>Network effects</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Year of manufacture</td>
+      <td>The year the plane was manufactured (from plane-data file)</td>
+      <td>Age analysis</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Table 1: Selected variables</em></p>
+
+<p>The reason for this selection is because these variables were the only ones determined to be crucial in answering the questions posed. We can also see that it is quite a large dataset since it is reading 3.5 gigabytes even when only 12 (actually 13 including plane manufacture year) variables were selected, so determining the important variables and selecting only those helps with reducing memory errors. The last variable, year of manufacture, is from the <code class="language-plaintext highlighter-rouge">plane-data</code> file.</p>
+
+<div class="theme-aware-image">
+  <img src="/assets/projects/flight_analysis/images/info_light.png" alt="Data information" class="light-theme-image" />
+  <img src="/assets/projects/flight_analysis/images/info_dark.png" alt="Data information" class="dark-theme-image" />
+</div>
+
+<style>
+.theme-aware-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.theme-aware-image .light-theme-image {
+  display: block;
+}
+
+.theme-aware-image .dark-theme-image {
+  display: none;
+}
+
+/* Dark theme styles */
+html[data-theme="dark"] .theme-aware-image .light-theme-image {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-aware-image .dark-theme-image {
+  display: block;
+}
+</style>
+
+<p><em>Table 2: Data information</em></p>
+
+<p>The main dataset is first checked for NA/missing values. There are missing values in the variables <code class="language-plaintext highlighter-rouge">DepTime</code>, <code class="language-plaintext highlighter-rouge">ArrTime</code>, <code class="language-plaintext highlighter-rouge">ArrDelay</code>, and <code class="language-plaintext highlighter-rouge">DepDelay</code>. We can check how many NA values there are and see the percentage of them compared to the total amount of data. As a rule of thumb, dropping NA values that are less than 5% of the respective observations is acceptable [<a href="https://pressbooks.library.upei.ca/montelpare/chapter/working-with-missing-data/" title="Working with Missing Data (Mears et al.)">3</a>]. As we can see, the variables that have NA values have them for less than 5% of their observations and hence, the NA values will be dropped.</p>
+
+<p><img src="/assets/projects/flight_analysis/images/NA percentage.png" alt="NA percentage values" /></p>
+
+<p><em>Table 2: NA percentage values</em></p>
+
+<p>Now that the data is set, we can start to do analysis on the data.</p>
+
+<h1 id="data-processing-exploration-and-modelling">Data Processing, Exploration and Modelling</h1>
+
+<h2 id="when-is-the-best-time-of-day-day-of-the-week-and-time-of-year-to-fly-to-minimise-delays">When is the best time of day, day of the week, and time of year to fly to minimise delays?</h2>
+
+<h3 id="the-best-time-of-the-day">The best time of the day</h3>
+
+<p>For Question 1 (best time of the day), to determine what is the best time of the day to fly, the variables <code class="language-plaintext highlighter-rouge">CRSDepTime</code> and <code class="language-plaintext highlighter-rouge">CRSArrTime</code> were selected. This is due to the fact that departure and arrival delays start at the scheduled departure and arrival timings. This would show the delays that are expected at a said scheduled time.</p>
+
+<p>For example, if the scheduled departure time is 06 hours (6 AM) and the mean departure delay is found out to be one hour then the observation is that there is an expected mean departure delay of an hour after 6 AM. If the actual departure time was taken, this would be inverse in interpretation since the actual departure time would already consider the delay. If the actual departure time is 07 hours (7 AM) and the mean departure delay is the same, then the delay ended at 7 AM. Hence, the variables <code class="language-plaintext highlighter-rouge">CRSDepTime</code> and <code class="language-plaintext highlighter-rouge">CRSArrTime</code> were selected.</p>
+
+<p>As we can see in the hourly mean arrival and departure delay visualizations from both R and Python, the lowest arrival delay mean is in the morning, at 04:00 and 07:00 hours. The lowest departure delay mean is at 06:00 hours. The second lowest is at 05:00 hours.</p>
+
+<p>The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours). This persists till 04:00 hours where it drops into the negatives. The highest departure delay mean is also in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours).</p>
+
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/hourly_delay_plot.html" width="100%" height="550px"></iframe>
+</div>
+
+<p><em>Figure 1: Interactive hourly mean delay</em></p>
+
+<p>In general, the time between 14:00 to 22:00 (2 PM to 10 PM) is when a lot of delays occur. There is also an abnormal increase at 03:00 to 04:00 in the early morning. Hence, the best time of the day to fly, in order to minimise delays, is during the early morning, from 05:00 to 06:00. In order to avoid peak delays, a person should avoid the evening hours of 17:00 to 21:00 and the early morning hour at 04:00.</p>
+
+<h3 id="the-best-day-of-the-week">The best day of the week</h3>
+
+<p>Next, we have the day of the week. First, the weekly data frame is created by extracting the variables <code class="language-plaintext highlighter-rouge">DayOfWeek</code>, <code class="language-plaintext highlighter-rouge">ArrDelay</code>, and <code class="language-plaintext highlighter-rouge">DepDelay</code>. This allows us to focus on just those variables for this part of the question and makes it easier to handle the data as well. The same goes for the monthly data frame where only <code class="language-plaintext highlighter-rouge">Month</code>, <code class="language-plaintext highlighter-rouge">ArrDelay</code>, and <code class="language-plaintext highlighter-rouge">DepDelay</code> were used. For both weekly and monthly analysis, total delay (the sum of arrival and departure delay) was calculated due to the fact that on a timeframe like a week or as large as a month, looking at arrival and departure delay separately seems excessive. On such a timescale, there will be very nuanced changes between the two types of delays especially on a monthly timescale and hence total delay was taken for both weekly and monthly analysis.</p>
+
+<p>The best day of the week, where total delays are the lowest, is Saturday. The total delay mean is close to ten minutes on Saturday while the second lowest is Tuesday where it is close to 12.5 minutes. The highest total delay mean is on Thursday and Friday with both having more than 17.5 minutes in the total delay mean. The next highest is Monday with just under 17.5 minutes.</p>
+
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/weekly_delay_plot.html" width="100%" height="550px"></iframe>
+</div>
+
+<p><em>Figure 2: Weekly mean delay</em></p>
+
+<p>Hence, the best day of the week is Saturday. To avoid delays, it is best to avoid Thursdays, Fridays, and Mondays.</p>
+
+<h3 id="the-best-time-of-the-year-month">The best time of the year (month)</h3>
+
+<p>The best time of the year to fly, by month, is September which has a mean of about six minutes. The next best month is April which has a mean of about seven minutes. The highest mean is during July, with December and June coming in 2nd and 3rd place for highest mean. This corresponds to the Summer and Winter break, hence the rise in delays. January also has high delays due to spill over from Winter break and New Year’s. It can also include the weather from winter season in December and January. The same can be seen in the R visualization.</p>
+
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/monthly_delay_plot.html" width="100%" height="550px"></iframe>
+</div>
+
+<p><em>Figure 3: Monthly mean delay</em></p>
+
+<h2 id="do-older-planes-suffer-more-delays">Do older planes suffer more delays?</h2>
+
+<p>For Question 2, the <code class="language-plaintext highlighter-rouge">plane-data</code> dataset was used. The NA values were checked and removed. The variable <code class="language-plaintext highlighter-rouge">TailNum</code> was used which then allowed for the year of manufacture to be extracted.</p>
+
+<p>There are two regression lines in each plot. This is done due to the sampling difference mentioned in the data pre-processing. It is helpful to split the data and plot them in two sections within the same plot.</p>
+
+<p>The data is much more scattered in pre-1980s as opposed to post-1980s where there is much more data that results in a more gathered plot. Likewise, the confidence interval is much wider for pre-1980s as compared to post-1980s. Since there is a sampling issue with pre-1980s, we cannot reasonably apply the conclusion for all years. Hence, 1980 onwards, data points and analysis show that older planes did suffer more delays. We can see that there is a slow downward trend with much more scatter appearing below the trend line post-1990s and that there is much more scatter above the trend line during the 1980s. Meanwhile, pre-1980, the delays were increasing as seen by the upward sloping regression line.</p>
+
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/plane_age_plot.html" width="100%" height="550px"></iframe>
+</div>
+
+<p><em>Figure 9: Regression plot of total delay against year of manufacture (Python)</em></p>
+
+<h2 id="how-does-the-number-of-people-number-of-flights-flying-between-different-locations-change-over-time">How does the number of people (number of flights) flying between different locations change over time?</h2>
+
+<p>For Question 3, the data was split in two: pre-1980 year of manufacture and post-1980 year of manufacture. This is due to the sampling variations between the two periods. There are about 8 million observations in post-1980 compared to the 500,000 in pre-1980. Hence, it wouldn’t give an accurate representation if the two were not separated.</p>
+
+<p>In both visualizations, we can see that there is quite a lot of change for most of the connections. The largest change is between DTW - TYS (Detroit, Michigan – Knoxville, Tennessee) where more than 90% of total flights were in 2004 which dipped to less than 5% of total flights in 2005. The second largest change is between LAS – PVD (Las Vegas, Nevada – Warwick, Rhode Island) where it had a little over 10% of total flights in 2004 which then increased to more than 80%.</p>
+
+<p>DTW – SBN (Detroit, Michigan – South Bend, Indiana) and LGA – STT (Queens, New York – St. Thomas, US Virgin Islands) have about the same amount of change, percentage wise. Both had just below 40% in 2004 which increased to more than 60% in 2005. AKN – DLG (King Salmon, Alaska – Dillingham, Alaska) had the opposite change with 60% in 2004 dropping to 40% in 2005.</p>
+
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/select5_airports.html" width="100%" height="550px"></iframe>
+</div>
+
+<p><em>Figure 7: Top 5 connections by total flights (Python)</em></p>
+
+<p>The R visualization is quite interesting, almost resembling a step graph. The largest change is, of course, between MSY – SLC (New Orleans, Louisiana – Salt Lake, Utah) where the percentage change is 100% which means that the flights in 2005 are double of those in 2004. The second largest is between GSO – TPA (Greensboro, North Carolina – Port Alsworth, Alaska) where there was an increase from 25% to 75% of total flights. There is a similar increase between GRB – MQT (Green Bay, Wisconsin – Gwinn, Michigan) where it increased from about 30% to 70% from 2004 to 2005. The connection between AKN – ANC (King Salmon, Alaska – Anchorage, Alaska) had almost no change at all with the percentage increasing from just below 50% to just a little over 50% from 2004 to 2005. A similar change is noted in BDL – IAH (Windsor Locks, Connecticut – Houston, Texas) with the increase being from about 45% to 55%.</p>
+
+<p><img src="/assets/projects/flight_analysis/images/Q3 R.png" alt="Top 5 connections" /></p>
+
+<p><em>Figure 8: Top 5 connections by total flights (R)</em></p>
+
+<h2 id="can-you-detect-cascading-failures-as-delays-in-one-airport-create-delays-in-others">Can you detect cascading failures as delays in one airport create delays in others?</h2>
+
+<p>For Question 4, two different data subsets were taken for Python and R. For Python, the top 5 connections, in ascending order, with total flights between 100 and 500 were analysed while for R, the top 5 connections, in ascending order, with total flights between 1000 and 2500 were analysed. This was done due to the fact that at higher levels of total flights, there is very little change since the total flights number is so large. Hence, to find a greater change between 2004 and 2005, the data was filtered and analysed.</p>
+
+<p><img src="/assets/projects/flight_analysis/images/Q4 python.png" alt="Correlation matrix" /></p>
+
+<p><em>Figure 13: Triangle correlation heatmap of top 5 airports (Python)</em></p>
+
+<p>It is possible to detect cascading failures as delays. The visualizations from Python and R both show the same information. We can see that there are indeed delays which cascade from one airport into another. There is perfect correlation between ORD (O’Hare airport, Chicago) and DFW (Dallas/Fort Worth airport, Dallas-Fort Worth) which means that the delays in ORD constantly cascade to DFW and result in delays in DFW. There are other similarly high correlations between other airports. PHL (Philadelphia airport, Philadelphia) and ATL (Hartsfield-Jackson airport, Atlanta) have a delay correlation of 0.95 while PHL has pretty much the same correlation with EWR (Newark Liberty airport, Newark) that has a correlation of 0.96. ORD and ATL have a correlation of 0.88 while EWR and DFW have a correlation of 0.8. The high positive correlations imply that delays in one airport, like PHL, do translate to or be associated with delays in the other airport, like ATL. This could be an indication that cascading failures are occurring between the airports. There is also much lower correlation such as 0.53 between ORD and EWR as well as 0.41 between PHL and ORD. This means that there is a moderately positive relationship in delays between the airports but does not necessarily mean that cascading failures are occurring. It is also to be noted that there is a correlation of 0.067, about 0, between EWR and ATL. This means that the delays in EWR do not affect the delays in ATL. There are also negative correlations between DFW and ATL, of -0.99, as well as between PHL and DFW, of -0.91. This means delays in DFW and PHL do not translate to delays in ATL and DFW, respectively.</p>
+
+<p>As we saw, we can detect cascading failures as delays that start from one airport and lead to delays in other airports. Namely, there are indications of cascading failures between ORD – DFW, PHL – EWR, PHL – ATL, ORD – ATL, and EWR – DFW.</p>
+
+<h2 id="use-the-available-variables-to-construct-a-model-that-predicts-delays">Use the available variables to construct a model that predicts delays</h2>
+
+<p>For Question 5, the variables that immediately impact arrival and departure delay were taken. These are <code class="language-plaintext highlighter-rouge">CRSDepTime</code>, <code class="language-plaintext highlighter-rouge">CRSArrTime</code>, <code class="language-plaintext highlighter-rouge">DepTime</code>, <code class="language-plaintext highlighter-rouge">ArrTime</code>, <code class="language-plaintext highlighter-rouge">Origin</code>, and <code class="language-plaintext highlighter-rouge">Dest</code>. Total delay was calculated, and the 6 variables were used to model total delay. The sample size taken for both Python and R is 200,000. A large sample size results in greater accuracy within the model. For R, the variables <code class="language-plaintext highlighter-rouge">Origin</code> and <code class="language-plaintext highlighter-rouge">Dest</code> had to be dropped due to the “Factor has new levels” error that occurs from taking samples. Unfortunately, this results in lower accuracy but the error could not be solved. The only solution found was to take the entire dataset but this would be impossible due to the fact that the data has about 7 million rows. This will result in numerous memory errors and session aborts from R. Hence, the variables were dropped. The models used are logistic regression and gradient boosting in Python and linear regression, ridge regression, lasso regression, and random forests in R.</p>
+
+<p>The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [<a href="https://stephenallwright.com/good-auc-score/" title="What is a Good AUC Score? (Allwright, 2022)">4</a>][<a href="https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc" title="Classification: ROC Curve and AUC (Google Developers)">5</a>][<a href="https://www.analyticsvidhya.com/blog/2020/06/auc-roc-curve-machine-learning/" title="Guide to AUC ROC Curve (Bhandari, 2023)">6</a>]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [<a href="https://stephenallwright.com/good-auc-score/" title="What is a Good AUC Score? (Allwright, 2022)">4</a>]. We can also change the train-test ratio and see if it can improve the model.</p>
+
+<p><img src="/assets/projects/flight_analysis/images/Q5 python.png" alt="AUC score" /></p>
+
+<p><em>Figure 15: Machine learning model (Python)</em></p>
+
+<p>On the left is the graph visualizing the various mean squared error (MSE) values for the regression models. The values for each model are given in the table below. As we can see, the MSE values vary quite a bit. The random forest model has the highest MSE with the most range as well. Its mean MSE value is 26.6. The second highest is the ridge regression without any tuning. The third highest is the lasso regression without any tuning. The lowest is the linear regression. A MSE value of zero would imply a perfect model [<a href="https://stephenallwright.com/good-mse-value/" title="What is a Good MSE Value? (Allwright, 2022)">7</a>]. We cannot conclude this with the linear regression as such a small value when variables like <code class="language-plaintext highlighter-rouge">Origin</code> and <code class="language-plaintext highlighter-rouge">Dest</code> were dropped. It also threw a warning message that the “prediction from a rank deficient fit may be misleading”. This means that the test data did not work well with the regression [<a href="https://www.programmingr.com/r-error-messages/prediction-from-a-rank-deficient-fit-may-be-misleading/" title="Prediction from a Rank-Deficient Fit May Be Misleading (ProgrammingR)">8</a>]. The ridge and lasso regressions without tuning are more believable but these are without tuning. Their penalty terms, also called lambdas, have not been calculated when benchmarking [<a href="https://www.andreaperlato.com/theorypost/ridge-and-lasso-regression/" title="Ridge and Lasso Regression (Andrea Perlato)">9</a>]. We can (see) with the penalty terms that their MSE values fall drastically. We can improve upon the model by including more variables, especially origin and destination.</p>
+
+<p><img src="/assets/projects/flight_analysis/images/Q5 R.png" alt="MSE values" /></p>
+
+<p><em>Figure 16: MSE values of regression models (R)</em></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>Overall, we were able to analyse when delays occur, changes in flight connections, cascading delays etc. There can be much more flight analysis done with this data. The entirety of the code, both in Python and R, took around 30 minutes to run and execute which is quite fast considering the samples taken in the machine learning models.</p>
+
+<h1 id="references">References</h1>
+
+<ol>
+  <li>The World of Air Transport in 2019. (n.d.). Retrieved March 25, 2023. Available at: <a href="https://www2023.icao.int/annual-report-2019/Pages/the-world-of-air-transport-in-2019.aspx" title="The World of Air Transport in 2019">Link</a></li>
+  <li>Harvard Dataverse. (2008, October 6). Data Expo 2009: Airline On Time Data. Retrieved February 27, 2023. Available at: <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FHG7NV7" title="Data Expo 2009: Airline On Time Data (Harvard Dataverse)">Link</a></li>
+  <li>Mears, K., Montelpare, W. J., Read, E., McComber, T., Mahar, A., &amp; Ritchie, K. (n.d.). Working with missing data. Retrieved April 3, 2023. Available at: <a href="https://pressbooks.library.upei.ca/montelpare/chapter/working-with-missing-data/" title="Working with Missing Data (Mears et al.)">Link</a></li>
+  <li>Allwright, S. (2022, August 23). What is a good AUC score? Retrieved April 2, 2023. Available at: <a href="https://stephenallwright.com/good-auc-score/" title="What is a Good AUC Score? (Allwright, 2022)">Link</a></li>
+  <li>Google Developers. Classification: ROC curve and AUC. Retrieved April 1, 2023. Available at: <a href="https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc" title="Classification: ROC Curve and AUC (Google Developers)">Link</a></li>
+  <li>Bhandari, A. (2023, March 28). Guide to AUC ROC curve in machine learning. Retrieved March 25, 2023. Available at: <a href="https://www.analyticsvidhya.com/blog/2020/06/auc-roc-curve-machine-learning/" title="Guide to AUC ROC Curve (Bhandari, 2023)">Link</a></li>
+  <li>Allwright, S. (2022, December 6). What is a good MSE value? Retrieved April 2, 2023. Available at: <a href="https://stephenallwright.com/good-mse-value/" title="What is a Good MSE Value? (Allwright, 2022)">Link</a></li>
+  <li>ProgrammingR. Fix R warning: Prediction from a rank-deficient fit may be misleading. Retrieved April 1, 2023. Available at: <a href="https://www.programmingr.com/r-error-messages/prediction-from-a-rank-deficient-fit-may-be-misleading/" title="Prediction from a Rank-Deficient Fit May Be Misleading (ProgrammingR)">Link</a></li>
+  <li>Andrea Perlato. Ridge and lasso regression. Retrieved April 2, 2023. Available at: <a href="https://www.andreaperlato.com/theorypost/ridge-and-lasso-regression/" title="Ridge and Lasso Regression (Andrea Perlato)">Link</a></li>
+</ol>
+
+<h2 id="-project-files">📂 Project Files</h2>
+<ul>
+  <li><a href="/assets/projects/flight_analysis/flight_analysis_report.pdf">📄 Full Report (PDF)</a></li>
+  <li><a href="/assets/projects/flight-analysis/flight_analysis.Rmd">📓 R Markdown (RMD)</a></li>
+  <li><a href="/assets/projects/flight-analysis/flight_analysis.ipynb">📔 Jupyter Notebook (IPYNB)</a></li>
+  <li><a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7">📂 Dataset (CSV)</a></li>
+</ul>
+
+<h2 id="-repository">🔗 Repository</h2>
+<p>Source code and materials are available on GitHub:<br />
+👉 <a href="https://github.com/atharvacoolkarni/flight-analysis">Flight Analysis Repository</a></p>
+
+
+        
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+<section class="page__share">
+  <div class="likebtn-container" style="margin-bottom: 10px;">
+    <span class="likebtn-wrapper" data-theme="custom" data-btn_size="26" data-f_size="16" data-icon_size="18" data-bg_c="#d3d3d3" data-ef_voting="grow" data-identifier="zero" data-show_dislike_label="true" data-counter_clickable="true" data-counter_frmt="km" data-counter_zero_show="true"></span>
+  </div>
+
+  <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://atharvacoolkarni.github.io/projects/flight-analysis/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://x.com/intent/post?text=https://atharvacoolkarni.github.io/projects/flight-analysis/" class="btn btn--twitter" title="Share on X"><i class="fab fa-x-twitter" aria-hidden="true"></i><span> (formerly Twitter)</span></a>
+
+  <div id="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="atharvacoolkarni/atharvacoolkarni.github.io"
+        data-repo-id="R_kgDOPvwF2g"
+        data-category="General"
+        data-category-id="DIC_kwDOPvwF2s4CvdiL"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+
+</section>
+
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="https://atharvacoolkarni.github.io/projects/convergence-analysis/" class="pagination--pager" title="Convergence analysis [work in progress]
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<a href="/sitemap/">Sitemap</a>
+
+<!-- Support for MatJax -->
+<script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+
+<!-- Support for Plotly -->
+<script defer src='https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.1/plotly.min.js'></script>
+
+<!-- Support for Mermaid -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({startOnLoad:true, theme:'default'});
+    await mermaid.run({querySelector:'code.language-mermaid'});
+</script>
+
+<!-- end custom footer snippets -->
+
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="http://github.com/atharvacoolkarni"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://atharvacoolkarni.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">
+  &copy; 2025 Atharva Kulkarni, Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br />
+  Site last updated 2025-09-18
+</div>
+
+      </footer>
+    </div>
+
+    <script type="module" src="https://atharvacoolkarni.github.io/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
