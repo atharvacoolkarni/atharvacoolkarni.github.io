@@ -101,14 +101,17 @@
         const ctx = document.getElementById('myChart').getContext('2d');
         const currentDarkMode = isDarkMode();
 
+        // FIXED: Access data from the correct nested structure
+        const hourlyData = data.hourly;
+
         chart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: data.hours,
+            labels: hourlyData.hours,
             datasets: [
               {
                 label: 'Departure Delay',
-                data: data.departure,
+                data: hourlyData.departure_delays,
                 backgroundColor: currentDarkMode ? '#4fc3f7' : '#17a2b8',
                 hoverBackgroundColor: currentDarkMode ? '#039be5' : '#138496',
                 barPercentage: 0.7,
@@ -116,7 +119,7 @@
               },
               {
                 label: 'Arrival Delay',
-                data: data.arrival,
+                data: hourlyData.arrival_delays,
                 backgroundColor: currentDarkMode ? '#fbc02d' : '#dc3545',
                 hoverBackgroundColor: currentDarkMode ? '#f57f17' : '#a71d2a',
                 barPercentage: 0.7,
