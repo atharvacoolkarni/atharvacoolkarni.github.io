@@ -73,13 +73,13 @@ _Table 1: Selected variables_
 
 The reason for this selection is because these variables were the only ones determined to be crucial in answering the questions posed. We can also see that it is quite a large dataset since it is reading 3.5 gigabytes even when only 12 (actually 13 including plane manufacture year) variables were selected, so determining the important variables and selecting only those helps with reducing memory errors. The last variable, year of manufacture, is from the `plane-data` file.
 
-![Data information](/assets/projects/flight_analysis/info.png)
+![Data information](/assets/projects/flight_analysis/images/info_light.png)
 
 _Table 2: Data information_
 
 The main dataset is first checked for NA/missing values. There are missing values in the variables `DepTime`, `ArrTime`, `ArrDelay`, and `DepDelay`. We can check how many NA values there are and see the percentage of them compared to the total amount of data. As a rule of thumb, dropping NA values that are less than 5% of the respective observations is acceptable [[3]]. As we can see, the variables that have NA values have them for less than 5% of their observations and hence, the NA values will be dropped.
 
-![NA percentage values](/assets/projects/flight_analysis/NA percentage.png)
+![NA percentage values](/assets/projects/flight_analysis/images/NA percentage.png)
 
 _Table 2: NA percentage values_
 
@@ -100,7 +100,7 @@ As we can see in the hourly mean arrival and departure delay visualizations from
 The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours). This persists till 04:00 hours where it drops into the negatives. The highest departure delay mean is also in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours).
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/hourly_delay_plot.html" width="100%" height="550px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/hourly_delay_plot.html" width="100%" height="550px"></iframe>
 </div>
 
 _Figure 1: Interactive hourly mean delay_
@@ -114,7 +114,7 @@ Next, we have the day of the week. First, the weekly data frame is created by ex
 The best day of the week, where total delays are the lowest, is Saturday. The total delay mean is close to ten minutes on Saturday while the second lowest is Tuesday where it is close to 12.5 minutes. The highest total delay mean is on Thursday and Friday with both having more than 17.5 minutes in the total delay mean. The next highest is Monday with just under 17.5 minutes.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/weekly_delay_plot.html" width="100%" height="550px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/weekly_delay_plot.html" width="100%" height="550px"></iframe>
 </div>
 
 _Figure 2: Weekly mean delay_
@@ -126,7 +126,7 @@ Hence, the best day of the week is Saturday. To avoid delays, it is best to avoi
 The best time of the year to fly, by month, is September which has a mean of about six minutes. The next best month is April which has a mean of about seven minutes. The highest mean is during July, with December and June coming in 2nd and 3rd place for highest mean. This corresponds to the Summer and Winter break, hence the rise in delays. January also has high delays due to spill over from Winter break and New Year’s. It can also include the weather from winter season in December and January. The same can be seen in the R visualization.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/monthly_delay_plot.html" width="100%" height="550px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/monthly_delay_plot.html" width="100%" height="550px"></iframe>
 </div>
 
 _Figure 3: Monthly mean delay_
@@ -140,7 +140,7 @@ There are two regression lines in each plot. This is done due to the sampling di
 The data is much more scattered in pre-1980s as opposed to post-1980s where there is much more data that results in a more gathered plot. Likewise, the confidence interval is much wider for pre-1980s as compared to post-1980s. Since there is a sampling issue with pre-1980s, we cannot reasonably apply the conclusion for all years. Hence, 1980 onwards, data points and analysis show that older planes did suffer more delays. We can see that there is a slow downward trend with much more scatter appearing below the trend line post-1990s and that there is much more scatter above the trend line during the 1980s. Meanwhile, pre-1980, the delays were increasing as seen by the upward sloping regression line.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/plane_age_plot.html" width="100%" height="550px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/plane_age_plot.html" width="100%" height="550px"></iframe>
 </div>
 
 _Figure 9: Regression plot of total delay against year of manufacture (Python)_
@@ -154,14 +154,14 @@ In both visualizations, we can see that there is quite a lot of change for most 
 DTW – SBN (Detroit, Michigan – South Bend, Indiana) and LGA – STT (Queens, New York – St. Thomas, US Virgin Islands) have about the same amount of change, percentage wise. Both had just below 40% in 2004 which increased to more than 60% in 2005. AKN – DLG (King Salmon, Alaska – Dillingham, Alaska) had the opposite change with 60% in 2004 dropping to 40% in 2005.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/select5_airports.html" width="100%" height="550px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/select5_airports.html" width="100%" height="550px"></iframe>
 </div>
 
 _Figure 7: Top 5 connections by total flights (Python)_
 
 The R visualization is quite interesting, almost resembling a step graph. The largest change is, of course, between MSY – SLC (New Orleans, Louisiana – Salt Lake, Utah) where the percentage change is 100% which means that the flights in 2005 are double of those in 2004. The second largest is between GSO – TPA (Greensboro, North Carolina – Port Alsworth, Alaska) where there was an increase from 25% to 75% of total flights. There is a similar increase between GRB – MQT (Green Bay, Wisconsin – Gwinn, Michigan) where it increased from about 30% to 70% from 2004 to 2005. The connection between AKN – ANC (King Salmon, Alaska – Anchorage, Alaska) had almost no change at all with the percentage increasing from just below 50% to just a little over 50% from 2004 to 2005. A similar change is noted in BDL – IAH (Windsor Locks, Connecticut – Houston, Texas) with the increase being from about 45% to 55%.
 
-![Top 5 connections](/assets/projects/flight_analysis/Q3 R.png)
+![Top 5 connections](/assets/projects/flight_analysis/images/Q3 R.png)
 
 _Figure 8: Top 5 connections by total flights (R)_
 
@@ -169,7 +169,7 @@ _Figure 8: Top 5 connections by total flights (R)_
 
 For Question 4, two different data subsets were taken for Python and R. For Python, the top 5 connections, in ascending order, with total flights between 100 and 500 were analysed while for R, the top 5 connections, in ascending order, with total flights between 1000 and 2500 were analysed. This was done due to the fact that at higher levels of total flights, there is very little change since the total flights number is so large. Hence, to find a greater change between 2004 and 2005, the data was filtered and analysed.
 
-![Correlation matrix](/assets/projects/flight_analysis/Q4 python.png)
+![Correlation matrix](/assets/projects/flight_analysis/images/Q4 python.png)
 
 _Figure 13: Triangle correlation heatmap of top 5 airports (Python)_
 
@@ -183,13 +183,13 @@ For Question 5, the variables that immediately impact arrival and departure dela
 
 The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [[4]][[5]][[6]]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [[4]]. We can also change the train-test ratio and see if it can improve the model.
 
-![AUC score](/assets/projects/flight_analysis/Q5 python.png)
+![AUC score](/assets/projects/flight_analysis/images/Q5 python.png)
 
 _Figure 15: Machine learning model (Python)_
 
 On the left is the graph visualizing the various mean squared error (MSE) values for the regression models. The values for each model are given in the table below. As we can see, the MSE values vary quite a bit. The random forest model has the highest MSE with the most range as well. Its mean MSE value is 26.6. The second highest is the ridge regression without any tuning. The third highest is the lasso regression without any tuning. The lowest is the linear regression. A MSE value of zero would imply a perfect model [[7]]. We cannot conclude this with the linear regression as such a small value when variables like `Origin` and `Dest` were dropped. It also threw a warning message that the “prediction from a rank deficient fit may be misleading”. This means that the test data did not work well with the regression [[8]]. The ridge and lasso regressions without tuning are more believable but these are without tuning. Their penalty terms, also called lambdas, have not been calculated when benchmarking [[9]]. We can (see) with the penalty terms that their MSE values fall drastically. We can improve upon the model by including more variables, especially origin and destination.
 
-![MSE values](/assets/projects/flight_analysis/Q5 R.png)
+![MSE values](/assets/projects/flight_analysis/images/Q5 R.png)
 
 _Figure 16: MSE values of regression models (R)_
 
