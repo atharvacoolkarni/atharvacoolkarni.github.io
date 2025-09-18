@@ -1,12 +1,14 @@
 ---
-title: "Flight Analysis [work in progress]"
-excerpt: "Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data."
+title: "Flight Analysis [_work in progress_]"
+excerpt: >
+  <blockquote style="border-left: 4px solid #fd7e14; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #fff8f0; padding: 1rem; color: #1b1b1b;">
+  Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
+  </blockquote>
 collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/flight-analysis/
 date: 2025-09-14
-last_modified_at: 2025-09-17
 ---
 
 <div class="notice">
@@ -14,9 +16,9 @@ last_modified_at: 2025-09-17
   <br>
   1. This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008) due to memory and performance constraints. I will be redoing this analysis for the entire dataset soon using big data tools and updating it here.<br>
   <br>
-  2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
+  1. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
   <br>
-  3. I have only attached some R plots as of yet. Once the complete analysis using the full dataset is done, I will be uploading both: Python and R plots for all questions.<br>
+  1. I have only attached some R plots as of yet. Once the complete analysis using the full dataset is done, I will be uploading both: Python and R plots for all questions.<br>
   <br>
   Stay tuned!
 </div>
