@@ -243,3 +243,56 @@
     }
   }
 }
+
+/* Portfolio excerpt styling for theme compatibility */
+.portfolio-excerpt {
+  border-left: 4px solid var(--global-link-color);
+  background-color: rgba(var(--global-text-color-rgb, 123, 130, 136), 0.05);
+  color: var(--global-text-color);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  border-radius: 4px;
+}
+
+/* Orange theme for specific projects */
+.portfolio-excerpt--orange {
+  border-left-color: #fd7e14;
+}
+
+/* Red theme for specific projects */
+.portfolio-excerpt--red {
+  border-left-color: #dc3545;
+}
+
+/* Blue theme for specific projects */
+.portfolio-excerpt--blue {
+  border-left-color: #007bff;
+}
+
+/* Green theme for specific projects */
+.portfolio-excerpt--green {
+  border-left-color: #28a745;
+}
+
+/* Purple theme for specific projects */
+.portfolio-excerpt--purple {
+  border-left-color: #6f42c1;
+}
+
+.archive__item-excerpt {
+  blockquote {
+    border-left: 4px solid var(--global-link-color);
+    background-color: var(--global-bg-color);
+    color: var(--global-text-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    
+    /* Override inline styles for dark mode compatibility */
+    &[style] {
+      background-color: var(--global-bg-color) !important;
+      color: var(--global-text-color) !important;
+    }
+  }
+}

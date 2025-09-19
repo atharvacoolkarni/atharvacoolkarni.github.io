@@ -1,10 +1,10 @@
 ---
 title: "Convergence analysis [_work in progress_]"
 excerpt: >
-  <blockquote style="border-left: 4px solid #28a745; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #f8fff8; padding: 1rem; color: #1b1b1b;">
+  <div class="portfolio-excerpt portfolio-excerpt--green">
   Testing the convergence hypothesis in economics and exploring whether 
   countries' incomes and productivity levels move closer together over time.
-  </blockquote>
+  </div>
 collection: portfolio
 layout: single
 classes: wide
