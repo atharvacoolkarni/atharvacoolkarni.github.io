@@ -55,6 +55,11 @@
   .fal {
     color: var(--global-text-color-light);
   }
+  
+  /* Ensure GitHub icon is visible in dark mode */
+  .fa-github {
+    color: var(--global-text-color-light);
+  }
 }
 
 .page__footer-copyright {
