@@ -243,3 +243,21 @@
     }
   }
 }
+
+/* Portfolio excerpt styling for theme compatibility */
+.archive__item-excerpt {
+  blockquote {
+    border-left: 4px solid var(--global-link-color);
+    background-color: var(--global-bg-color);
+    color: var(--global-text-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    
+    /* Override inline styles for dark mode compatibility */
+    &[style] {
+      background-color: var(--global-bg-color) !important;
+      color: var(--global-text-color) !important;
+    }
+  }
+}
