@@ -3,11 +3,11 @@ title: "Price Discrimination Strategies of Air India and Vistara on the Delhi-Mu
 categories: [research, econometrics]
 tags: [price-discrimination, airline-industry, regression-analysis, india]
 excerpt: >
-  <blockquote style="border-left: 4px solid #6f42c1; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #f8f6ff; padding: 1rem; color: #1b1b1b;">
+  <div class="portfolio-excerpt portfolio-excerpt--purple">
   An analysis of Air India and Vistara's pricing behavior on the busy Delhi–Mumbai route, 
   focusing on how different forms of price discrimination are applied and what they reveal 
   about competition, demand patterns, and airline revenue strategies.
-  </blockquote>
+  </div>
 collection: portfolio
 layout: single
 classes: wide
