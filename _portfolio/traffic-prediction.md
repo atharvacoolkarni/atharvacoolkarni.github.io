@@ -10,7 +10,6 @@ collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/traffic-prediction/
-date: 2025-09-17
 ---
 
 *Repository and detailed results coming soon...*

@@ -10,7 +10,6 @@ collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/sentiment-analysis/
-date: 2025-09-17
 ---
 
 *Repository and detailed results coming soon...*

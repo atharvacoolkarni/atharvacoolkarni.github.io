@@ -8,7 +8,6 @@ collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/flight-analysis/
-date: 2025-09-14
 ---
 
 <div class="notice">

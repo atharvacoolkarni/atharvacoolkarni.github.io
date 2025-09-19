@@ -12,7 +12,6 @@ collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/price-discrimination/
-date: 2025-09-18
 ---
 
 ## Introduction

@@ -3,13 +3,13 @@
    ========================================================================== */
 
 /* Color codes used for the theme */
-$primary-color              : #00adb5;
+$primary-color              : #00b2c6;
 $dark-primary-color         : mix(#000, $primary-color, 40%);
 $darker-primary-color       : mix(#000, $primary-color, 60%);
 $light-primary-color        : mix(#000, $primary-color, 50%);
 
 $background                 : #252a34;
-$background-light           : mix(#fff, $background, 20%);
+$background-light           : lighten(#00d3e0, 20%);
 $background-lighter         : mix(#fff, $background, 90%);
 $text                       : #eaeaea;
 $link                       : mix($primary-color, $text, 40%);
@@ -39,7 +39,7 @@ html[data-theme="dark"] {
     --global-base-color                 : #{$background};
     --global-bg-color                   : #{$background};
     --global-footer-bg-color            : #{$footer};
-    --global-border-color               : #{$light-primary-color};
+    --global-border-color               : #00a3ad;
     --global-dark-border-color          : #{$background-light};
     --global-code-background-color      : #fafafa;
     --global-code-text-color            : #{$darker-primary-color};

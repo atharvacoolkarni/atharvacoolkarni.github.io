@@ -3,15 +3,15 @@
    ========================================================================== */
 
 /* Color codes used for the theme */
-$primary-color              : #0092ca;
+$primary-color              : #007bb8;
 $dark-primary-color         : mix(#000, $primary-color, 40%);
 $darker-primary-color       : mix(#000, $primary-color, 60%);
 $light-primary-color        : mix(#000, $primary-color, 50%);
 
-$background                 : #eeeeee;
-$background-light           : mix(#fff, $background, 20%);
+$background                 : #f5f5f5;
+$background-light           : darken(#7bc0e5, 20%);
 $background-lighter         : mix(#fff, $background, 90%);
-$text                       : #222831;
+$text                       : #0f1a26;
 $link                       : #393e46;
 $link-dark                  : mix(#000, $link, 25%);
 $link-light                 : mix(#fff, $link, 25%);
@@ -39,7 +39,7 @@ $sidebar-screen-min-width   : 1024px;
     --global-base-color                 : #{$background};
     --global-bg-color                   : #{$background};
     --global-footer-bg-color            : #{$footer};
-    --global-border-color               : #{$light-primary-color};
+    --global-border-color               : #80c5e8;
     --global-dark-border-color          : #{$background-light};
     --global-code-background-color      : #fafafa;
     --global-code-text-color            : #{$darker-primary-color};
@@ -48,7 +48,7 @@ $sidebar-screen-min-width   : 1024px;
     --global-link-color-hover           : #{$link-dark};
     --global-link-color-visited         : #{$link-light};
     --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$link};
+    --global-masthead-link-color-hover  : #{$background-light};
     --global-text-color                 : #{$text};
     --global-text-color-light           : #{$light-primary-color};
     --global-thead-color                : #{$background-lighter};

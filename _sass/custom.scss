@@ -1,0 +1,13 @@
+/* Sidebar icon overrides */
+
+/* Default (light mode) */
+.author__urls .fa-github,
+.author__urls .fa-linkedin {
+  color: #000000; /* black for light mode */
+}
+
+/* Dark mode */
+[data-theme="dark"] .author__urls .fa-github,
+[data-theme="dark"] .author__urls .fa-linkedin {
+  color: #ffffff; /* white for dark mode */
+}

@@ -9,7 +9,6 @@ collection: portfolio
 layout: single
 classes: wide
 permalink: /projects/convergence-analysis/
-date: 2025-09-17
 ---
 
 ## Dissertation Overview

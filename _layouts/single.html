@@ -27,9 +27,6 @@ layout: default
     {% if page.date %}
       <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">
     {% endif %}
-    {% if page.last_modified_at %}
-      <meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">
-    {% endif %}
 
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
@@ -39,26 +36,27 @@ layout: default
               {{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}
             </h1>
           {% endif %}
+          {% if page.collection == "portfolio" or page.collection == "posts" %}
+            {% if page.last_modified_at %}
+              <p class="page__date">
+                <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong>
+                <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">
+                  {{ page.last_modified_at | date: "%B %d, %Y" }}
+                </time>
+              </p>
+            {% elsif page.date %}
+              <p class="page__date">
+                <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong>
+                <time datetime="{{ page.date | date_to_xmlschema }}">
+                  {{ page.date | date: "%B %d, %Y" }}
+                </time>
+              </p>
+            {% endif %}
+          {% endif %}
           {% if page.read_time %}
             <p class="page__meta">
               <i class="fa fa-clock" aria-hidden="true"></i>
               {% include read-time.html %}
-            </p>
-          {% endif %}
-
-          {% if page.last_modified_at %}
-            <p class="page__date">
-              <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong>
-              <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">
-                {{ page.last_modified_at | date: "%B %d, %Y" }}
-              </time>
-            </p>
-          {% elsif page.date %}
-            <p class="page__date">
-              <strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong>
-              <time datetime="{{ page.date | date_to_xmlschema }}">
-                {{ page.date | date: "%B %d, %Y" }}
-              </time>
             </p>
           {% endif %}
 
