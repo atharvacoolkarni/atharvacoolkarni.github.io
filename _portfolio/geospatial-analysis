@@ -1,11 +1,11 @@
 ---
 title: "Geospatial and temporal analysis of New York City taxi rides [_work in progress_]"
 excerpt: >
-  <blockquote style="border-left: 4px solid #17a2b8; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #f0fcff; padding: 1rem; color: #1b1b1b;">
+  <div class="portfolio-excerpt portfolio-excerpt--blue">
   Comprehensive geospatial and temporal analysis of NYC taxi ride patterns, exploring 
   trip distributions, fare dynamics, and mobility trends across different boroughs 
   and time periods using large-scale transportation data and spatial analytics.
-  </blockquote>
+  </div>
 collection: portfolio
 layout: single
 classes: wide

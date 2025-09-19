@@ -1,9 +1,9 @@
 ---
 title: "Flight Analysis [_work in progress_]"
 excerpt: >
-  <blockquote style="border-left: 4px solid #fd7e14; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #fff8f0; padding: 1rem; color: #1b1b1b;">
+  <div class="portfolio-excerpt portfolio-excerpt--orange">
   Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
-  </blockquote>
+  </div>
 collection: portfolio
 layout: single
 classes: wide
