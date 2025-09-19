@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "analysis": "Flight connections over time",
+    "total_connections_analyzed": 2488,
+    "filtered_connections": 166,
+    "generated_by": "atharvacoolkarni"
+  },
+  "connections": [
+    "MSP-SRQ",
+    "DTW-SBN",
+    "LAS-PVD",
+    "DTW-TYS",
+    "LGA-STT"
+  ],
+  "years": [
+    "2004",
+    "2005"
+  ],
+  "counts_2004": [
+    104.0,
+    37.0,
+    14.0,
+    106.0,
+    39.0
+  ],
+  "counts_2005": [
+    0.0,
+    68.0,
+    100.0,
+    8.0,
+    76.0
+  ],
+  "percentages_2004": [
+    50.0,
+    17.61904761904762,
+    6.140350877192982,
+    46.49122807017544,
+    16.956521739130434
+  ],
+  "percentages_2005": [
+    0.0,
+    32.38095238095238,
+    43.859649122807014,
+    3.508771929824561,
+    33.04347826086956
+  ],
+  "totals": [
+    104.0,
+    105.0,
+    114.0,
+    114.0,
+    115.0
+  ],
+  "summary": {
+    "most_stable_route": "MSP-SRQ",
+    "total_routes_in_dataset": 2488
+  }
+}
