@@ -11,3 +11,59 @@
 [data-theme="dark"] .author__urls .fa-linkedin {
   color: #ffffff; /* white for dark mode */
 }
+
+.table-container {
+  max-width: 500px;       /* limit width */
+  margin: 0;
+  margin-left: 0;         /* left align */
+  overflow-x: auto;       /* horizontal scroll if needed */
+  padding-left: 0;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;    /* respect colgroup widths */
+}
+
+/* spacing between table and caption */
+.table-container caption {
+  caption-side: bottom;   /* put caption below */
+  text-align: left;       /* align with table */
+  margin-top: 0.5rem;     /* gap from table */
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.table-container th,
+.table-container td {
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+/* Meta line: Updated date + read time */
+.page__meta {
+  display: flex;                  /* keep inline */
+  align-items: center;            /* vertically align nicely */
+  gap: 0.5rem;                    /* small space around the separator */
+  margin-bottom: 1.25rem;         /* space below meta block */
+  font-size: 0.9rem;
+  color: var(--global-text-color-light);
+}
+
+/* Explicit separator (|) styling */
+.page__meta::before {
+  content: "";                    /* no prefix for first item */
+}
+
+.page__meta span + span::before {
+  content: "|";                   /* insert | between items */
+  margin: 0 0.25rem;              /* space around the pipe */
+  color: var(--global-text-color-light);
+}
+
+/* Add more breathing room before intro text */
+.page__content {
+  margin-top: 1rem;               /* ensures extra gap after meta block */
+}
