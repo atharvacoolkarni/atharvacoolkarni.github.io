@@ -162,6 +162,9 @@ include:
   - .htaccess
   - _pages
   - files
+  - "*.Rmd"
+  - "*.ipynb"
+  - assets/projects/flight_analysis
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"

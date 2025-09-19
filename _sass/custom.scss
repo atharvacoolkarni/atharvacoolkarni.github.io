@@ -67,3 +67,70 @@
 .page__content {
   margin-top: 1rem;               /* ensures extra gap after meta block */
 }
+
+.theme-image {
+  transition: filter 0.05s ease;
+  filter: none;
+}
+
+/* Test one selector at a time */
+html[data-theme="dark"] .theme-image {
+  filter: invert(1) brightness(1) contrast(1);
+}
+
+/* Make the Updated: line follow theme text color, with dark-mode overrides */
+/* Covers both Minimal Mistakes selectors often used: .page__date and .page__meta */
+
+.page__date,
+.page__meta {
+  color: var(--global-text-color);        /* black in light, white in dark if your variable switches */
+}
+
+/* Ensure children (icons, <time>, <strong>) inherit the container color */
+.page__date time,
+.page__date strong,
+.page__date i,
+.page__meta i {
+  color: inherit;
+}
+
+/* Align the "Updated" line with the title and tighten spacing */
+
+/* 1) Make the "Updated" line line up with the H1 title */
+.page__header .page__date,
+.page__header .page__meta {
+  /* kill any default left padding/margins */
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+
+  /* keep icon + text inline and neatly spaced */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ensure the calendar icon doesn't introduce extra indent and matches text color */
+.page__header .page__date i,
+.page__header .page__date svg,
+.page__header .page__meta i,
+.page__header .page__meta svg {
+  margin-left: 0;
+  color: inherit;
+  fill: currentColor;
+}
+
+/* 2) Reduce the gap between "Updated" and the content that follows */
+.page__header {
+  margin-bottom: 0.75rem; /* tighten the header’s bottom spacing */
+}
+
+/* Also reduce the top margin of the very first H2 in the content */
+.page__content > h2:first-of-type {
+  margin-top: 0.5rem;     /* was likely ~1.5–2rem */
+}
+
+/* If you use dark mode, ensure the "Updated" text follows theme text color */
+html[data-theme="dark"] .page__header .page__date,
+html[data-theme="dark"] .page__header .page__meta {
+  color: #ffffff;
+}

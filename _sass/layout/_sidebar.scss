@@ -115,7 +115,7 @@
     display: block;
     width: 100%;
     padding-left: 0;
-    padding-right: 0;
+  padding-right: 0;
   }
 }
 
@@ -190,7 +190,7 @@
   position: absolute;
   right: 0;
   margin-top: 15px;
-  padding: 10px;
+  padding: 0px;
   list-style-type: none;
   border: 1px solid var(--global-border-color);
   border-radius: $border-radius;
@@ -247,18 +247,38 @@
     white-space: nowrap;
   }
 
+  /* Icons inside links should match text color, not link color */
+  a i,
+  a svg,
+  a .icon,
+  a .fa,
+  .icon-envelope {
+    color: var(--global-text-color) !important; /* black in light, white in dark */
+    fill: var(--global-text-color) !important;  /* for SVGs using currentColor */
+  }
+
   a {
     display: block;
     margin-bottom: 5px;
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
-    color: inherit;
+    color: #2563eb;                 /* link color (light mode) */
     font-size: $type-size-5;
-    text-decoration: none;
+    text-decoration: none;          /* underline only on hover */
+    transition: color .15s ease;
 
     &:hover {
       text-decoration: underline;
+      color: #1d4ed8;               /* slightly darker on hover (light mode) */
     }
+  }
+
+  /* Dark mode overrides */
+  [data-theme="dark"] & a {
+    color: #00d3e0;                 /* link color in dark mode */
+  }
+  [data-theme="dark"] & a:hover {
+    color: #00b8c4;                 /* slightly darker hover in dark mode */
   }
 }

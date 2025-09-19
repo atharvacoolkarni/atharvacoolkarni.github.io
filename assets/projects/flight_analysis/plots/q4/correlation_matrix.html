@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Correlation Heatmap</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0px;
+      background: var(--global-bg-color, #ffffff);
+      color: var(--global-text-color, #000000);
+    }
+    #plot {
+      width: 650px;
+      height: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="plot"></div>
+
+  <script>
+    function isDarkMode() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          if (parentDoc.documentElement.classList.contains('dark') || parentDoc.documentElement.getAttribute('data-theme')==='dark') return true;
+          if (parentDoc.body.classList.contains('dark') || parentDoc.body.getAttribute('data-theme')==='dark') return true;
+          if (window.parent.localStorage && window.parent.localStorage.getItem('theme')==='dark') return true;
+        }
+      } catch(e){}
+      return document.documentElement.classList.contains('dark') ||
+             document.documentElement.getAttribute('data-theme')==='dark' ||
+             document.body.classList.contains('dark') ||
+             document.body.getAttribute('data-theme')==='dark' ||
+             localStorage.getItem('theme')==='dark';
+    }
+
+    function buildHeatmap(matrix, labels) {
+      const dark = isDarkMode();
+
+      // Mask upper triangle
+      const maskedMatrix = matrix.map((row, i) =>
+        row.map((val, j) => j > i ? NaN : val)
+      );
+
+      // Text values (2 decimals, empty for upper triangle)
+      const textMatrix = matrix.map((row, i) =>
+        row.map((val, j) => j > i ? '' : val.toFixed(2))
+      );
+
+      // Colorscales
+      const colorscale = dark
+        ? [[0, '#1E88E5'], [0.5, 'white'], [1, '#FB8C00']] // blue → white → orange
+        : [[0, '#17a2b8'], [0.5, 'white'], [1, '#dc3545']]; // teal → white → red
+
+      const heatmap = {
+        z: maskedMatrix,
+        x: labels,
+        y: labels,
+        type: 'heatmap',
+        colorscale: colorscale,
+        zmin: -1,
+        zmax: 1,
+        hovertemplate: 'Origin: %{y}<br>Dest: %{x}<br>Corr: %{z:.2f}<extra></extra>',
+        colorbar: {
+          title: 'Correlation',
+          titleside: 'right'
+        }
+      };
+
+      const textOverlay = {
+        z: maskedMatrix,
+        x: labels,
+        y: labels,
+        type: 'heatmap',
+        colorscale: [[0, 'rgba(0,0,0,0)'], [1, 'rgba(0,0,0,0)']], // invisible
+        showscale: false,
+        text: textMatrix,
+        texttemplate: "%{text}",
+        textfont: { color: dark ? 'white' : 'black' },
+        hoverinfo: 'skip'
+      };
+
+      const layout = {
+        title: {
+          text: 'Correlation Heatmap for the top 5 airports by total delay',
+          font: { size: 18, color: dark ? '#ffffff' : '#000000' }
+        },
+        plot_bgcolor: dark ? '#000000' : '#ffffff',
+        paper_bgcolor: dark ? '#000000' : '#ffffff',
+        xaxis: {
+          title: 'Destination Airport',
+          side: 'bottom',
+          color: dark ? '#ffffff' : '#000000',
+          gridcolor: dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'
+        },
+        yaxis: {
+          title: 'Origin Airport',
+          autorange: 'reversed',
+          color: dark ? '#ffffff' : '#000000',
+          gridcolor: dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'
+        }
+      };
+
+      return { data: [heatmap, textOverlay], layout: layout };
+    }
+
+    function renderHeatmap(matrix, labels) {
+      const { data, layout } = buildHeatmap(matrix, labels);
+      Plotly.newPlot('plot', data, layout, { responsive: true });
+    }
+
+    fetch('q4_cascading_analysis.json')
+      .then(res => res.json())
+      .then(jsonData => {
+        const matrix = jsonData.correlation_matrix;
+        const labels = jsonData.airports;
+
+        renderHeatmap(matrix, labels);
+
+        // Observe theme changes and re-render
+        const observer = new MutationObserver(() => renderHeatmap(matrix, labels));
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+        try {
+          if (window.parent && window.parent !== window) {
+            const parentDoc = window.parent.document;
+            observer.observe(parentDoc.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+            observer.observe(parentDoc.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+            window.parent.addEventListener('storage', e => { if(e.key==='theme') renderHeatmap(matrix, labels); });
+          }
+        } catch(e){}
+        window.addEventListener('storage', e => { if(e.key==='theme') renderHeatmap(matrix, labels); });
+      })
+      .catch(err => console.error('Error loading JSON:', err));
+  </script>
+</body>
+</html>

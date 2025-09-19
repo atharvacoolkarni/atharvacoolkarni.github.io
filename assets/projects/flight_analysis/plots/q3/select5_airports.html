@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top 5 Connections Analysis</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    :root {
+      --global-bg-color: #ffffff;
+      --global-text-color: #000000;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+    }
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      --global-bg-color: #000000;
+      --global-text-color: #ffffff;
+    }
+    #plot {
+      width: 900px;
+      height: 500px;
+    }
+    .hoverlayer .axistext { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="plot"></div>
+
+  <script>
+    // Dark mode detection
+    function isDarkMode() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          if (parentDoc.documentElement.classList.contains('dark') || parentDoc.documentElement.getAttribute('data-theme')==='dark') return true;
+          if (parentDoc.body.classList.contains('dark') || parentDoc.body.getAttribute('data-theme')==='dark') return true;
+          if (window.parent.localStorage && window.parent.localStorage.getItem('theme')==='dark') return true;
+        }
+      } catch(e){}
+      return document.documentElement.classList.contains('dark') ||
+             document.documentElement.getAttribute('data-theme')==='dark' ||
+             document.body.classList.contains('dark') ||
+             document.body.getAttribute('data-theme')==='dark' ||
+             localStorage.getItem('theme')==='dark';
+    }
+
+    function applyThemeGlobally(plotDiv) {
+      const dark = isDarkMode();
+      Plotly.relayout(plotDiv, {
+        'plot_bgcolor': dark ? '#000000' : '#ffffff',
+        'paper_bgcolor': dark ? '#000000' : '#ffffff',
+        'font.color': dark ? '#ffffff' : '#000000',
+        'xaxis.color': dark ? '#ffffff' : '#000000',
+        'yaxis.color': dark ? '#ffffff' : '#000000',
+        'xaxis.gridcolor': dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+        'yaxis.gridcolor': dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)',
+        'title.font.color': dark ? '#ffffff' : '#000000'
+      });
+      const newColors = [
+        dark ? '#4fc3f7' : '#17a2b8', // Year 2004
+        dark ? '#fbc02d' : '#dc3545'  // Year 2005
+      ];
+
+      Plotly.restyle(plotDiv, {
+        'marker.color': newColors
+      });
+
+      plotDiv.style.backgroundColor = dark ? '#000000' : '#ffffff';
+    }
+
+    function observeTheme(plotDiv) {
+      const observer = new MutationObserver(() => applyThemeGlobally(plotDiv));
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+      observer.observe(document.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          observer.observe(parentDoc.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+          observer.observe(parentDoc.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+          window.parent.addEventListener('storage', e => { if(e.key==='theme') applyThemeGlobally(plotDiv); });
+        }
+      } catch(e){}
+      window.addEventListener('storage', e => { if(e.key==='theme') applyThemeGlobally(plotDiv); });
+    }
+
+    // Load JSON and build stacked bar
+    fetch("q3_connections_analysis.json")
+      .then(res => res.json())
+      .then(data => {
+        const dark = isDarkMode();
+
+        const trace1 = {
+          x: data.connections,
+          y: data.percentages_2004,
+          name: data.years[0],
+          type: 'bar',
+          marker: { color: dark ? '#4fc3f7' : '#17a2b8' },
+          hovertemplate: '%{y:.1f}%<extra>%{fullData.name}</extra>',
+          hoverinfo: 'y+name'
+        };
+
+        const trace2 = {
+          x: data.connections,
+          y: data.percentages_2005,
+          name: data.years[1],
+          type: 'bar',
+          marker: { color: dark ? '#fbc02d' : '#dc3545' },
+          hovertemplate: '%{y:.1f}%<extra>%{fullData.name}</extra>',
+          hoverinfo: 'y+name'
+        };
+
+        const layout = {
+          barmode: 'stack',
+          title: {
+            text: 'Percentage stacked bar plot of 5 connections over two years',
+            font: { size: 18, color: dark ? '#ffffff' : '#000000' }
+          },
+          plot_bgcolor: dark ? '#000000' : '#ffffff',
+          paper_bgcolor: dark ? '#000000' : '#ffffff',
+          font: { color: dark ? '#ffffff' : '#000000' },
+          xaxis: { title: 'Connection', color: dark ? '#ffffff' : '#000000', gridcolor: dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)' },
+          yaxis: { title: 'Percentage', color: dark ? '#ffffff' : '#000000', gridcolor: dark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)', ticksuffix: '%' }
+        };
+
+        const config = { responsive: true };
+        const plotDiv = document.getElementById('plot');
+        Plotly.newPlot(plotDiv, [trace1, trace2], layout, config);
+
+        applyThemeGlobally(plotDiv);
+        observeTheme(plotDiv);
+      });
+  </script>
+</body>
+</html>

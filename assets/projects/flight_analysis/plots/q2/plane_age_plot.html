@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hourly Flight Delay Analysis</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    :root {
+      --global-bg-color: #ffffff;
+      --global-text-color: #000000;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0px;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      transition: background 0.05s, color 0.05s;
+    }
+
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      --global-bg-color: #000000;
+      --global-text-color: #ffffff;
+    }
+
+  #plot {
+    width: 900px;
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  </style>
+</head>
+<body>
+  <div id="plot"></div>
+
+  <script>
+    const colors = {
+      light: { scatter1: '#17a2b8', scatter2: '#dc3545', ci1: 'rgba(23,162,184,0.2)', ci2: 'rgba(220,53,69,0.2)', reg1: '#138496', reg2: '#a71d2a' },
+      dark:  { scatter1: '#4fc3f7', scatter2: '#fbc02d', ci1: 'rgba(79,195,247,0.2)', ci2: 'rgba(251,192,42,0.2)', reg1: '#039be5', reg2: '#f57f17' }
+    };
+
+    function isDarkMode() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const pd = window.parent.document;
+          if (pd.documentElement.getAttribute('data-theme')==='dark' || pd.body.getAttribute('data-theme')==='dark') return true;
+          if (window.parent.localStorage?.getItem('theme')==='dark') return true;
+        }
+      } catch(e){}
+      return document.documentElement.getAttribute('data-theme')==='dark' || document.body.getAttribute('data-theme')==='dark' || localStorage.getItem('theme')==='dark';
+    }
+
+    fetch('q2_plane_age_analysis.json').then(r=>r.json()).then(data => {
+      const darkMode = isDarkMode();
+      const theme = darkMode ? colors.dark : colors.light;
+
+      function linearRegression(x, y){
+        const n = x.length;
+        const meanX = x.reduce((a,b)=>a+b,0)/n;
+        const meanY = y.reduce((a,b)=>a+b,0)/n;
+        const num = x.map((xi,i)=>(xi-meanX)*(y[i]-meanY)).reduce((a,b)=>a+b,0);
+        const den = x.map(xi=>Math.pow(xi-meanX,2)).reduce((a,b)=>a+b,0);
+        const slope = num/den;
+        const intercept = meanY - slope*meanX;
+
+        // Compute 95% CI around mean
+        const yhat = x.map(xi=>intercept + slope*xi);
+        const residuals = y.map((yi,i)=>yi - yhat[i]);
+        const s_err = Math.sqrt(residuals.map(r=>r*r).reduce((a,b)=>a+b,0)/(n-2));
+        const t_val = 2.086; // ~95% CI for n~20
+        const sumSqX = den;
+        const ci_upper = x.map(xi=>intercept + slope*xi + t_val*s_err*Math.sqrt(1/n + Math.pow(xi-meanX,2)/sumSqX));
+        const ci_lower = x.map(xi=>intercept + slope*xi - t_val*s_err*Math.sqrt(1/n + Math.pow(xi-meanX,2)/sumSqX));
+        return {slope, intercept, yhat, ci_upper, ci_lower};
+      }
+
+      function makeTraces(periodData, scatterColor, regColor, ciColor, name){
+        const x = periodData.years;
+        const y = periodData.delays;
+        const reg = linearRegression(x, y);
+
+        return [
+          { x, y, mode:'markers', type:'scatter', name:name, marker:{color:scatterColor}, legendgroup:name },
+          { x, y: reg.yhat, mode:'lines', type:'scatter', name: name+' regression', line:{color:regColor}, legendgroup:name, visible:true },
+          { x:[...x,...x.slice().reverse()], y:[...reg.ci_upper,...reg.ci_lower.slice().reverse()], fill:'toself', fillcolor:ciColor, line:{color:'transparent'}, name:name+' CI', legendgroup:name, showlegend:false, visible:true }
+        ];
+      }
+
+      const traces = [
+        ...makeTraces(data.period_1956_1979, theme.scatter1, theme.reg1, theme.ci1, '1956-1979'),
+        ...makeTraces(data.period_1980_2007, theme.scatter2, theme.reg2, theme.ci2, '1980-2007')
+      ];
+
+      const layout = {
+        title: {text:'Total delay vs year of manufacture', font:{size:20, color:darkMode?'#ffffff':'#000000'}},
+        xaxis:{
+          title:{text:'Year', color: darkMode ? '#ffffff':'#000000'},
+          showgrid:true,
+          tickfont: { color: darkMode ? '#ffffff' : '#000000' },
+          gridcolor: darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)',
+          zerolinecolor: darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)',
+          zerolinewidth: 1,
+          dtick: 5
+        },
+        yaxis:{
+          title:{text:'Average Delay', color:darkMode?'#ffffff':'#000000'},
+          showgrid:true,
+          tickfont: { color: darkMode ? '#ffffff' : '#000000' },
+          gridcolor: darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)',
+          zerolinecolor: darkMode ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)',
+          zerolinewidth: 1,
+          tickformat: ".1f"
+        },
+        plot_bgcolor: darkMode?'#000000':'#ffffff',
+        paper_bgcolor: darkMode?'#000000':'#ffffff',
+        legend:{font:{color:darkMode?'#ffffff':'#000000'}}
+      };
+
+      const plotDiv = document.getElementById('plot');
+      Plotly.newPlot(plotDiv, traces, layout, {responsive:true});
+      updateTheme();
+
+      // Handle dynamic CI visibility
+      plotDiv.on('plotly_legendclick', function(evt){
+        const clickedName = evt.node.textContent;
+        if(clickedName.includes('regression')){
+          // Hide/show CI along with regression
+          const ciName = clickedName.replace('regression','CI');
+          const ciIdx = plotDiv.data.findIndex(d=>d.name===ciName);
+          if(ciIdx>=0){
+            const visible = plotDiv.data[ciIdx].visible==='legendonly'?'true':'legendonly';
+            Plotly.restyle(plotDiv, {'visible':[visible]}, [ciIdx]);
+          }
+        }
+      });
+
+      // Observe theme changes
+      const observer = new MutationObserver(()=>updateTheme());
+      observer.observe(document.documentElement,{attributes:true,attributeFilter:['class','data-theme']});
+      observer.observe(document.body,{attributes:true,attributeFilter:['class','data-theme']});
+      window.addEventListener('storage',()=>updateTheme());
+
+      function updateTheme(){
+        const dark = isDarkMode();
+        const theme = dark ? colors.dark : colors.light;
+        const updates = plotDiv.data.map(d=>{
+          const name = d.name;
+          if(name.includes('CI')) return {fillcolor: name.includes('1956-1979')?theme.ci1:theme.ci2};
+          if(name.includes('regression')) return {line:{color:name.includes('1956-1979')?theme.reg1:theme.reg2}};
+          return {marker:{color:name.includes('1956-1979')?theme.scatter1:theme.scatter2}};
+        });
+        updates.forEach((u,i)=>Plotly.restyle(plotDiv,u,[i]));
+        Plotly.relayout(plotDiv, {
+          'font.color': dark ? '#ffffff' : '#000000',
+          'plot_bgcolor': dark ? '#000000' : '#ffffff',
+          'paper_bgcolor': dark ? '#000000' : '#ffffff',
+          'font.color': dark ? '#ffffff' : '#000000',
+          'xaxis.color': dark ? '#ffffff' : '#000000',
+          'xaxis.gridcolor': dark ? 'rgba(255,255,255,0.3)':'rgba(0,0,0,0.1)',
+          'xaxis.zerolinecolor': dark ? 'rgba(255,255,255,0.3)':'rgba(0,0,0,0.2)',
+          'xaxis.tickfont.color': dark ? '#ffffff' : '#000000',
+          'yaxis.color': dark ? '#ffffff' : '#000000',
+          'yaxis.gridcolor': dark ? 'rgba(255,255,255,0.3)':'rgba(0,0,0,0.1)',
+          'yaxis.zerolinecolor': dark ? 'rgba(255,255,255,0.3)':'rgba(0,0,0,0.2)',
+          'yaxis.tickfont.color': dark ? '#ffffff' : '#000000',
+          'yaxis.ticklabelpad': 20, 
+          'yaxis.automargin': true, 
+          'title.text': 'Total delay vs year of manufacture',
+          'title.font.color': dark ? '#ffffff' : '#000000',
+          'legend.font.color': dark ? '#ffffff':'#000000'
+        })
+      }
+    });
+  </script>
+</body>
+</html>

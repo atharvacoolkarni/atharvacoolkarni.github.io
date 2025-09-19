@@ -1,5 +1,6 @@
 ---
 title: "Price Discrimination Strategies of Air India and Vistara on the Delhi-Mumbai Route"
+status: "completed"
 categories: [research, econometrics]
 tags: [price-discrimination, airline-industry, regression-analysis, india]
 excerpt: >

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Flight Delay Analysis</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    :root {
+      --global-bg-color: #ffffff;
+      --global-text-color: #000000;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0px;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      transition: background 0.05s, color 0.05s;
+    }
+
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      --global-bg-color: #000000;
+      --global-text-color: #ffffff;
+    }
+
+  #plot {
+    width: 900px;
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .hoverlayer .axistext { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="plot"></div>
+
+  <script>
+    function isDarkMode() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const parentDoc = window.parent.document;
+          if (parentDoc.documentElement.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.body.getAttribute('data-theme') === 'dark') return true;
+          if (parentDoc.documentElement.classList.contains('dark') || parentDoc.body.classList.contains('dark')) return true;
+          if (window.parent.localStorage && window.parent.localStorage.getItem('theme') === 'dark') return true;
+        }
+      } catch(e){}
+      return localStorage.getItem('theme') === 'dark' ||
+             document.documentElement.getAttribute('data-theme') === 'dark' ||
+             document.body.getAttribute('data-theme') === 'dark' ||
+             document.documentElement.classList.contains('dark') ||
+             document.body.classList.contains('dark');
+    }
+
+    function applyTheme(plotDiv) {
+      const dark = isDarkMode();
+
+      plotDiv.style.backgroundColor = dark ? '#000000' : '#ffffff';
+
+      Plotly.relayout(plotDiv, {
+        'plot_bgcolor': dark ? '#000000' : '#ffffff',
+        'paper_bgcolor': dark ? '#000000' : '#ffffff',
+        'font.color': dark ? '#ffffff' : '#000000',
+        'xaxis.color': dark ? '#ffffff' : '#000000',
+        'yaxis.color': dark ? '#ffffff' : '#000000',
+        'yaxis.ticklabelpad': 20, 
+        'yaxis.automargin': true, 
+        'title.text': 'Weekly Flight Delay Analysis',
+        'title.font.color': dark ? '#ffffff' : '#000000'
+      });
+
+      Plotly.restyle(plotDiv, {
+        'marker.color': [
+          dark ? '#4fc3f7' : '#17a2b8',  // Departure
+          dark ? '#fbc02d' : '#dc3545'   // Arrival
+        ]
+      });
+    }
+
+    fetch("q1_time_analysis.json")
+      .then(response => response.json())
+      .then(data => {
+        const weeklyData = data.weekly;
+        const darkMode = isDarkMode();
+        const plotDiv = document.getElementById('plot');
+
+        const traceDeparture = {
+          x: weeklyData.days,
+          y: weeklyData.departure_delays,
+          name: 'Departure Delay',
+          type: 'bar',
+          marker: { color: darkMode ? '#4fc3f7' : '#17a2b8' },
+          hovertemplate: '%{y:.1f}<extra>%{fullData.name}</extra>',
+          hoverinfo: 'y+name'
+        };
+
+        const traceArrival = {
+          x: weeklyData.days,
+          y: weeklyData.arrival_delays,
+          name: 'Arrival Delay',
+          type: 'bar',
+          marker: { color: darkMode ? '#fbc02d' : '#dc3545' },
+          hovertemplate: '%{y:.1f}<extra>%{fullData.name}</extra>',
+          hoverinfo: 'y+name'
+        };
+
+        const layout = {
+          barmode: 'group',
+          bargap: 0.2,
+          bargroupgap: 0.1,
+          plot_bgcolor: darkMode ? '#000000' : '#ffffff',
+          paper_bgcolor: darkMode ? '#000000' : '#ffffff',
+          font: { color: darkMode ? '#ffffff' : '#000000' },
+          title: { text: 'Weekly Flight Delay Analysis', font: { size: 22, color: darkMode ? '#ffffff' : '#000000' }, x:0.5, xanchor:'center' },
+          xaxis: { title: { text: 'Day of Week', standoff: 15 }, automargin: true, color: darkMode ? '#ffffff' : '#000000' },
+          yaxis: { title: { text: 'Average Delay (minutes)', standoff: 25 }, automargin: true, color: darkMode ? '#ffffff' : '#000000' },
+          margin: { l: 80, r: 20, t: 80, b: 70 }
+        };
+
+        Plotly.newPlot(plotDiv, [traceDeparture, traceArrival], layout, { responsive: true });
+
+        // Observe theme changes
+        const observer = new MutationObserver(() => applyTheme(plotDiv));
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class','data-theme'] });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class','data-theme'] });
+
+        try {
+          if(window.parent && window.parent !== window){
+            const parentDoc = window.parent.document;
+            observer.observe(parentDoc.documentElement, { attributes:true, attributeFilter:['class','data-theme'] });
+            observer.observe(parentDoc.body, { attributes:true, attributeFilter:['class','data-theme'] });
+            window.parent.addEventListener('storage', e=>{if(e.key==='theme') applyTheme(plotDiv)});
+          }
+        } catch(e){}
+
+        window.addEventListener('storage', e=>{if(e.key==='theme') applyTheme(plotDiv)});
+      });
+  </script>
+</body>
+</html>
