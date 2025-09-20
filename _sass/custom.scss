@@ -164,15 +164,16 @@ html[data-theme="dark"] .archive__subtitle {
 
 .plot-container {
   width: 100%;
-  max-width: 100%;       /* never exceed viewport */
-  overflow-x: auto;      /* enable scroll if content spills */
+  max-width: 100%;
+  overflow-x: auto;      /* only this container scrolls if needed */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
 
 .plot-container > div {
-  width: 100% !important;   /* let Plotly scale down */
-  max-width: 900px;         /* optional: cap width on large screens */
-  height: 500px;
-  margin: 0 auto;           /* center on desktop */
+  width: 100% !important;   /* allows Plotly to resize to container */
+  min-width: 300px;         /* prevent too small plots on tiny screens */
+  max-width: 100%;           /* ensures it never exceeds viewport */
+  height: auto !important;   /* auto height if possible */
 }
 
 .MathJax, .katex-display {
