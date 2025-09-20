@@ -764,6 +764,15 @@ D_{A-LN} &amp;= \begin{cases}
 
 
 
+    <script>
+    document.querySelectorAll('.page__content a').forEach(function(link) {
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener');
+      }
+    });
+    </script>
+
   </body>
 </html>
 

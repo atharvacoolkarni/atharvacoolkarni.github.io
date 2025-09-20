@@ -307,6 +307,9 @@
   </li>
 </ul>
 
+<h1 id="download-my-cv">Download my CV</h1>
+<p>👉 <a href="/assets/Atharva Kulkarni_CV.pdf" target="_blank">CV</a></p>
+
   </div>
 </div>
 
@@ -368,6 +371,15 @@
 
 
 
+
+    <script>
+    document.querySelectorAll('.page__content a').forEach(function(link) {
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener');
+      }
+    });
+    </script>
 
   </body>
 </html>

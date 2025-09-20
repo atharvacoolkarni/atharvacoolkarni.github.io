@@ -316,7 +316,7 @@
 
 <p>Feel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!</p>
 
-<p>You can reach me at: atharva.kulkarni.2024@sse.ac.in</p>
+<p>You can reach me at: <a href="mailto:atharva.kulkarni.2024@sse.ac.in">atharva.kulkarni.2024@sse.ac.in</a></p>
 
 
         
@@ -404,6 +404,15 @@
 
 
 
+
+    <script>
+    document.querySelectorAll('.page__content a').forEach(function(link) {
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener');
+      }
+    });
+    </script>
 
   </body>
 </html>
