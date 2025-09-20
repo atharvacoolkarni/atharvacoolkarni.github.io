@@ -25,13 +25,27 @@
     }
 
     #main-plot {
-      width: 900px;
+      width: 100%;
+      max-width: 900px;
       height: 500px;
       margin-bottom: 0px;
       background: none;
       border: none;
       box-shadow: none;
       border-radius: 0;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      #main-plot {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #main-plot {
+        height: 350px;
+      }
     }
 
     #plot-select {
@@ -177,10 +191,8 @@
           title: 'Models',
           color: darkMode ? '#ffffff' : '#000000'
         },
-        width: 900, 
-        height: 500,
         hovermode: 'closest'
-      });
+      }, { responsive: true });
     }
 
     function plotRocCurve(darkMode = isDarkMode()) {
@@ -196,7 +208,6 @@
           font: { color: darkMode ? '#ffffff' : '#000000' },
           xaxis: {title: 'False Positive Rate', tickformat: '.2f', color: darkMode ? '#ffffff' : '#000000'},
           yaxis: {title: 'True Positive Rate', tickformat: '.2f', color: darkMode ? '#ffffff' : '#000000'},
-          width: 900, height: 500,
           annotations: [{
             text: 'Loading ROC curve data...',
             showarrow: false,
@@ -206,7 +217,7 @@
             yref: 'paper',
             font: { size: 16, color: darkMode ? '#ffffff' : '#666666' }
           }]
-        });
+        }, { responsive: true });
 
         // Load ROC data
         fetch("q5_ml_analysis.json")
@@ -236,7 +247,6 @@
               font: { color: darkMode ? '#ffffff' : '#000000' },
               xaxis: {title: 'False Positive Rate', tickformat: '.2f', color: darkMode ? '#ffffff' : '#000000'},
               yaxis: {title: 'True Positive Rate', tickformat: '.2f', color: darkMode ? '#ffffff' : '#000000'},
-              width: 900, height: 500,
               annotations: [{
                 text: 'Error loading ROC curve data. Please make sure q5_ml_analysis.json is available.',
                 showarrow: false,
@@ -246,7 +256,7 @@
                 yref: 'paper',
                 font: { size: 16, color: darkMode ? '#ffffff' : '#d32f2f' }
               }]
-            });
+            }, { responsive: true });
           });
         
         return;
@@ -301,10 +311,8 @@
           tickformat: '.2f',
           color: darkMode ? '#ffffff' : '#000000'
         },
-        width: 900, 
-        height: 500,
         showlegend: true
-      });
+      }, { responsive: true });
     }
 
     function plotFeatureImportance(model, darkMode = isDarkMode()) {
@@ -336,14 +344,12 @@
           color: darkMode ? '#ffffff' : '#000000'
         },
         margin: { l: 150 },
-        width: 900, 
-        height: 500,
         hoverlabel: {
           bgcolor: darkMode ? '#000000' : '#ffffff',
           font: { color: darkMode ? '#ffffff' : '#000000' },
           bordercolor: darkMode ? '#ffffff' : '#000000'
         }
-      });
+      }, { responsive: true });
     }
 
     // ----- Updated plot function with theme support -----
