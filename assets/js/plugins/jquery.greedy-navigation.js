@@ -81,6 +81,7 @@ screen.orientation.addEventListener("change", function () {
 $btn.on('click', function () {
   $hlinks.toggleClass('hidden');
   $(this).toggleClass('close');
+  $('#theme-toggle').css({ zIndex: 200 });
 });
 
 updateNav();

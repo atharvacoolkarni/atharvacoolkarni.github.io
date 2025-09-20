@@ -35,6 +35,12 @@
     box-shadow: none;
     border-radius: 0;
   }
+  @media (max-width: 480px) {
+    #plot {
+      width: 100%; /* Ensure the plot width does not exceed the viewport */
+      overflow-x: auto; /* Enable horizontal scrolling if content overflows */
+    }
+  }
   </style>
 </head>
 <body>

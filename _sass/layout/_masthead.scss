@@ -65,3 +65,17 @@
     font-weight: 700;
   }
 }
+
+#theme-toggle {
+  position: absolute; /* Position it independently */
+  top: 10px; /* Adjust as per design */
+  right: 50px; /* Move it away from the menu button */
+  z-index: 200; /* Ensure it sits above other elements */
+}
+
+@media (max-width: 480px) {
+  #theme-toggle {
+    top: 15px; /* Adjust for smaller screens */
+    right: 20px; /* Ensure it's clearly visible */
+  }
+}
