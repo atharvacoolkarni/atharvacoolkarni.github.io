@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Q5 Interactive Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 40px; }
+    .plot { width: 100%; height: 500px; margin-bottom: 50px; }
+  </style>
+</head>
+<body>
+  <h1>Q5 Flight Delay Prediction Dashboard</h1>
+
+  <!-- Model Performance Metrics -->
+  <h2>1. Model Performance Metrics</h2>
+  <div id="metrics-bar" class="plot"></div>
+
+  <!-- Training and Prediction Time -->
+  <h2>2. Training and Prediction Time</h2>
+  <div id="train-pred-time" class="plot"></div>
+
+  <!-- ROC Curves -->
+  <h2>3. ROC Curves</h2>
+  <div id="roc-curve" class="plot"></div>
+
+  <!-- Feature Importance -->
+  <h2>4. Feature Importance</h2>
+  <div id="feature-importance-logistic" class="plot"></div>
+  <div id="feature-importance-rf" class="plot"></div>
+  <div id="feature-importance-et" class="plot"></div>
+
+  <!-- Delay Patterns -->
+  <h2>5. Delay Patterns</h2>
+  <div id="delay-by-hour" class="plot"></div>
+  <div id="delay-by-day" class="plot"></div>
+  <div id="delay-by-month" class="plot"></div>
+  <div id="delay-weekend-vs-weekday" class="plot"></div>
+
+  <script>
+    // ----- 1. Model Performance Metrics -----
+    const models = ["Logistic Regression", "Random Forest", "Extra Trees"];
+    const auc = [0.6943, 0.8580, 0.8073];
+    const accuracy = [0.6432, 0.7563, 0.7107];
+    const precision = [0.6463, 0.7475, 0.7023];
+    const recall = [0.9320, 0.9139, 0.9223];
+    const f1_score = [0.7633, 0.8224, 0.7974];
+
+    Plotly.newPlot('metrics-bar', [
+      { x: models, y: auc, name: 'AUC', type: 'bar' },
+      { x: models, y: accuracy, name: 'Accuracy', type: 'bar' },
+      { x: models, y: precision, name: 'Precision', type: 'bar' },
+      { x: models, y: recall, name: 'Recall', type: 'bar' },
+      { x: models, y: f1_score, name: 'F1 Score', type: 'bar' }
+    ], { barmode: 'group', title: 'Model Performance Metrics', yaxis:{title:'Score', range:[0,1]} });
+
+    // ----- 2. Training vs Prediction Time -----
+    const train_time = [468.57, 745.59, 820.92];
+    const prediction_time = [0.14, 30.63, 22.21];
+
+    Plotly.newPlot('train-pred-time', [
+      { x: models, y: train_time, name: 'Train Time (s)', type: 'bar' },
+      { x: models, y: prediction_time, name: 'Prediction Time (s)', type: 'bar' }
+    ], { barmode: 'group', title: 'Training & Prediction Time', yaxis:{title:'Seconds'} });
+
+    // ----- 3. ROC Curves -----
+    // Placeholder: replace with your full JSON fpr/tpr arrays
+    const roc_traces = [
+      { x: [0,0.1,0.3,0.5,1], y: [0,0.5,0.7,0.9,1], mode:'lines', name:'Logistic Regression' },
+      { x: [0,0.05,0.2,0.4,1], y: [0,0.6,0.75,0.92,1], mode:'lines', name:'Random Forest' },
+      { x: [0,0.08,0.25,0.45,1], y: [0,0.55,0.78,0.9,1], mode:'lines', name:'Extra Trees' }
+    ];
+    Plotly.newPlot('roc-curve', roc_traces, {title:'ROC Curves', xaxis:{title:'FPR'}, yaxis:{title:'TPR'}});
+
+    // ----- 4. Feature Importance -----
+    const featureImportance = {
+      'Logistic Regression': {
+        features: ["CRSDepHour","IsPeakMonth","IsTopOrigin","IsWeekend","Month","IsTopDest","CRSArrHour","DayOfWeek","DepTime","Origin_encoded","Dest_encoded","ArrTime","EstFlightDuration"],
+        values: [-0.4217,0.4158,0.2478,-0.1598,-0.0393,-0.0229,-0.0136,0.0060,0.0046,-0.00047,-0.00023,0.00023,0.000043]
+      },
+      'Random Forest': {
+        features: ["ArrTime","CRSArrHour","DepTime","CRSDepHour","EstFlightDuration","Month","Origin_encoded","Dest_encoded","IsPeakMonth","IsTopOrigin","DayOfWeek","IsTopDest","IsWeekend"],
+        values: [0.3553,0.1945,0.1738,0.1246,0.0593,0.0180,0.0172,0.0165,0.0126,0.0119,0.0104,0.0034,0.0024]
+      },
+      'Extra Trees': {
+        features: ["ArrTime","CRSArrHour","DepTime","CRSDepHour","EstFlightDuration","Month","IsPeakMonth","IsTopOrigin","Origin_encoded","Dest_encoded","DayOfWeek","IsWeekend","IsTopDest"],
+        values: [0.3175,0.2152,0.1938,0.1515,0.0390,0.0179,0.0163,0.0136,0.0118,0.0094,0.0092,0.0027,0.0021]
+      }
+    };
+
+    function plotFeatureImportance(divId, model){
+      const data = [{
+        x: featureImportance[model].values,
+        y: featureImportance[model].features,
+        type: 'bar',
+        orientation: 'h'
+      }];
+      Plotly.newPlot(divId, data, {title: model+' Feature Importance', margin:{l:150}});
+    }
+
+    plotFeatureImportance('feature-importance-logistic','Logistic Regression');
+    plotFeatureImportance('feature-importance-rf','Random Forest');
+    plotFeatureImportance('feature-importance-et','Extra Trees');
+
+    // ----- 5. Delay Patterns -----
+    const hours = [...Array(24).keys()];
+    const delayByHour = [0.581,0.526,0.527,0.675,0.727,0.426,0.457,0.496,0.538,0.559,0.580,0.596,0.604,0.626,0.652,0.669,0.675,0.693,0.693,0.691,0.689,0.682,0.652,0.635];
+    Plotly.newPlot('delay-by-hour',[{x:hours,y:delayByHour,type:'bar'}],{title:'Delay Rate by Hour',xaxis:{title:'Hour'},yaxis:{title:'Delay Rate'}});
+
+    const days = [1,2,3,4,5,6,7];
+    const delayByDay = [0.625,0.589,0.609,0.647,0.658,0.565,0.615];
+    Plotly.newPlot('delay-by-day',[{x:days,y:delayByDay,type:'bar'}],{title:'Delay Rate by Day of Week',xaxis:{title:'Day'},yaxis:{title:'Delay Rate'}});
+
+    const months = [1,2,3,4,5,6,7,8,9,10,11,12];
+    const delayByMonth = [0.650,0.619,0.607,0.558,0.577,0.663,0.666,0.626,0.526,0.589,0.607,0.695];
+    Plotly.newPlot('delay-by-month',[{x:months,y:delayByMonth,type:'bar'}],{title:'Delay Rate by Month',xaxis:{title:'Month'},yaxis:{title:'Delay Rate'}});
+
+    const delayWeekend = [0.592,0.626];
+    Plotly.newPlot('delay-weekend-vs-weekday',[{x:['Weekday','Weekend'],y:delayWeekend,type:'bar'}],{title:'Delay: Weekend vs Weekday',yaxis:{title:'Delay Rate'}});
+  </script>
+</body>
+</html>

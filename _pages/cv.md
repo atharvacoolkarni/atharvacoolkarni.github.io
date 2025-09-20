@@ -39,3 +39,6 @@ Skills
 * Data Skills:
     * Data Visualization
     * Data Manipulation
+
+# Download my CV
+👉 [CV](/assets/Atharva Kulkarni_CV.pdf){:target="_blank"}

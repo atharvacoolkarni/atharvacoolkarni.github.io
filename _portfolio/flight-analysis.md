@@ -207,11 +207,8 @@ For Question 5, the variables that immediately impact arrival and departure dela
 
 The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [[4]][[5]][[6]]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [[4]]. We can also change the train-test ratio and see if it can improve the model.
 
-<div class="theme-image">
-  <img src="/assets/projects/flight_analysis/images/Q5 python.png" 
-       alt="AUC score"
-       width="600"
-       height="400">
+<div class="full-width-block viz-container">
+  <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html" width="654px" height="604px"></iframe>
 </div>
 
 _Figure 15: Machine learning model (Python)_

@@ -37,4 +37,4 @@ When I'm not analyzing data or studying economic models, I enjoy exploring new t
 
 Feel free to explore my projects, interests, and blog posts to learn more about my work. I'm always open to discussions about economics, data science, and their intersection!
 
-You can reach me at: atharva.kulkarni.2024@sse.ac.in
+You can reach me at: [atharva.kulkarni.2024@sse.ac.in](mailto:atharva.kulkarni.2024@sse.ac.in)
