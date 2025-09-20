@@ -1,0 +1,665 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>            Predicting Currency Crises in Emerging Markets: A CART-Based Early Warning System - Atharva Kulkarni      Economist &amp; Data Analyst      </title>
+
+
+
+<meta name="description" content="  This study applies machine learning (CART) to predict currency crises in five emerging markets, finding that real exchange rate overvaluation is the strongest universal predictor, while country-specific vulnerabilities vary significantly — from Argentina&#39;s current account deficits to Turkey&#39;s short-term debt exposure.">
+
+
+
+
+
+
+
+  <link rel="canonical" href="https://atharvacoolkarni.github.io/projects/currency-crisis/">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Atharva Kulkarni",
+      "url" : "https://atharvacoolkarni.github.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+<!-- Open Graph protocol data (https://ogp.me/), used by social media -->
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Atharva Kulkarni | Economist & Data Analyst"> 
+<meta property="og:title" content="Predicting Currency Crises in Emerging Markets: A CART-Based Early Warning System">
+
+
+  <meta property="og:description" name="description" content="  This study applies machine learning (CART) to predict currency crises in five emerging markets, finding that real exchange rate overvaluation is the strongest universal predictor, while country-specific vulnerabilities vary significantly — from Argentina&#39;s current account deficits to Turkey&#39;s short-term debt exposure.">
+
+
+  <meta property="og:url" content="https://atharvacoolkarni.github.io/projects/currency-crisis/">
+
+
+
+
+
+<!-- end Open Graph protocol -->
+
+<link href="https://atharvacoolkarni.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Atharva Kulkarni | Economist & Data Analyst Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://atharvacoolkarni.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<!-- Support for Academicons -->
+<link rel="stylesheet" href="https://atharvacoolkarni.github.io/assets/css/academicons.css"/>
+
+<!-- favicon from https://commons.wikimedia.org/wiki/File:OOjs_UI_icon_academic-progressive.svg -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://atharvacoolkarni.github.io/images/apple-touch-icon-180x180.png"/>
+<link rel="icon" type="image/svg+xml" href="https://atharvacoolkarni.github.io/images/favicon.svg"/>
+<link rel="icon" type="image/png" href="https://atharvacoolkarni.github.io/images/favicon-32x32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="https://atharvacoolkarni.github.io/images/favicon-192x192.png" sizes="192x192"/>
+<link rel="manifest" href="https://atharvacoolkarni.github.io/images/manifest.json"/>
+<link rel="icon" href="/images/favicon.ico"/>
+<meta name="theme-color" content="#ffffff"/>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg persist"><a href="https://atharvacoolkarni.github.io/">Atharva Kulkarni | Economist & Data Analyst</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/projects/">Projects</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/interests/">Interests</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/blog-posts/">Blog Posts</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/cv/">CV</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://atharvacoolkarni.github.io/about-me/">About me</a></li>
+          
+          <li id="theme-toggle" class="masthead__menu-item persist tail">
+            <a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+          </li>
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="https://atharvacoolkarni.github.io/images/profile.png" class="author__avatar" alt="Atharva Kulkarni"  fetchpriority="high" />
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Atharva Kulkarni</h3>
+    
+    <p class="author__bio">MSc Economics student</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      <!-- Font Awesome icons / Biographic information  -->
+      
+        <li class="author__desktop"><i class="fas fa-fw fa-location-dot icon-pad-right" aria-hidden="true"></i>Pune, India</li>
+      
+      
+        <li class="author__desktop"><i class="fas fa-fw fa-building-columns icon-pad-right" aria-hidden="true"></i>Symbiosis School of Economics</li>
+      
+      
+      
+        <li><a href="mailto:atharva.kulkarni.2024@sse.ac.in"><i class="fas fa-fw fa-envelope icon-pad-right" aria-hidden="true"></i>Email</a></li>
+      
+
+      <!-- Font Awesome and Academicons icons / Academic websites -->
+      
+            
+      
+      
+      
+      
+                              
+      
+      
+      
+
+      <!-- Font Awesome icons / Repositories and software development -->
+      
+            
+            
+      
+        <li><a href="https://github.com/atharvacoolkarni"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>GitHub</a></li>
+      
+            
+            
+
+      <!-- Font Awesome icons / Social media -->
+              
+      
+      
+            
+      
+                  
+                  
+      
+            
+            
+      
+        <li><a href="https://www.linkedin.com/in/atharva-kulkarni-5588081bb"><i class="fab fa-fw fa-linkedin icon-pad-right" aria-hidden="true"></i>LinkedIn</a></li>
+            
+      
+            
+                  
+            
+      
+            
+            
+      
+              
+      
+                      
+      
+      
+            
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <meta itemprop="headline" content="Predicting Currency Crises in Emerging Markets: A CART-Based Early Warning System">
+    
+    
+      <meta itemprop="description" content="  This study applies machine learning (CART) to predict currency crises in five emerging markets, finding that real exchange rate overvaluation is the strongest universal predictor, while country-specific vulnerabilities vary significantly — from Argentina&#39;s current account deficits to Turkey&#39;s short-term debt exposure.">
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          
+            <h1 class="page__title" itemprop="headline">
+              Predicting Currency Crises in Emerging Markets: A CART-Based Early Warning System
+
+            </h1>
+          
+
+          
+            <div class="page__meta">
+              
+                <span>
+                  <i class="fa fa-fw fa-calendar" aria-hidden="true"></i>
+                  Updated:
+                  <time datetime="2025-09-20T07:07:17+00:00">
+                    September 20, 2025
+                  </time>
+                </span>
+              
+
+              
+            </div>
+          
+
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Currency crises have repeatedly disrupted emerging market economies, often triggering severe economic, social, and political consequences. Identifying early warning signals of such crises is a central concern for policymakers, international organizations, and investors. In recent decades, an extensive literature has developed around crisis prediction models, with varying degrees of sophistication and success. This paper builds on that tradition by applying a Classification and Regression Trees (CART) approach to construct both pooled and country-specific early warning models for five major emerging markets: Argentina, Brazil, Indonesia, Mexico, and Turkey.</p>
+
+<p>We focus on a set of macro-financial variables documented in the literature to be associated with crisis susceptibility, including real exchange rate overvaluation, credit growth, current account imbalances, short-term external debt, reserve adequacy, and global interest rates. We find that the predictive power of these variables varies substantially across countries, highlighting the importance of tailored risk assessment.</p>
+
+<h1 id="literature-review">Literature Review</h1>
+
+<p>Theoretical and empirical studies on currency crises have changed over several generations of models:</p>
+
+<ul>
+  <li><strong>First-generation models</strong> (Krugman, 1979) focus on fiscal deficits and macroeconomic inconsistencies as main causes of currency crises.</li>
+  <li><strong>Second-generation models</strong> (Obstfeld, 1996) point to self-fulfilling expectations and multiple equilibria, where crises can happen even without clear macroeconomic imbalances.</li>
+  <li><strong>Third-generation models</strong> (Krugman, 1999) include weaknesses in the financial sector, balance sheet mismatches, and vulnerabilities in the capital account.</li>
+</ul>
+
+<p>Empirical early warning systems (EWS) have usually depended on threshold signaling (Kaminsky, Lizondo, and Reinhart, 1998), probit/logit regression (Berg &amp; Pattillo, 1999), and more recently, machine learning methods like CART (Frankel &amp; Saravelos, 2012), random forests (Alessi &amp; Detken, 2011), and neural networks (Demyanyk &amp; Hasan, 2010).</p>
+
+<p>Among the predictors, real exchange rate overvaluation has been one of the strongest signs of a crisis (Kaminsky &amp; Reinhart, 1999). Other common predictors include rapid credit growth (Mendoza &amp; Terrones, 2008), large current account deficits, increasing short-term external debt, and declining reserves (Eichengreen, Rose &amp; Wyplosz, 1996; Gourinchas &amp; Obstfeld, 2012).</p>
+
+<h1 id="data">Data</h1>
+
+<p>Our sample includes annual data for Argentina, Brazil, Indonesia, Mexico, and Turkey, covering about 1957 to 2025, with availability varying by country. The dataset has:</p>
+
+<ul>
+  <li><strong>Real Exchange Rate Overvaluation</strong>: This is calculated as the percentage difference of the real exchange rate from its HP-filtered trend. Overvaluation is important because ongoing deviations from balance can indicate vulnerability.</li>
+  <li><strong>Credit Growth</strong>: This shows the year-on-year percent change in domestic credit to the private sector.</li>
+  <li><strong>US Interest Rates (GS_10)</strong>: This represents the 10-year US Treasury yield, which reflects global financial conditions.</li>
+  <li><strong>Current Account Balance to GDP (CAB_GDP)</strong>: This serves as a measure of external imbalances.</li>
+  <li><strong>Short-term External Debt (ST_Debt)</strong>: This is shown as a share of GDP, indicating rollover risk.</li>
+  <li><strong>Reserve to Broad Money Ratio</strong>: This measures reserve adequacy.</li>
+</ul>
+
+<p>We define crisis events as years when real exchange rate overvaluation exceeds 15%, following Kaminsky and Reinhart’s work from 1999. We also test alternative thresholds for further validity.</p>
+
+<div class="table-container">
+  <table>
+    <colgroup>
+      <col style="width: 25%;" />
+      <col style="width: 25%;" />
+      <col style="width: 25%;" />
+      <col style="width: 25%;" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Data points</th>
+        <th>Crises</th>
+        <th>Crisis rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Argentina</td>    <td>64</td><td>8</td><td>12.5%</td></tr>
+      <tr><td>Brazil</td>       <td>47</td><td>4</td><td>8.5%</td></tr>
+      <tr><td>Indonesia</td>    <td>58</td><td>3</td><td>5.2%</td></tr>
+      <tr><td>Mexico</td>       <td>69</td><td>4</td><td>5.8%</td></tr>
+      <tr><td>Turkey</td>       <td>69</td><td>4</td><td>5.8%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Table 1: Crisis Distribution by Country</strong></p>
+
+<p>The dataset is moderately imbalanced, with relatively few crises compared to tranquil years.</p>
+
+<h1 id="methodology">Methodology</h1>
+
+<h2 id="variable-construction">Variable Construction</h2>
+
+<p><strong>Dependent variable: Currency Crisis Dummy</strong></p>
+<ul>
+  <li>Crisis = 1 if real exchange rate overvaluation &gt; 15%, else 0.</li>
+</ul>
+
+<p><strong>Independent variables</strong> (all lagged by 1 or 2 years to prevent look-ahead bias):</p>
+<ul>
+  <li>Overval_pct_lag1, Overval_pct_lag2</li>
+  <li>Credit_Growth_lag1, Credit_Growth_lag2</li>
+  <li>GS10_lag1, GS10_lag2</li>
+  <li>CAB_GDP_lag1, CAB_GDP_lag2</li>
+  <li>ST_Debt_lag1, ST_Debt_lag2</li>
+  <li>Reserves_M2_lag1, Reserves_M2_lag2</li>
+  <li>credit_growth_change, us_rate_change, and binary flags for high risk states</li>
+</ul>
+
+<h2 id="modelling-technique">Modelling Technique</h2>
+
+<p>We use the Classification and Regression Trees (CART) algorithm, a non-parametric decision tree approach, for both pooled and country-specific models. CART is well-suited for capturing nonlinear interactions and threshold effects. Given the limited number of crises, we employ simple models (max_depth=3) and adapt the crisis threshold for each country to ensure at least two crisis events per sample. Where possible, we use grid search and cross-validation (CV). Otherwise, a simple out-of-bag or random split is used.</p>
+
+<h2 id="model-evaluation">Model Evaluation</h2>
+
+<p>Performance is assessed using:</p>
+<ul>
+  <li>AUC (Area Under ROC Curve)</li>
+  <li>Classification report (precision, recall, F1-score)</li>
+  <li>Feature importance from the decision tree</li>
+</ul>
+
+<h1 id="results-and-findings">Results and Findings</h1>
+
+<h2 id="pooled-model">Pooled Model</h2>
+
+<p>The pooled model across countries has a cross-validation AUC of 0.676 and AUC of 0.944 for the test data. The results indicate a solid fit within the sample data but imperfect performance when generalized to the test data, likely from a low number of crisis years experienced by countries after 2010. The best predictor variable was the 2-year lagged overvaluation (overval_pct_lag2, importance = 0.79), then lagged short-term debt and reserves (see Figure 1).</p>
+
+<p><img src="/assets/projects/currency-crisis/pooled model results.png" alt="Pooled model results" width="900" height="500" /></p>
+
+<p><strong>Figure 1: Pooled model feature importance and confusion matrix</strong></p>
+
+<p>The feature importance scores are:</p>
+<ul>
+  <li>overval_pct_lag2 (0.79)</li>
+  <li>ST_Debt_lag1 (0.19)</li>
+  <li>Reserves_M2_lag2 (0.02)</li>
+</ul>
+
+<p>These results support previous findings that a real exchange rate misalignment is a significant indication of crises, and reinforces the need to consider a country’s external debt and adequacy of reserves.</p>
+
+<h2 id="country-specific-models">Country-Specific Models</h2>
+
+<p><strong>Argentina:</strong></p>
+<ul>
+  <li>64 observations, 8 crises, Test AUC = 0.464 (out-of-sample)</li>
+  <li>Top predictor: CAB_GDP_lag2 (importance = 0.81), second lagged Reserves_M2_lag1</li>
+  <li>Interpretation: Argentina’s significant current account deficits along with declining reserves are a leading indicator for the presence of crises, a feature of the country’s past reliance on “twin” crises.</li>
+</ul>
+
+<p><strong>Brazil:</strong></p>
+<ul>
+  <li>47 observations, 4 crises, Test AUC = 0.5</li>
+  <li>Top predictor: Credit_Growth_lag2 (importance = 0.76)</li>
+  <li>Interpretation: In Brazil’s case, the risk of crisis may be related to the system of external borrowing and recovery. The rapid increase in credit or short-term liquidity is probably more important than the exposure to external risk.</li>
+</ul>
+
+<p><strong>Mexico:</strong></p>
+<ul>
+  <li>69 observations, 4 crises, Test AUC = 1.0 (likely overfit check sample size)</li>
+  <li>Top predictor: overval_pct_lag2 (importance = 1.0)</li>
+  <li>Interpretation: The country demonstrating a large and/or ongoing overvaluation is a tell for the adaptation of the economic adjustment, where a surplus of overvaluation exists.</li>
+</ul>
+
+<p><strong>Turkey:</strong></p>
+<ul>
+  <li>69 observations, 4 crises, Test AUC = 0.5</li>
+  <li>Most important predictor: ST_Debt_lag1 (importance = 1.0)</li>
+  <li>Explanation: Short-term debt is the most critical vulnerability, consistent with recent events.</li>
+</ul>
+
+<p><strong>Indonesia:</strong></p>
+<ul>
+  <li>There is not enough crisis data to allow for a reliable model estimation.</li>
+</ul>
+
+<p><img src="/assets/projects/currency-crisis/country feature importance.png" alt="Country feature importance" /></p>
+
+<p><strong>Figure 2: Country Feature Importance</strong></p>
+
+<h2 id="overvaluation-patterns">Overvaluation Patterns</h2>
+
+<p>Figures 3-7 show the time series overvaluation of the real exchange rate for all countries. Overvaluation episodes appear to clearly precede the majority of crisis events, and when the crisis dummy coincides with overvaluation, there are large positive deviations from the trend. The conclusion is that overvaluation is a predictor is consistent with both theoretical and empirical studies.</p>
+
+<p>Below is the overvaluation of the real exchange rate for Argentina. We can see clear rise in overvaluations during multiple crises: mid-1970s, mid-1980s, 1990, mid-2000s, and a couple of small crises just recently.</p>
+
+<p><img src="/assets/projects/currency-crisis/argentina overvaluation.png" alt="Argentina overvaluation" width="900" height="500" /></p>
+
+<p><strong>Figure 3: Argentina overvaluation from HP trend</strong></p>
+
+<p>Similarly, we can also see Brazil and Indonesia’s overvaluation from the HP trend. We can see that Brazil had multiple crises with the most disastrous happening in 1994. Indonesia only faced one crisis which is why country specific analysis was not possible however, it was devastating enough that it was important to include for the pooled model.</p>
+
+<p><img src="/assets/projects/currency-crisis/brazil overvaluation.png" alt="Brazil overvaluation" width="900" height="500" /></p>
+
+<p><strong>Figure 4: Brazil overvaluation from the HP trend</strong></p>
+
+<p><img src="/assets/projects/currency-crisis/indonesia overvaluation.png" alt="Indonesia overvaluation" width="900" height="500" /></p>
+
+<p><strong>Figure 5: Indonesia overvaluation from the HP trend</strong></p>
+
+<p>The same can be seen for Mexico and Turkey. Mexico had multiple large crises in the 1970s, 1980s, and the 1990s after which the scale of the crises had actually calmed down. In comparison, Turkey’s Lira has had a volatile past which still seems to be continuing into the present. The volatile nature of the Lira from the start has been a main reason as to including Turkey for this research.</p>
+
+<p><img src="/assets/projects/currency-crisis/mexico overvaluation.png" alt="Mexico overvaluation" width="900" height="500" /></p>
+
+<p><strong>Figure 6: Mexico overvaluation from HP trend</strong></p>
+
+<p><img src="/assets/projects/currency-crisis/turkey overvaluation.png" alt="Turkey overvaluation" width="900" height="500" /></p>
+
+<p><strong>Figure 7: Turkey overvaluation from HP trend</strong></p>
+
+<h1 id="limitations-of-models">Limitations of Models</h1>
+
+<ul>
+  <li><strong>Sample Size</strong>: The number of crisis years is limited, especially at the level of a country. Therefore, reliability and generalizability are limited. This can be improved by taking more countries especially from the developed economies that might have older data available.</li>
+  <li><strong>Set of predictors</strong>: This model addresses observable macro-financial variables only and does not account for political or institutional factors.</li>
+  <li><strong>Data Quality</strong>: The credibility of the results is dependent on consistency in measuring mistakes in exchange rates or financial variables.</li>
+  <li><strong>Threshold decisions</strong>: The results reported are dependent on the choice of crisis threshold; other definitions of crisis criteria may yield different crisis years.</li>
+  <li><strong>Temporal stability</strong>: Relationships may vary from crisis to crisis due to structural changes or reforms.</li>
+  <li><strong>Overfitting</strong>: High AUCs in-sample or for small test sets are likely related to overfitting of some type of model, especially in circumstances where systemic crises may be infrequent.</li>
+</ul>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>This investigation leads to reaffirmation of the role of real exchange rate overvaluation as a leading indicator of currency crises in emerging markets in both pooled and country-specific models. The situation, to be sure, will vary across countries in terms of the factors contributing to the risk of a crisis: for Argentina, external imbalances and reserves are important; for Brazil, domestic credit; for Turkey, external debt; for Mexico, long periods of overvaluation.</p>
+
+<p>The policy-related conclusion is that early warning systems will need to be unique to each country instead of a single universal approach. Early warning systems will have to integrate macro-financial indicators with the specific context. With the data limitations considered so far, any results have to be taken with caution; in the future, the research should ideally incorporate more frequently sampled data, consider more expansive variables, and machine learning options.</p>
+
+<h1 id="references">References</h1>
+
+<p>Alessi, L., &amp; Detken, C. (2011). Quasi real time early warning indicators for costly asset price boom/bust cycles: A role for global liquidity. <em>European Journal of Political Economy</em>, 27(3), 520-533.</p>
+
+<p>Berg, A., &amp; Pattillo, C. (1999). Predicting currency crises: The indicators approach and an alternative. <em>Journal of International Money and Finance</em>, 18(4), 561-586.</p>
+
+<p>Demyanyk, Y., &amp; Hasan, I. (2010). Financial crises and bank failures: A review of prediction methods. <em>Omega</em>, 38(5), 315-324.</p>
+
+<p>Eichengreen, B., Rose, A., &amp; Wyplosz, C. (1996). Contagious currency crises. NBER Working Paper No. 5681.</p>
+
+<p>Frankel, J. A., &amp; Saravelos, G. (2012). Can leading indicators assess country vulnerability? Evidence from the 2008–09 global financial crisis. <em>Journal of International Economics</em>, 87(2), 216-231.</p>
+
+<p>Gourinchas, P. O., &amp; Obstfeld, M. (2012). Stories of the twentieth century for the twenty-first. <em>American Economic Journal: Macroeconomics</em>, 4(1), 226-265.</p>
+
+<p>Kaminsky, G., Lizondo, S., &amp; Reinhart, C. (1998). Leading indicators of currency crises. <em>IMF Staff Papers</em>, 45(1), 1-48.</p>
+
+<p>Kaminsky, G., &amp; Reinhart, C. (1999). The twin crises: the causes of banking and balance-of-payments problems. <em>American Economic Review</em>, 89(3), 473-500.</p>
+
+<p>Krugman, P. (1979). A model of balance-of-payments crises. <em>Journal of Money, Credit and Banking</em>, 11(3), 311-325.</p>
+
+<p>Krugman, P. (1999). Balance sheets, the transfer problem, and financial crises. In <em>International Finance and Financial Crises</em>, Kluwer Academic Publishers, 31–44.</p>
+
+<p>Mendoza, E., &amp; Terrones, M. (2008). An anatomy of credit booms: Evidence from macro aggregates and micro data. NBER Working Paper No. 14049.</p>
+
+<p>Obstfeld, M. (1996). Models of currency crises with self-fulfilling features. <em>European Economic Review</em>, 40(3-5), 1037-1047.</p>
+
+
+        
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+<section class="page__share">
+  <div class="likebtn-container" style="margin-bottom: 10px;">
+    <span class="likebtn-wrapper" data-theme="custom" data-btn_size="26" data-f_size="16" data-icon_size="18" data-bg_c="#d3d3d3" data-ef_voting="grow" data-identifier="zero" data-show_dislike_label="true" data-counter_clickable="true" data-counter_frmt="km" data-counter_zero_show="true"></span>
+  </div>
+
+  <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://atharvacoolkarni.github.io/projects/currency-crisis/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://x.com/intent/post?text=https://atharvacoolkarni.github.io/projects/currency-crisis/" class="btn btn--twitter" title="Share on X"><i class="fab fa-x-twitter" aria-hidden="true"></i><span> (formerly Twitter)</span></a>
+
+  <div id="comments">
+    <script src="https://giscus.app/client.js"
+        data-repo="atharvacoolkarni/atharvacoolkarni.github.io"
+        data-repo-id="R_kgDOPvwF2g"
+        data-category="General"
+        data-category-id="DIC_kwDOPvwF2s4CvdiL"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
+  </div>
+
+</section>
+
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="https://atharvacoolkarni.github.io/projects/convergence-analysis/" class="pagination--pager" title="Convergence analysis [work in progress]
+">Previous</a>
+    
+    
+      <a href="https://atharvacoolkarni.github.io/projects/flight-analysis/" class="pagination--pager" title="Flight Analysis
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<a href="/sitemap/">Sitemap</a>
+
+<!-- Support for MatJax -->
+<script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+
+<!-- Support for Plotly -->
+<script defer src='https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.1/plotly.min.js'></script>
+
+<!-- Support for Mermaid -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({startOnLoad:true, theme:'default'});
+    await mermaid.run({querySelector:'code.language-mermaid'});
+</script>
+
+<!-- end custom footer snippets -->
+
+        
+
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="http://github.com/atharvacoolkarni"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://atharvacoolkarni.github.io/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">
+  &copy; 2025 Atharva Kulkarni, Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br />
+  Site last updated 2025-09-20
+</div>
+
+      </footer>
+    </div>
+
+    <script type="module" src="https://atharvacoolkarni.github.io/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
