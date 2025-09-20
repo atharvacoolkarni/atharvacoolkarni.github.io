@@ -36,17 +36,10 @@
     box-shadow: none;
     border-radius: 0;
   }
-
-  /* Mobile responsive adjustments */
-  @media (max-width: 768px) {
-    #plot {
-      height: 400px;
-    }
-  }
-
   @media (max-width: 480px) {
     #plot {
-      height: 350px;
+      width: 100%; /* Ensure the plot width does not exceed the viewport */
+      overflow-x: auto; /* Enable horizontal scrolling if content overflows */
     }
   }
   </style>
