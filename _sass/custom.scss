@@ -46,10 +46,10 @@
 .page__meta {
   display: flex;                  /* keep inline */
   align-items: center;            /* vertically align nicely */
-  gap: 0.5rem;                    /* small space around the separator */
-  margin-bottom: 1.25rem;         /* space below meta block */
+  gap: 0rem;                    /* small space around the separator */
+  margin-bottom: 0.5rem;         /* space below meta block */
   font-size: 0.9rem;
-  color: var(--global-text-color-light);
+  color: var(--global-text-color-dark);
 }
 
 /* Explicit separator (|) styling */

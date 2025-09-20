@@ -16,9 +16,7 @@ permalink: /projects/flight-analysis/
   <br>
   1. This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008) due to memory and performance constraints. I will be redoing this analysis for the entire dataset soon using big data tools and updating it here.<br>
   <br>
-  1. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
-  <br>
-  1. I have only attached some R plots as of yet. Once the complete analysis using the full dataset is done, I will be uploading both: Python and R plots for all questions.<br>
+  2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
   <br>
   Stay tuned!
 </div>
@@ -32,7 +30,7 @@ The main goals were:
 
 The analysis is based on commercial flight data and combines statistical analysis and machine learning to obtain meaningful insights.
 
-This project was done for University of London's third year course 'Programming for Data Science' during my BSc. Economics degree. The full coursework question set can be found here [ST2195_Coursework (PDF)](/assets/projects/flight-analysis/st2195_coursework.pdf)
+This project was done for University of London's third year course 'Programming for Data Science' during my BSc. Economics degree. The full coursework question set can be found here [ST2195_Coursework (PDF)](/assets/projects/flight_analysis/st2195_coursework.pdf){:target="_blank" rel="noopener"}.
 
 The questions are:
 1. When is the 
@@ -208,7 +206,7 @@ For Question 5, the variables that immediately impact arrival and departure dela
 The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [[4]][[5]][[6]]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [[4]]. We can also change the train-test ratio and see if it can improve the model.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html" width="654px" height="604px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html" width="950px" height="590px"></iframe>
 </div>
 
 _Figure 15: Machine learning model (Python)_

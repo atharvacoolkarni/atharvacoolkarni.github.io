@@ -39,7 +39,7 @@
   line-height: 1;
 
   & + .page__meta {
-    margin-top: -0.5em;
+    margin-top: 0em;
   }
 }
 
@@ -61,7 +61,7 @@
 
   /* paragraph indents */
   p {
-    margin: 0 0 $indent-var;
+    margin: 0.25em 0 $indent-var;
 
     /* sibling indentation*/
     @if $paragraph-indent == true {
