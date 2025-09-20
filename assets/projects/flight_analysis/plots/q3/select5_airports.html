@@ -22,8 +22,28 @@
       --global-text-color: #ffffff;
     }
     #plot {
-      width: 900px;
+      width: 100%;
+      max-width: 900px;
       height: 500px;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      #plot {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #plot {
+        height: 350px;
+      }
     }
     .hoverlayer .axistext { display: none !important; }
   </style>

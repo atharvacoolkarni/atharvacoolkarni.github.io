@@ -1,11 +1,4 @@
----
-permalink: /
-title: "Welcome to Atharva Kulkarni's Website"
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
+# Welcome to Atharva Kulkarni's website!
 
 ## Economist & Data Analyst
 
