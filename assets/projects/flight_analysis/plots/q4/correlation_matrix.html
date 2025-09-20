@@ -13,9 +13,23 @@
       color: var(--global-text-color, #000000);
     }
     #plot {
-      width: 650px;
+      width: 100%;
+      max-width: 650px;
       height: 600px;
       margin: auto;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      #plot {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #plot {
+        height: 400px;
+      }
     }
   </style>
 </head>
