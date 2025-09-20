@@ -9,11 +9,11 @@ tags:
   - pune
   - transportation policy
 excerpt: >
-  <blockquote style="border-left: 4px solid #28a745; padding-left: 1rem; font-style: italic; margin: 1rem 0; background-color: #f8fff8; padding: 1rem; color: #1b1b1b;">
-  An in-depth analysis of Pune's public transportation challenges, examining the causes of 
-  overcrowded PMPML buses and proposing data-driven solutions for improving urban mobility 
-  in one of India's fastest-growing metropolitan areas.
-  </blockquote>
+  <div class="posts-excerpt posts-excerpt--green">
+    An in-depth analysis of Pune's public transportation challenges, examining the causes of 
+    overcrowded PMPML buses and proposing data-driven solutions for improving urban mobility 
+    in one of India's fastest-growing metropolitan areas.
+  </div>
 ---
 
 # 1. Introduction

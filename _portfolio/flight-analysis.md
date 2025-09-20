@@ -3,7 +3,7 @@ title: "Flight Analysis"
 status: "wip"
 excerpt: >
   <div class="portfolio-excerpt portfolio-excerpt--orange">
-  Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
+    Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
   </div>
 collection: portfolio
 layout: single

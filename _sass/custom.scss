@@ -134,3 +134,14 @@ html[data-theme="dark"] .page__header .page__date,
 html[data-theme="dark"] .page__header .page__meta {
   color: #ffffff;
 }
+
+/* Light mode (default) */
+.archive__subtitle {
+  color: var(--global-text-color) !important; /* matches body text */
+  font-weight: 600;
+}
+
+/* Dark mode override */
+html[data-theme="dark"] .archive__subtitle {
+  color: var(--global-text-color) !important; /* uses theme accent (link) color */
+}

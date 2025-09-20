@@ -1,5 +1,6 @@
 ---
 title: "Convergence analysis [_work in progress_]"
+status: "wip"
 excerpt: >
   <div class="portfolio-excerpt portfolio-excerpt--green">
   Testing the convergence hypothesis in economics and exploring whether 
