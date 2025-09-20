@@ -18,10 +18,13 @@ permalink: /projects/flight-analysis/
   <br>
   2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
   <br>
+  3. The explanations presented here and in the actual report may differ due to code changes done recently which are more efficient and calculate correctly.<br>
+  <br>
   Stay tuned!
 </div>
 
-## Project Overview
+# Project Overview
+---
 This project explores **flight data analysis and prediction patterns**.  
 The main goals were:
 - Analyze flight delay patterns and identify key factors 
@@ -42,11 +45,12 @@ The questions are:
 1. Can you detect cascading failures as delays in one airport create delays in others?
 1. Use the available variables to construct a model that predicts delays.
 
-## Introduction
+# Introduction
+---
 Airline travel is an immensely popular mode of transportation, with billions of people taking it every year [[1]]. In 2019, there were approximately 38.3 million flights worldwide, and while the COVID-19 pandemic caused a significant dip in air travel, the numbers are expected to rebound [[1]]. Despite increased efficiency since the start of flight travel, flight delays remain a persistent issue for travellers. Through data exploration and modelling, this study aims to analyse trends in flight delays, connections, and other factors, providing insight into how flight data evolves over time.
 
-## Data
-
+# Data
+---
 The data is from the Data Expo 2009: Airline on time data found in the Harvard Dataverse [[2]]. The data has 29 variables detailing each flight. When reading the data for both Python and R, the files for the code should be in the data folder or the working directory must be set to where the data is located.
 
 ## Data pre-processing
@@ -90,7 +94,7 @@ Now that the data is set, we can start to do analysis on the data.
 ## When is the best time of day, day of the week, and time of year to fly to minimise delays?
 
 ### The best time of the day
-
+---
 For Question 1 (best time of the day), to determine what is the best time of the day to fly, the variables `CRSDepTime` and `CRSArrTime` were selected. This is due to the fact that departure and arrival delays start at the scheduled departure and arrival timings. This would show the delays that are expected at a said scheduled time. 
 
 For example, if the scheduled departure time is 06 hours (6 AM) and the mean departure delay is found out to be one hour then the observation is that there is an expected mean departure delay of an hour after 6 AM. If the actual departure time was taken, this would be inverse in interpretation since the actual departure time would already consider the delay. If the actual departure time is 07 hours (7 AM) and the mean departure delay is the same, then the delay ended at 7 AM. Hence, the variables `CRSDepTime` and `CRSArrTime` were selected.
@@ -108,7 +112,7 @@ _Figure 1: Interactive hourly mean delay_
 In general, the time between 14:00 to 22:00 (2 PM to 10 PM) is when a lot of delays occur. There is also an abnormal increase at 03:00 to 04:00 in the early morning. Hence, the best time of the day to fly, in order to minimise delays, is during the early morning, from 05:00 to 06:00. In order to avoid peak delays, a person should avoid the evening hours of 17:00 to 21:00 and the early morning hour at 04:00.
 
 ### The best day of the week
-
+---
 Next, we have the day of the week. First, the weekly data frame is created by extracting the variables `DayOfWeek`, `ArrDelay`, and `DepDelay`. This allows us to focus on just those variables for this part of the question and makes it easier to handle the data as well. The same goes for the monthly data frame where only `Month`, `ArrDelay`, and `DepDelay` were used. For both weekly and monthly analysis, total delay (the sum of arrival and departure delay) was calculated due to the fact that on a timeframe like a week or as large as a month, looking at arrival and departure delay separately seems excessive. On such a timescale, there will be very nuanced changes between the two types of delays especially on a monthly timescale and hence total delay was taken for both weekly and monthly analysis.
 
 The best day of the week, where total delays are the lowest, is Saturday. The total delay mean is close to ten minutes on Saturday while the second lowest is Tuesday where it is close to 12.5 minutes. The highest total delay mean is on Thursday and Friday with both having more than 17.5 minutes in the total delay mean. The next highest is Monday with just under 17.5 minutes.
@@ -122,7 +126,7 @@ _Figure 2: Weekly mean delay_
 Hence, the best day of the week is Saturday. To avoid delays, it is best to avoid Thursdays, Fridays, and Mondays.
 
 ### The best time of the year (month)
-
+---
 The best time of the year to fly, by month, is September which has a mean of about six minutes. The next best month is April which has a mean of about seven minutes. The highest mean is during July, with December and June coming in 2nd and 3rd place for highest mean. This corresponds to the Summer and Winter break, hence the rise in delays. January also has high delays due to spill over from Winter break and New Year’s. It can also include the weather from winter season in December and January. The same can be seen in the R visualization.
 
 <div class="full-width-block viz-container">
@@ -206,7 +210,7 @@ For Question 5, the variables that immediately impact arrival and departure dela
 The train-test split is 80-20. A large sample was used in order to improve accuracy. We can see that we have an AUC score of 0.89 for the gradient boosting while the logistic regression has an AUC of 0.71. An AUC score tells us how well a model can predict classes correctly [[4]][[5]][[6]]. An AUC score of 0.71 means that the logistic regression model can distinguish and predict 71% of the classes correctly. This is already a good score. Gradient boosting has a score 0.89 which means that it can predict 89% of the classes correctly. This is a high score and is close to being very high since it is just 1% below 90%. We can improve on the model by adding more variables that contribute to the delay [[4]]. We can also change the train-test ratio and see if it can improve the model.
 
 <div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html" width="950px" height="590px"></iframe>
+  <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html" width="950px" height="600px"></iframe>
 </div>
 
 _Figure 15: Machine learning model (Python)_
@@ -221,11 +225,11 @@ On the left is the graph visualizing the various mean squared error (MSE) values
 _Figure 16: MSE values of regression models (R)_
 
 # Conclusions
-
+---
 Overall, we were able to analyse when delays occur, changes in flight connections, cascading delays etc. There can be much more flight analysis done with this data. The entirety of the code, both in Python and R, took around 30 minutes to run and execute which is quite fast considering the samples taken in the machine learning models.
 
 # References
-
+---
 1. The World of Air Transport in 2019. (n.d.). Retrieved March 25, 2023. Available at: [Link][1]{:target="_blank" rel="noopener"}  
 2. Harvard Dataverse. (2008, October 6). Data Expo 2009: Airline On Time Data. Retrieved February 27, 2023. Available at: [Link][2]{:target="_blank" rel="noopener"}  
 3. Mears, K., Montelpare, W. J., Read, E., McComber, T., Mahar, A., & Ritchie, K. (n.d.). Working with missing data. Retrieved April 3, 2023. Available at: [Link][3]{:target="_blank" rel="noopener"}  
