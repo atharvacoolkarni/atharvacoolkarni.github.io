@@ -45,7 +45,9 @@
   </style>
 </head>
 <body>
-  <div id="plot"></div>
+  <div class="plot-container">
+    <div id="plot1"></div>
+  </div>
 
   <script>
     // Detect global site dark mode
@@ -156,7 +158,7 @@
         };
 
         const config = { responsive: true };
-        const plotDiv = document.getElementById('plot');
+        const plotDiv = document.getElementById('plot1');
         Plotly.newPlot(plotDiv, [trace1, trace2], layout, config);
 
         // Apply initial theme and observe changes

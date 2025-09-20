@@ -145,3 +145,38 @@ html[data-theme="dark"] .page__header .page__meta {
 html[data-theme="dark"] .archive__subtitle {
   color: var(--global-text-color) !important; /* uses theme accent (link) color */
 }
+
+.site-header .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header .nav-icons {
+  display: flex;
+  gap: 12px; /* spacing between menu + theme toggle */
+}
+
+#theme-toggle {
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.plot-container {
+  width: 100%;
+  max-width: 100%;       /* never exceed viewport */
+  overflow-x: auto;      /* enable scroll if content spills */
+}
+
+.plot-container > div {
+  width: 100% !important;   /* let Plotly scale down */
+  max-width: 900px;         /* optional: cap width on large screens */
+  height: 500px;
+  margin: 0 auto;           /* center on desktop */
+}
+
+.MathJax, .katex-display {
+  overflow-x: auto;
+  white-space: normal !important;
+  max-width: 100% !important;
+}

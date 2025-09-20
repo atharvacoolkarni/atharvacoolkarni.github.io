@@ -106,13 +106,8 @@ $(document).ready(function () {
   var bumpIt = function () {
     $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
   }
-  $(window).on('resize', function () {
-    const themeToggle = $('#theme-toggle');
-    if ($(window).width() <= 480) {
-      themeToggle.css({ top: '15px', right: '20px' });
-    } else {
-      themeToggle.css({ top: '10px', right: '50px' });
-    }
+  $(window).resize(function () {
+    didResize = true;
   });
   setInterval(function () {
     if (didResize) {
