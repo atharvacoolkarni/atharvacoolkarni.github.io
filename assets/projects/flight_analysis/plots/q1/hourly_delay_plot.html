@@ -20,17 +20,24 @@
     }
 
     #plot1 {
-      width: 100%;
-      height: 500px; /* desktop default */
+      width: 100% !important;
+      max-width: 100%;
+      min-width: 0;
+      height: 500px !important; /* desktop default */
+      overflow: hidden;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-bottom: 12px;
+      box-sizing: border-box;
     }
     @media (max-width: 768px) {
       #plot1 {
-        height: 650px; /* taller for tablets/mobiles */
+        height: 340px !important;
       }
     }
     @media (max-width: 480px) {
       #plot1 {
-        height: 750px; /* narrow phones */
+        height: 260px !important;
       }
     }
   </style>
@@ -54,31 +61,35 @@
     }
 
     function getLayout(darkMode) {
-      if (window.innerWidth < 768) {
-        return {
-          title: { text: 'Hourly Flight Delay Analysis', font: { size: 20, color: darkMode ? '#fff' : '#000' }, x:0.5 },
-          barmode: 'group',
-          plot_bgcolor: darkMode ? '#000' : '#fff',
-          paper_bgcolor: darkMode ? '#000' : '#fff',
-          font: { color: darkMode ? '#fff' : '#000' },
-          xaxis: { title: 'Hour of Day', dtick: 2, color: darkMode ? '#fff' : '#000' },
-          yaxis: { title: 'Average Delay (minutes)', color: darkMode ? '#fff' : '#000' },
-          legend: { orientation: 'h', yanchor: 'top', y: -0.25, xanchor: 'center', x:0.5 },
-          margin: { t:50, b:75, l:50, r:50 }
-        };
-      } else {
-        return {
-          title: { text: 'Hourly Flight Delay Analysis', font: { size: 20, color: darkMode ? '#fff' : '#000' }, x:0.5 },
-          barmode: 'group',
-          plot_bgcolor: darkMode ? '#000' : '#fff',
-          paper_bgcolor: darkMode ? '#000' : '#fff',
-          font: { color: darkMode ? '#fff' : '#000' },
-          xaxis: { title: 'Hour of Day', dtick: 2, color: darkMode ? '#fff' : '#000' },
-          yaxis: { title: 'Average Delay (minutes)', color: darkMode ? '#fff' : '#000' },
-          legend: { orientation: 'v', x:1.05, y:1 },
-          margin: { t: 75, b: 75, l: 75, r: 20 }
-        };
-      }
+      return {
+        title: {
+          text: 'Hourly Flight Delay Analysis',
+          font: { size: 20, color: darkMode ? '#fff' : '#000' },
+          x: 0.5,
+          xanchor: 'center',
+        },
+        barmode: 'group',
+        plot_bgcolor: darkMode ? '#000' : '#fff',
+        paper_bgcolor: darkMode ? '#000' : '#fff',
+        font: { color: darkMode ? '#fff' : '#000' },
+        xaxis: { title: 'Hour of Day', dtick: 2, color: darkMode ? '#fff' : '#000', automargin: true },
+        yaxis: { title: 'Average Delay (minutes)', color: darkMode ? '#fff' : '#000', automargin: true },
+        legend: {
+          orientation: 'h',
+          yanchor: 'top',
+          y: 1.025, // just below title, adjust as needed
+          xanchor: 'center',
+          x: 0.485,
+          font: { size: 14 }
+        },
+        margin: { t: 80, b: 40, l: 48, r: 24 },
+        autosize: true
+      };
+    }
+
+    function resizePlot(plotDiv, traces, config) {
+      const darkMode = isDarkMode();
+      Plotly.react(plotDiv, traces, getLayout(darkMode), config);
     }
 
     fetch("q1_time_analysis.json")
@@ -90,15 +101,14 @@
         const trace1 = { x: hourlyData.hours, y: hourlyData.departure_delays, name:'Departure Delay', type:'bar', marker:{color: darkMode ? '#4fc3f7':'#17a2b8'} };
         const trace2 = { x: hourlyData.hours, y: hourlyData.arrival_delays, name:'Arrival Delay', type:'bar', marker:{color: darkMode ? '#fbc02d':'#dc3545'} };
 
+        const traces = [trace1, trace2];
         const layout = getLayout(darkMode);
         const config = { responsive: true, displayModeBar: false };
         const plotDiv = document.getElementById('plot1');
 
-        Plotly.newPlot(plotDiv, [trace1, trace2], layout, config);
+        Plotly.newPlot(plotDiv, traces, layout, config);
 
-        window.addEventListener('resize', () => {
-          Plotly.react(plotDiv, [trace1, trace2], getLayout(isDarkMode()), config);
-        });
+        window.addEventListener('resize', () => resizePlot(plotDiv, traces, config));
       });
   </script>
 </body>
