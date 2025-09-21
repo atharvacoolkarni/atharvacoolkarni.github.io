@@ -11,6 +11,18 @@ classes: wide
 permalink: /projects/currency-crisis/
 ---
 
+# Project Overview
+
+This project investigates the **causes and dynamics of currency crises in emerging markets**.  
+The main goals were:
+- Analyze historical cases to identify triggers and warning signs of currency crises  
+- Explore theoretical models explaining crises, such as policy missteps and external shocks  
+- Visualize economic indicators and policy responses during crisis periods  
+
+The analysis uses macroeconomic data and crisis case studies to highlight patterns and inform policy recommendations.
+
+---
+
 # Introduction
 
 Currency crises have repeatedly disrupted emerging market economies, often triggering severe economic, social, and political consequences. Identifying early warning signals of such crises is a central concern for policymakers, international organizations, and investors. In recent decades, an extensive literature has developed around crisis prediction models, with varying degrees of sophistication and success. This paper builds on that tradition by applying a Classification and Regression Trees (CART) approach to construct both pooled and country-specific early warning models for five major emerging markets: Argentina, Brazil, Indonesia, Mexico, and Turkey.

@@ -11,6 +11,18 @@ classes: wide
 permalink: /projects/taylor-rule-brazil/
 ---
 
+# Project Overview
+
+This project analyzes **Brazil’s monetary policy using the Taylor Rule framework**.  
+The main goals were:
+- Apply the Taylor Rule to Brazil’s economic data to model interest rate decisions  
+- Compare actual central bank policies with Taylor Rule predictions  
+- Visualize the relationship between inflation, output gap, and policy rates over time  
+
+The study uses empirical data, economic modeling, and visualizations to assess how closely Brazil’s policy aligns with standard monetary guidelines.
+
+---
+
 # Introduction
 
 The debate on whether monetary policy should be based on intuition or a policy rule has been going on since the 19th century. After the Great Depression, policies came under great scrutiny. Monetarists like Milton Friedman opined that high inflation could have been curbed if the Federal Reserve had managed the money supply consistently.

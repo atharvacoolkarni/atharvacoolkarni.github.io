@@ -162,52 +162,48 @@ html[data-theme="dark"] .archive__subtitle {
   font-size: 1.2em;
 }
 
-.plot-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;      /* only this container scrolls if needed */
-  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-}
-
-.plot-container > div {
-  width: 100% !important;   /* allows Plotly to resize to container */
-  min-width: 300px;         /* prevent too small plots on tiny screens */
-  max-width: 100%;           /* ensures it never exceeds viewport */
-  height: auto !important;   /* auto height if possible */
-}
-
 .MathJax, .katex-display {
   overflow-x: auto;
   white-space: normal !important;
   max-width: 100% !important;
 }
 
-/* Responsive iframe wrapper for plots */
 .iframe-wrapper {
-  position: relative;
   width: 100%;
-  padding-bottom: 55%; /* desktop ratio (≈ 490/910) */
-  height: 0;
+  max-width: 100%;
 }
 
 .iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
+  height: 500px; /* desktop default */
   border: none;
 }
 
-/* Make plots taller on smaller screens */
+/* Tablets/mobiles */
 @media (max-width: 768px) {
-  .iframe-wrapper {
-    padding-bottom: 75%; /* increase height for tablets/phones */
+  .iframe-wrapper iframe {
+    height: 650px;
   }
 }
 
+/* Narrow phones */
 @media (max-width: 480px) {
-  .iframe-wrapper {
-    padding-bottom: 100%; /* square-ish ratio for narrow phones */
+  .iframe-wrapper iframe {
+    height: 750px;
   }
+}
+
+/* Ensure Plotly containers use all available width */
+.plot-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.plot-container > div {
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 300px;
+  height: auto !important;
 }
