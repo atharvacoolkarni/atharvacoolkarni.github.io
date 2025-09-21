@@ -99,9 +99,7 @@ For Question 1 (best time of the day), to determine what is the best time of the
 
 For example, if the scheduled departure time is 06 hours (6 AM) and the mean departure delay is found out to be one hour then the observation is that there is an expected mean departure delay of an hour after 6 AM. If the actual departure time was taken, this would be inverse in interpretation since the actual departure time would already consider the delay. If the actual departure time is 07 hours (7 AM) and the mean departure delay is the same, then the delay ended at 7 AM. Hence, the variables `CRSDepTime` and `CRSArrTime` were selected.
 
-As we can see in the hourly mean arrival and departure delay visualizations from both R and Python, the lowest arrival delay mean is in the morning, at 04:00 and 07:00 hours. The lowest departure delay mean is at 06:00 hours. The second lowest is at 05:00 hours.
-
-The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours). This persists till 04:00 hours where it drops into the negatives. The highest departure delay mean is also in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours).
+As shown in the hourly delay chart, the lowest mean arrival delay occurs at 6:00 and 7:00. The lowest mean departure delay is at 6:00, with a similarly low value at 7:00. The highest average delays for both arrival and departure are in the evening, especially between 17:00 and 21:00 (5 PM to 9 PM). Arrival delay spikes at 4:00, but this is not seen for departure delay. Delays drop after midnight, with arrival delays even turning negative at 6:00.
 
 <div class="viz-container">
   <div class="iframe-wrapper">
@@ -111,13 +109,13 @@ The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM)
 
 _Figure 1: Interactive hourly mean delay_
 
-In general, the time between 14:00 to 22:00 (2 PM to 10 PM) is when a lot of delays occur. There is also an abnormal increase at 03:00 to 04:00 in the early morning. Hence, the best time of the day to fly, in order to minimise delays, is during the early morning, from 05:00 to 06:00. In order to avoid peak delays, a person should avoid the evening hours of 17:00 to 21:00 and the early morning hour at 04:00.
+Thus, the best time to fly is early morning (6:00–7:00). To avoid delays, avoid evenings (17:00–21:00) and the early morning hour of 4:00.
 
 ### The best day of the week
 ---
 Next, we have the day of the week. First, the weekly data frame is created by extracting the variables `DayOfWeek`, `ArrDelay`, and `DepDelay`. This allows us to focus on just those variables for this part of the question and makes it easier to handle the data as well. The same goes for the monthly data frame where only `Month`, `ArrDelay`, and `DepDelay` were used. For both weekly and monthly analysis, total delay (the sum of arrival and departure delay) was calculated due to the fact that on a timeframe like a week or as large as a month, looking at arrival and departure delay separately seems excessive. On such a timescale, there will be very nuanced changes between the two types of delays especially on a monthly timescale and hence total delay was taken for both weekly and monthly analysis.
 
-The best day of the week, where total delays are the lowest, is Saturday. The total delay mean is close to ten minutes on Saturday while the second lowest is Tuesday where it is close to 12.5 minutes. The highest total delay mean is on Thursday and Friday with both having more than 17.5 minutes in the total delay mean. The next highest is Monday with just under 17.5 minutes.
+The weekly delay chart shows that Saturday has the lowest average delays, making it the best day to fly. Tuesday also has low delays. The highest average delays occur on Thursday and Friday. To minimize delays, fly on Saturdays or Tuesdays, and avoid Thursdays and Fridays.
 
 <div class="viz-container">
   <div class="iframe-wrapper">
@@ -127,11 +125,11 @@ The best day of the week, where total delays are the lowest, is Saturday. The to
 
 _Figure 2: Weekly mean delay_
 
-Hence, the best day of the week is Saturday. To avoid delays, it is best to avoid Thursdays, Fridays, and Mondays.
+To minimize delays, fly on Saturdays or Tuesdays, and avoid Thursdays and Fridays.
 
 ### The best time of the year (month)
 ---
-The best time of the year to fly, by month, is September which has a mean of about six minutes. The next best month is April which has a mean of about seven minutes. The highest mean is during July, with December and June coming in 2nd and 3rd place for highest mean. This corresponds to the Summer and Winter break, hence the rise in delays. January also has high delays due to spill over from Winter break and New Year’s. It can also include the weather from winter season in December and January. The same can be seen in the R visualization.
+According to the monthly delay chart, September has the lowest average delays, followed by April. The highest delays are in July, with December and June also showing elevated delay averages. These peaks correspond to summer and winter break periods. January and August have moderately high delays, likely due to seasonal effects.
 
 <div class="viz-container">
   <div class="iframe-wrapper">
@@ -147,7 +145,7 @@ For Question 2, the `plane-data` dataset was used. The NA values were checked an
 
 There are two regression lines in each plot. This is done due to the sampling difference mentioned in the data pre-processing. It is helpful to split the data and plot them in two sections within the same plot.
 
-The data is much more scattered in pre-1980s as opposed to post-1980s where there is much more data that results in a more gathered plot. Likewise, the confidence interval is much wider for pre-1980s as compared to post-1980s. Since there is a sampling issue with pre-1980s, we cannot reasonably apply the conclusion for all years. Hence, 1980 onwards, data points and analysis show that older planes did suffer more delays. We can see that there is a slow downward trend with much more scatter appearing below the trend line post-1990s and that there is much more scatter above the trend line during the 1980s. Meanwhile, pre-1980, the delays were increasing as seen by the upward sloping regression line.
+The regression plots split the data by year of manufacture (pre-1980 and post-1980) to account for sampling differences. Pre-1980, average delays increase with year, and the data is more scattered with a wider confidence interval. Post-1980, average delays show a slight downward trend and the data is less scattered. This suggests that, for newer aircraft, delays have decreased over time, while older planes pre-1980 experienced increasing delays. Sampling limitations for pre-1980 mean conclusions should be focused on the post-1980 data.
 
 <div class="viz-container">
   <div class="iframe-wrapper">
