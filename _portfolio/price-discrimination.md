@@ -297,3 +297,7 @@ Overall, the analysis shows how Air India and Vistara use dynamic pricing strate
 - Gupta, R. (2024). *Global Aviation Market Rankings*
 - Pindyck, R. S. (2018). *Microeconomics*. Pearson Education
 - Snyder, C. (2007). *Price Discrimination Theory and Applications*
+
+## 🔗 Repository
+Source code and materials are available on GitHub:  
+👉 [Price discrimination Repository](https://github.com/atharvacoolkarni/price-discrimination){:target="_blank"}

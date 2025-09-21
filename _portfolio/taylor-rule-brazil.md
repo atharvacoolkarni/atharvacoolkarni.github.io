@@ -327,3 +327,7 @@ IBGE | Portal do IBGE | IBGE. Available at:
 [12]: https://doi.org/10.1016/j.econmod.2011.03.007 "Estimating monetary policy reaction functions for emerging market economies: The case of Brazil"
 [13]: https://www.investopedia.com/articles/economics/10/taylor-rule.asp "The Taylor rule: An economic model for monetary policy"
 [14]: https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS?locations=BR "Unemployment, total (% of total labor force) (modeled ILO estimate) - Brazil"
+
+## 🔗 Repository
+Source code and materials are available on GitHub:  
+👉 [Taylor Rule Brazil Repository](https://github.com/atharvacoolkarni/taylor-rule-brazil){:target="_blank"}

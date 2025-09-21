@@ -227,3 +227,7 @@ Krugman, P. (1999). Balance sheets, the transfer problem, and financial crises. 
 Mendoza, E., & Terrones, M. (2008). An anatomy of credit booms: Evidence from macro aggregates and micro data. NBER Working Paper No. 14049.
 
 Obstfeld, M. (1996). Models of currency crises with self-fulfilling features. *European Economic Review*, 40(3-5), 1037-1047.
+
+## 🔗 Repository
+Source code and materials are available on GitHub:  
+👉 [Currency crisis Repository](https://github.com/atharvacoolkarni/currency-crisis){:target="_blank"}
