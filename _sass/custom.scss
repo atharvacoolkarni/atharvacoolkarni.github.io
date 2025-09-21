@@ -184,13 +184,13 @@ html[data-theme="dark"] .archive__subtitle {
 
 @media (max-width: 768px) {
   .iframe-wrapper iframe {
-    height: 340px; // Less tall for tablets/mobiles
+    height: 500px; // Less tall for tablets/mobiles
   }
 }
 
 @media (max-width: 480px) {
   .iframe-wrapper iframe {
-    height: 260px; // Even less tall for narrow phones
+    height: 400px; // Even less tall for narrow phones
   }
 }
 
