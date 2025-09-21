@@ -103,8 +103,10 @@ As we can see in the hourly mean arrival and departure delay visualizations from
 
 The highest arrival delay mean is in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours). This persists till 04:00 hours where it drops into the negatives. The highest departure delay mean is also in the evening, at 18:00 to 23:00 (6 to 11 PM) which then also continues over into the next day at midnight (12 AM or 00 hours).
 
-<div class="full-width-block viz-container">
-  <iframe src="/assets/projects/flight_analysis/plots/q1/hourly_delay_plot.html" width="910px" height="490px"></iframe>
+<div class="viz-container">
+  <div class="iframe-wrapper">
+    <iframe src="/assets/projects/flight_analysis/plots/q1/hourly_delay_plot.html"></iframe>
+  </div>
 </div>
 
 _Figure 1: Interactive hourly mean delay_

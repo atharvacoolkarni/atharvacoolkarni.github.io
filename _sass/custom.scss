@@ -181,3 +181,26 @@ html[data-theme="dark"] .archive__subtitle {
   white-space: normal !important;
   max-width: 100% !important;
 }
+
+/* Responsive iframe wrapper for plots */
+.iframe-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 55%; /* Adjust ratio to match plot aspect (490/910 ≈ 55%) */
+  height: 0;
+}
+
+.iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Optional: make sure containers never overflow */
+.viz-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
