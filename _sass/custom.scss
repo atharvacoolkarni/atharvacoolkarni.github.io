@@ -186,7 +186,7 @@ html[data-theme="dark"] .archive__subtitle {
 .iframe-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 55%; /* Adjust ratio to match plot aspect (490/910 ≈ 55%) */
+  padding-bottom: 55%; /* desktop ratio (≈ 490/910) */
   height: 0;
 }
 
@@ -199,8 +199,15 @@ html[data-theme="dark"] .archive__subtitle {
   border: none;
 }
 
-/* Optional: make sure containers never overflow */
-.viz-container {
-  max-width: 100%;
-  overflow-x: hidden;
+/* Make plots taller on smaller screens */
+@media (max-width: 768px) {
+  .iframe-wrapper {
+    padding-bottom: 75%; /* increase height for tablets/phones */
+  }
+}
+
+@media (max-width: 480px) {
+  .iframe-wrapper {
+    padding-bottom: 100%; /* square-ish ratio for narrow phones */
+  }
 }
