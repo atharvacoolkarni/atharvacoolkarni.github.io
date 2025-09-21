@@ -11,6 +11,14 @@ classes: wide
 permalink: /projects/currency-crisis/
 ---
 
+<div class="notice">
+  <strong>Note:</strong><br>
+  <br>
+  1. This project has a major limitation of low number of crises. I intend to perform another project on this topic using a better prediction model for a large sample size of crises by utilizing more countries' data.
+  <br>
+  Stay tuned!
+</div>
+
 # Project Overview
 
 This project investigates the **causes and dynamics of currency crises in emerging markets**.  
