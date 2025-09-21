@@ -282,8 +282,8 @@
                 <span>
                   <i class="fa fa-fw fa-calendar" aria-hidden="true"></i>
                   Updated:
-                  <time datetime="2025-09-19T20:46:55+00:00">
-                    September 19, 2025
+                  <time datetime="2025-09-21T08:43:10+00:00">
+                    September 21, 2025
                   </time>
                 </span>
               
@@ -297,13 +297,27 @@
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="introduction">Introduction</h2>
+        <h1 id="project-overview">Project Overview</h1>
+
+<p>This project explores <strong>the concept and real-world application of price discrimination in economics</strong>.<br />
+The main goals were:</p>
+<ul>
+  <li>Illustrate different types of price discrimination (first, second, and third degree) with examples</li>
+  <li>Analyze how firms segment markets and set prices for different consumer groups</li>
+  <li>Discuss fairness, ethical, and legal considerations in price discrimination practices</li>
+</ul>
+
+<p>The project uses real-world data and economic models to demonstrate pricing strategies and their implications.</p>
+
+<hr />
+
+<h1 id="introduction">Introduction</h1>
 
 <p>The airplane has been a popular mode of transport globally for close to 80 years now. It has become a popular mode of transport domestically within India as well as Indians are able to now afford airplane tickets alongside the emergence of Indian airline companies that are either full-service airlines or low-cost airlines. It is no doubt that the Indian airline market will grow even more in the coming years. According to Gupta (2024), the Indian domestic airline market is already the 3rd largest in the world. As for the airlines that serve the domestic market, according to Anand (2023), the market share was broken up into IndiGo (63.3%), Air India (9.8%), Vistara (9.8%), AirAsia (7.1%), SpiceJet (4.4%), and Akasa Air (4.2%).</p>
 
 <p>The main thing that every consumer is dealing with is the price of a ticket when travelling by air. However, anyone who travels regularly or even checks airplane ticket prices will notice that the prices change a lot. They change due to holiday seasons, peak timings either during the week or the day, how long the flight is, whether there are stopovers, the ticket class etc. There are a lot of factors that can influence the price of a seat. It is important to understand how airlines price the tickets and how the prices change as the factors themselves change. This is called price discrimination which is practiced heavily in the airline industry. It is also called dynamic pricing as the prices depend on time as well. We will look at the theory of price discrimination, review the existing literature regarding price discrimination in the airline industry, and then perform data analysis.</p>
 
-<h2 id="theory-of-price-discrimination">Theory of Price Discrimination</h2>
+<h1 id="theory-of-price-discrimination">Theory of Price Discrimination</h1>
 
 <p>Price discrimination is essentially when firms charge different prices to different consumers for the same good. This is the case within the airline industry as firms are selling airline tickets for different prices depending on a lot of factors. There are various ways this can be done but price discrimination has been broken down into three categories: first, second, and third.</p>
 
@@ -315,7 +329,7 @@
 
 <p>Third degree price discrimination is the most practiced price discrimination within the airline industry. Airlines focus on segregating customers based on timings, duration etc. Additionally, second degree price discrimination is also followed whereby airlines segregate flyers based on leisure or business flyers and accordingly accommodate economy and business class.</p>
 
-<h2 id="literature-review">Literature Review</h2>
+<h1 id="literature-review">Literature Review</h1>
 
 <p>Before starting the discussion on data and data analysis, a brief literature review will be conducted.</p>
 
@@ -325,7 +339,7 @@
 
 <p>We can see that airlines mainly set their strategies based on days before departure, duration, time of departure etc which is characteristic of third degree price discrimination. The airlines also use second degree price discrimination based on the seat class. As such, airlines use both strategies in order to set differing prices.</p>
 
-<h2 id="data-and-research-question">Data and Research Question</h2>
+<h1 id="data-and-research-question">Data and Research Question</h1>
 
 <p>The data for price discrimination analysis was taken from Kaggle, which was scraped from Ease My Trip, which contained prices from six different airline companies with six different cities for departures and arrivals. The airline companies were Air India, Air Asia, Go First, Indigo, Spice Jet, and Vistara. The departure and arrival cities were Bangalore, Chennai, Delhi, Hyderabad, Kolkata, and Mumbai. The data is from February 11 to March 31, 2022.</p>
 
@@ -338,7 +352,7 @@
 
 <p>Hence, the research question is <strong>“How do the factors influencing airlines’ pricing strategies affect price discrimination on the Delhi-Mumbai route for Air India and Vistara?”</strong>. The focus point is to see how class, number of stops, departure time, arrival time, duration, and days left affect the ticket price.</p>
 
-<h2 id="data-analysis">Data Analysis</h2>
+<h1 id="data-analysis">Data Analysis</h1>
 
 <p>We can first start with observing the trends of the average prices of both classes plotted against the days remaining before the flight. Figure 2 shows the average price of economy class plotted against the days remaining before the departure.</p>
 
@@ -372,7 +386,7 @@
 
 <p>Figure 5 shows the scatterplot and average price of business class with respect to the duration of the flight. The trendline for business class is much more curved. The points are also much more scattered compared to economy class. However, we can still see the increase in prices as the duration of the flight increases very distinctly. It starts around ₹35,000 and then increases to ₹50,000 at its highest point and then dropping down according to the trendline.</p>
 
-<h3 id="price-ratio">Price Ratio</h3>
+<h1 id="price-ratio">Price Ratio</h1>
 
 <p>We can also check the ratio of the average prices 1 day before departure and 49 days before departure. 49 days is the maximum number of days before departure given in the dataset. This ratio will allow us to check how much more expensive the flight is 1 day before departure compared to 49 days before departure. Average values will be calculated for both 1 day before departure and 49 days before departure. This ratio will be calculated for both economy and business class.</p>
 
@@ -395,7 +409,7 @@
 <p><strong>Figure 6: Average prices of flight based on the number of stops</strong><br />
 <em>Source: Coded in Python by authors</em></p>
 
-<h3 id="regression-analysis">Regression Analysis</h3>
+<h1 id="regression-analysis">Regression Analysis</h1>
 
 <p>We will also run a regression analysis in order to estimate the coefficients of variables and interpret their impacts on ticket price. The regression model will contain ticket price as the dependent variable and departure time, arrival time, number of stops, class, duration, and days left till departure as the independent variables. The regression model can be written as:</p>
 
@@ -481,7 +495,7 @@ D_{A-LN} &amp;= \begin{cases}
 <p><strong>Figure 7: Regression results</strong><br />
 <em>Source: Coded in Python by authors</em></p>
 
-<h3 id="interpretation-of-results">Interpretation of Results</h3>
+<h1 id="interpretation-of-results">Interpretation of Results</h1>
 
 <p>We can see that \(\beta_0 = 570.63\) which means this is the baseline price when all variables are zero. However, this serves no purpose with regards to interpretation as a flight with zero duration or no departure and arrival times does not exist.</p>
 
@@ -515,7 +529,7 @@ D_{A-LN} &amp;= \begin{cases}
 &amp;- 65.75 \cdot \text{duration} - 134.895 \cdot \text{days left}
 \end{align}\]
 
-<h3 id="example-calculation">Example Calculation</h3>
+<h2 id="example-calculation">Example Calculation</h2>
 
 <p>An example can be taken where the chosen attributes are economy class, night departure, early morning arrival, one stop, 6 hours of flight, and booked 7 days before departure. The calculation of price is then:</p>
 
@@ -535,23 +549,23 @@ D_{A-LN} &amp;= \begin{cases}
 
 <p>We can see that the price jumps by ₹37,310 which leads the total price to ₹48,045.64.</p>
 
-<h2 id="limitations-of-the-analysis">Limitations of the Analysis</h2>
+<h1 id="limitations-of-the-analysis">Limitations of the Analysis</h1>
 
 <p>There are plenty of limitations of the analysis that we have done. These are:</p>
 
-<h3 id="1-no-quantity-data">1. No Quantity Data</h3>
+<h2 id="1-no-quantity-data">1. No Quantity Data</h2>
 <p>The data and the model has no input of quantity. Quantity is an important tool to analyze price discrimination. However, since there is no quantity data, it is not a full analysis of price discrimination. As of now, this analysis is only focusing on the factors that airlines use to set prices. With quantity data, it would be possible to analyze how different consumer demands are changing against prices.</p>
 
-<h3 id="2-omitted-variables">2. Omitted Variables</h3>
+<h2 id="2-omitted-variables">2. Omitted Variables</h2>
 <p>The model has been built with the variables given in the data. However, it is possible that there are omitted variables. A possible omitted variable is the competition from other airlines on the same route. While Air India and Vistara account for 70% of the flights along this route, the 30% of flights by other airlines can still affect the prices that are set by Air India and Vistara. Omitted variables can lead to biased coefficients especially if the omitted variables are correlated with the variables used.</p>
 
-<h3 id="3-stationary-coefficients">3. Stationary Coefficients</h3>
+<h2 id="3-stationary-coefficients">3. Stationary Coefficients</h2>
 <p>The coefficients are stationary since the model assumes that coefficients do not change with time. However, the coefficients can change with time. This is mainly due to external factors such as fuel costs, economic shocks etc. Due to this, the model may predict incorrectly for certain periods.</p>
 
-<h3 id="4-assumption-of-linear-relationship">4. Assumption of Linear Relationship</h3>
+<h2 id="4-assumption-of-linear-relationship">4. Assumption of Linear Relationship</h2>
 <p>The model assumes a linear relationship between the price and the independent variables. However, it is likely that independent variables may have nonlinear effects on price. This can oversimplify the results and interpretations.</p>
 
-<h2 id="conclusion">Conclusion</h2>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>In conclusion, the analysis examined how factors such as class, number of stops, departure and arrival times, flight duration, and days before departure influence ticket prices on the Delhi-Mumbai route for Air India and Vistara. The analysis showed a clear trend of price discrimination such as with varying prices between business and economy class tickets or the prices rising as departure dates get closer. There is clear second and third degree price discrimination being practiced.</p>
 
@@ -559,7 +573,7 @@ D_{A-LN} &amp;= \begin{cases}
 
 <p>Overall, the analysis shows how Air India and Vistara use dynamic pricing strategies to maximize their revenue. Future research should explore how the quantity changes with price in various market segments, the impact of competition from other airlines, and how this differs across multiple routes.</p>
 
-<h2 id="references">References</h2>
+<h1 id="references">References</h1>
 
 <ul>
   <li>Anand, S. (2023). <em>Indian Aviation Market Share Analysis</em></li>
