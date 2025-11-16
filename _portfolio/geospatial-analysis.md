@@ -14,11 +14,23 @@ permalink: /projects/geospatial-analysis/
 ---
 
 Sankey diagram for borough
-<iframe src="/assets/projects/geospatial-analysis/sankey_borough_flow.html"></iframe>
+<div class="viz-container">
+  <div class="iframe-wrapper">
+    <iframe src="/assets/projects/geospatial-analysis/sankey_borough_flow.html"></iframe>
+  </div>
+</div>
 
 Sankey diagram for zone
-<iframe src="/assets/projects/geospatial-analysis/sankey_zone_flow.html"></iframe>
+<div class="viz-container">
+  <div class="iframe-wrapper">
+    <iframe src="/assets/projects/geospatial-analysis/sankey_zone_flow.html"></iframe>
+  </div>
+</div>
 
 Hotspot/Coldspot map
-<iframe src="/assets/projects/geospatial-analysis/interactive_hotspot_map.html"></iframe> 
+<div class="viz-container">
+  <div class="iframe-wrapper">
+    <iframe src="/assets/projects/geospatial-analysis/interactive_hotspot_map.html"></iframe>
+  </div>
+</div>
 
