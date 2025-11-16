@@ -1,5 +1,6 @@
 ---
 title: "Geospatial and temporal analysis of New York City taxi rides [_work in progress_]"
+status: wip
 excerpt: >
   <div class="portfolio-excerpt portfolio-excerpt--blue">
   Comprehensive geospatial and temporal analysis of NYC taxi ride patterns, exploring 
@@ -20,3 +21,4 @@ Sankey diagram for zone
 
 Hotspot/Coldspot map
 <iframe src="/assets/projects/geospatial-analysis/interactive_hotspot_map.html"></iframe> 
+
