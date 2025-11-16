@@ -12,4 +12,11 @@ classes: wide
 permalink: /projects/geospatial-analysis/
 ---
 
-*Repository and detailed results coming soon...*
+Sankey diagram for borough
+<iframe src="/assets/projects/geospatial-analysis/sankey_borough_flow.html"></iframe>
+
+Sankey diagram for zone
+<iframe src="/assets/projects/geospatial-analysis/sankey_zone_flow.html"></iframe>
+
+Hotspot/Coldspot map
+<iframe src="/assets/projects/geospatial-analysis/interactive_hotspot_map.html"></iframe> 
