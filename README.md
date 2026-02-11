@@ -1,15 +1,4 @@
----
-title: "Hi, I'm Atharva! Welcome to my website."
----
-
-<div class="alert alert-info">
-  <strong>Heads up!</strong> This site is being updated. Stay tuned.
-</div>
-
-Progress of the website:
-<div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%;"></div>
-</div>
+# Welcome to Atharva Kulkarni's website!
 
 ## Economist & Data Analyst
 

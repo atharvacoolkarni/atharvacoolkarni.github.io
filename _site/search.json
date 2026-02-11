@@ -1,16 +1,44 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Hi, I’m Atharva! Welcome to my website.",
+    "objectID": "interests.html",
+    "href": "interests.html",
+    "title": "",
     "section": "",
-    "text": "Heads up! This site is being updated. Stay tuned.\n\nProgress of the website:"
+    "text": "I am passionate about exploring the intersection of economics and data science. My primary areas of interest include:\n\n\n\nApplied econometrics and statistical modeling\nEconomic forecasting and time series analysis\nBig data applications in economic research\n\n\n\n\n\nPredictive modeling for economic indicators\nDeep learning applications in finance and economics\nTraffic prediction and urban economics\n\n\n\n\n\nBusiness intelligence and visualization\nData pipeline engineering with Apache Spark\nAdvanced analytics for policy making\n\n\n\n\n\nPursuing M.Sc. in Economics at Symbiosis School of Economics\nCompleting B.Sc. in Data Science and Applications from IIT Madras\nContinuous learning in statistical methods and programming\n\nI enjoy working on projects that combine theoretical economic knowledge with practical data science skills to solve real-world problems."
+  },
+  {
+    "objectID": "interests.html#research-interests",
+    "href": "interests.html#research-interests",
+    "title": "",
+    "section": "",
+    "text": "I am passionate about exploring the intersection of economics and data science. My primary areas of interest include:\n\n\n\nApplied econometrics and statistical modeling\nEconomic forecasting and time series analysis\nBig data applications in economic research\n\n\n\n\n\nPredictive modeling for economic indicators\nDeep learning applications in finance and economics\nTraffic prediction and urban economics\n\n\n\n\n\nBusiness intelligence and visualization\nData pipeline engineering with Apache Spark\nAdvanced analytics for policy making\n\n\n\n\n\nPursuing M.Sc. in Economics at Symbiosis School of Economics\nCompleting B.Sc. in Data Science and Applications from IIT Madras\nContinuous learning in statistical methods and programming\n\nI enjoy working on projects that combine theoretical economic knowledge with practical data science skills to solve real-world problems."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Me",
     "section": "",
-    "text": "About this site"
+    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing: - M.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026) - B.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\nI have completed: - B.A. in Economics (Hons) from Indira Gandhi National Open University (2024) - B.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
+  },
+  {
+    "objectID": "about.html#hello-im-atharva-kulkarni",
+    "href": "about.html#hello-im-atharva-kulkarni",
+    "title": "About Me",
+    "section": "",
+    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing: - M.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026) - B.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\nI have completed: - B.A. in Economics (Hons) from Indira Gandhi National Open University (2024) - B.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hi, I’m Atharva! Welcome to my website.",
+    "section": "",
+    "text": "Heads up! This site is being updated. Stay tuned."
+  },
+  {
+    "objectID": "index.html#economist-data-analyst",
+    "href": "index.html#economist-data-analyst",
+    "title": "Hi, I’m Atharva! Welcome to my website.",
+    "section": "Economist & Data Analyst",
+    "text": "Economist & Data Analyst\nWelcome to my personal website! I’m Atharva Kulkarni, a passionate economist and data scientist based in Pune, India. I’m currently pursuing my M.Sc. in Economics at Symbiosis School of Economics and a B.Sc. in Data Science and Applications from IIT Madras.\n\nWhat You’ll Find Here\nThis website showcases my journey in economics and data science through various sections: - Projects - Explore my portfolio of data science and economics projects - Interests - Learn about my research interests and academic pursuits\n- Blog Posts - Read my thoughts on economics, data science, and current research - CV - View my academic and professional experience - About Me - Get to know me better and my background\n\n\nCurrent Focus\nI’m particularly interested in the intersection of economics and data science, working on projects that involve: - Traffic prediction using deep learning and machine learning models - Currency, banking, and sovereign debt crises predictions - Convergence hypothesis\nFeel free to explore the site and don’t hesitate to reach out if you’d like to connect or discuss potential collaborations!"
   }
 ]
