@@ -1,0 +1,31 @@
+---
+title: "404"
+page-layout: full
+---
+
+<div style="text-align: center; padding: 3rem 0; max-width: 900px; margin: 0 auto;">
+
+<div style="font-size: 8rem; font-weight: 700; line-height: 1; margin-bottom: 1rem; color: #000;">
+404
+</div>
+
+<div style="font-size: 2rem; font-weight: 600; margin-bottom: 1.5rem;">
+Page Not Found
+</div>
+
+<div class="project-excerpt project-excerpt--yellow" style="max-width: 600px; margin: 0 auto 2rem auto; text-align: left;">
+If it is supposed to be here but isn't then please do rest assured that I am working on fixing it. In the meantime, feel free to explore other sections of my website using the links below.
+</div>
+
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+<a href="/" class="btn btn-primary">🏠 Go Home</a>
+<a href="/projects.html" class="btn btn-success">📁 View Projects</a>
+<a href="/cv.html" class="btn btn-info">📄 See My CV</a>
+<a href="/about.html" class="btn btn-light">👋 About Me</a>
+</div>
+
+<div style="text-align: center; margin-top: 3rem; color: #000000; font-size: 0.875rem;">
+If you believe this is an error, please check the URL or contact me.
+</div>
+
+</div>

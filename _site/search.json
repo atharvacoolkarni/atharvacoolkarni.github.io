@@ -18,14 +18,14 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing: - M.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026) - B.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\nI have completed: - B.A. in Economics (Hons) from Indira Gandhi National Open University (2024) - B.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
+    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing:\n\nM.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026)\nB.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\n\nI have completed:\n\nB.A. in Economics (Hons) from Indira Gandhi National Open University (2024)\nB.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
   },
   {
     "objectID": "about.html#hello-im-atharva-kulkarni",
     "href": "about.html#hello-im-atharva-kulkarni",
     "title": "About Me",
     "section": "",
-    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing: - M.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026) - B.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\nI have completed: - B.A. in Economics (Hons) from Indira Gandhi National Open University (2024) - B.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
+    "text": "Welcome to my personal website! I’m an aspiring economist and data scientist currently pursuing advanced degrees in both fields.\n\n\nI am currently pursuing:\n\nM.Sc. in Economics at Symbiosis School of Economics, Symbiosis International University (expected 2026)\nB.Sc. in Data Science and Applications from Indian Institute of Technology - Madras (expected 2027)\n\nI have completed:\n\nB.A. in Economics (Hons) from Indira Gandhi National Open University (2024)\nB.Sc. in Economics (Hons) from Indian School of Business and Finance, University of London (2023)\n\n\n\n\nI recently completed an internship at Symbiosis School of Economics, Pune (May-July 2025), where I: - Validated the performance of an advanced STD-ConvLSTM model on the PEMS dataset - Engineered complete data ingestion and processing pipelines using Apache Spark and PyTorch - Optimized model hyperparameters and implemented robust evaluation frameworks\n\n\n\nI’m passionate about bridging the gap between economic theory and practical data applications. I enjoy working on projects that combine statistical rigor with real-world problem solving.\nWhen I’m not analyzing data or studying economic models, I enjoy exploring new technologies and methodologies that can enhance economic research and analysis.\n\n\n\nFeel free to explore my projects, interests, and blog posts to learn more about my work. I’m always open to discussions about economics, data science, and their intersection!\nYou can reach me at: atharva.kulkarni.2024@sse.ac.in"
   },
   {
     "objectID": "index.html",
@@ -39,6 +39,76 @@
     "href": "index.html#economist-data-analyst",
     "title": "Hi, I’m Atharva! Welcome to my website.",
     "section": "Economist & Data Analyst",
-    "text": "Economist & Data Analyst\nWelcome to my personal website! I’m Atharva Kulkarni, a passionate economist and data scientist based in Pune, India. I’m currently pursuing my M.Sc. in Economics at Symbiosis School of Economics and a B.Sc. in Data Science and Applications from IIT Madras.\n\nWhat You’ll Find Here\nThis website showcases my journey in economics and data science through various sections: - Projects - Explore my portfolio of data science and economics projects - Interests - Learn about my research interests and academic pursuits\n- Blog Posts - Read my thoughts on economics, data science, and current research - CV - View my academic and professional experience - About Me - Get to know me better and my background\n\n\nCurrent Focus\nI’m particularly interested in the intersection of economics and data science, working on projects that involve: - Traffic prediction using deep learning and machine learning models - Currency, banking, and sovereign debt crises predictions - Convergence hypothesis\nFeel free to explore the site and don’t hesitate to reach out if you’d like to connect or discuss potential collaborations!"
+    "text": "Economist & Data Analyst\nWelcome to my personal website! I’m Atharva Kulkarni, a passionate economist and data scientist based in Pune, India. I’m currently pursuing my M.Sc. in Economics at Symbiosis School of Economics and a B.Sc. in Data Science and Applications from IIT Madras.\n\nWhat You’ll Find Here\nThis website showcases my journey in economics and data science through various sections:\n\nProjects - Explore my portfolio of data science and economics projects\nInterests - Learn about my research interests and academic pursuits\n\nBlog Posts - Read my thoughts on economics, data science, and current research\nCV - View my academic and professional experience\nAbout Me - Get to know me better and my background\n\n\n\nCurrent Focus\nI’m particularly interested in the intersection of economics and data science, working on projects that involve:\n\nTraffic prediction using deep learning and machine learning models\nCurrency, banking, and sovereign debt crises predictions\nConvergence hypothesis\n\nFeel free to explore the site and don’t hesitate to reach out if you’d like to connect or discuss potential collaborations!"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Completed Projects\n\n\nCurrency Crisis Prediction\n\n\nMachine learning models to predict currency crises using macroeconomic indicators and historical data from multiple countries.\n\n\nView Project View GitHub\n\n\n\n\nEconomic Convergence Analysis\n\n\nStatistical analysis testing the convergence hypothesis across emerging and developed economies using panel data methods.\n\n\nView Project View GitHub\n\n\n\nWork in Progress\n\n\n\nFlight Analysis\n\n\nExploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.\n\n\nView Project View GitHub\n\n\n\n\nTraffic Prediction Model\n\n\nDeep learning and machine learning models for traffic flow prediction using real-time traffic data and neural networks.\n\n\nView Project View GitHub"
+  },
+  {
+    "objectID": "projects/flight-analysis.html",
+    "href": "projects/flight-analysis.html",
+    "title": "Flight Analysis",
+    "section": "",
+    "text": "Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data."
+  },
+  {
+    "objectID": "projects/flight-analysis.html#project-overview",
+    "href": "projects/flight-analysis.html#project-overview",
+    "title": "Flight Analysis",
+    "section": "Project Overview",
+    "text": "Project Overview\n[Your project content here…]"
+  },
+  {
+    "objectID": "projects/flight-analysis.html#methodology",
+    "href": "projects/flight-analysis.html#methodology",
+    "title": "Flight Analysis",
+    "section": "Methodology",
+    "text": "Methodology\n[Your methodology content…]"
+  },
+  {
+    "objectID": "projects/flight-analysis.html#results",
+    "href": "projects/flight-analysis.html#results",
+    "title": "Flight Analysis",
+    "section": "Results",
+    "text": "Results\n[Your results content…]"
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "M.Sc. in Economics\nSymbiosis School of Economics, Symbiosis International University\n2026 (expected)\nB.Sc. in Data Science and Applications\nIndian Institute of Technology - Madras\n2027 (expected)\nB.A. in Economics (Hons)\nIndira Gandhi National Open University\n2024\nB.Sc. in Economics (Hons)\nIndian School of Business and Finance, University of London\n2023"
+  },
+  {
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "M.Sc. in Economics\nSymbiosis School of Economics, Symbiosis International University\n2026 (expected)\nB.Sc. in Data Science and Applications\nIndian Institute of Technology - Madras\n2027 (expected)\nB.A. in Economics (Hons)\nIndira Gandhi National Open University\n2024\nB.Sc. in Economics (Hons)\nIndian School of Business and Finance, University of London\n2023"
+  },
+  {
+    "objectID": "cv.html#internship",
+    "href": "cv.html#internship",
+    "title": "Curriculum Vitae",
+    "section": "Internship",
+    "text": "Internship\nSymbiosis School of Economics, Pune\nMay 5 - July 17, 2025\n\nValidated the superior performance of an advanced STD-ConvLSTM model on the PEMS dataset, a novel application that successfully outperformed multiple baseline architectures.\nEngineered the complete data ingestion and processing pipeline using Apache Spark and PyTorch to enable efficient handling of the large-scale traffic dataset.\nMethodically optimized model hyperparameters and implemented a robust evaluation framework to conduct a rigorous comparative analysis of performance."
+  },
+  {
+    "objectID": "cv.html#skills",
+    "href": "cv.html#skills",
+    "title": "Curriculum Vitae",
+    "section": "Skills",
+    "text": "Skills\nProgramming:\n\nPython\nR\nSQL\n\nBusiness Intelligence:\n\nPowerBI\nExcel\nOrange\n\nBig Data:\n\nApache Hadoop\nApache Spark\n\nData Skills:\n\nData Visualization\nData Manipulation"
+  },
+  {
+    "objectID": "cv.html#download-my-cv",
+    "href": "cv.html#download-my-cv",
+    "title": "Curriculum Vitae",
+    "section": "Download my CV",
+    "text": "Download my CV\n\n📄 CV (PDF)"
   }
 ]

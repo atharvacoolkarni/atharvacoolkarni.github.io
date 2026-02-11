@@ -3,3 +3,149 @@
 
 /*-- scss:rules --*/
 @import "brite/_bootswatch.scss";
+
+/* Custom Project Styles */
+
+/* Add spacing after progress bar */
+.progress {
+  margin-bottom: 2rem;
+}
+
+/* Project Cards - NO colored border on card itself */
+.project-card {
+  border: 2px solid $black;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 0 $black;
+}
+
+/* Project content wrapper - flexbox layout */
+.project-content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Project excerpt with colored banner - takes available space */
+.project-excerpt {
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+  border-radius: $border-radius;
+  margin: 0 0 1.5rem 0;  /* Add bottom margin by default */
+  border-left: 6px solid;
+  background-color: transparent;
+}
+
+/* Remove bottom margin when inside project-content (side-by-side layout) */
+.project-content .project-excerpt {
+  margin-bottom: 0;
+}
+
+.project-excerpt--orange { 
+  background-color: rgba(250, 152, 74, 0.1);
+  border-left-color: $orange; 
+}
+
+.project-excerpt--blue { 
+  background-color: rgba(97, 188, 255, 0.1);
+  border-left-color: $blue; 
+}
+
+.project-excerpt--purple { 
+  background-color: rgba(190, 130, 250, 0.1);
+  border-left-color: $purple; 
+}
+
+.project-excerpt--green { 
+  background-color: rgba(104, 211, 145, 0.1);
+  border-left-color: $green; 
+}
+
+.project-excerpt--pink { 
+  background-color: rgba(234, 73, 152, 0.1);
+  border-left-color: $pink; 
+}
+
+.project-excerpt--cyan { 
+  background-color: rgba(34, 210, 237, 0.1);
+  border-left-color: $cyan; 
+}
+
+.project-excerpt--red { 
+  background-color: rgba(245, 101, 101, 0.1);
+  border-left-color: $red; 
+}
+
+.project-excerpt--yellow { 
+  background-color: rgba(255, 199, 0, 0.1);
+  border-left-color: $yellow; 
+}
+
+/* Project buttons - fixed width on the right */
+.project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.project-buttons .btn {
+  width: 100%;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* On smaller screens, stack vertically */
+@media (max-width: 768px) {
+  .project-content {
+    flex-direction: column;
+  }
+  
+  .project-excerpt {
+    min-width: 100%;
+  }
+  
+  .project-buttons {
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .project-buttons .btn {
+    flex: 1;
+  }
+}
+
+/* Notice styling */
+.notice {
+  background-color: $gray-100;
+  border: 2px solid $black;
+  border-left-width: 6px;
+  border-left-color: $yellow;
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  margin-bottom: 2rem;
+}
+
+.notice strong {
+  font-weight: 600;
+}
+
+/* Section headers */
+.section-header {
+  border-bottom: 3px solid $black;
+  padding-bottom: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}

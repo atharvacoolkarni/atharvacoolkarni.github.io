@@ -1,0 +1,59 @@
+---
+title: "Projects"
+---
+
+<h2 class="section-header">Completed Projects</h2>
+
+### Currency Crisis Prediction
+
+<div class="project-content">
+<div class="project-excerpt project-excerpt--blue">
+Machine learning models to predict currency crises using macroeconomic indicators and historical data from multiple countries.
+</div>
+
+<div class="project-buttons">
+<a href="projects/currency-crisis.html" class="btn btn-success">View Project</a>
+<a href="https://github.com/atharvacoolkarni/currency-crisis" class="btn btn-info" target="_blank">View GitHub</a>
+</div>
+</div>
+
+### Economic Convergence Analysis
+
+<div class="project-content">
+<div class="project-excerpt project-excerpt--green">
+Statistical analysis testing the convergence hypothesis across emerging and developed economies using panel data methods.
+</div>
+
+<div class="project-buttons">
+<a href="projects/convergence-analysis.html" class="btn btn-success">View Project</a>
+<a href="https://github.com/atharvacoolkarni/convergence" class="btn btn-info" target="_blank">View GitHub</a>
+</div>
+</div>
+
+<h2 class="section-header">Work in Progress</h2>
+
+### Flight Analysis
+
+<div class="project-content">
+<div class="project-excerpt project-excerpt--orange">
+Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
+</div>
+
+<div class="project-buttons">
+<a href="projects/flight-analysis.html" class="btn btn-success">View Project</a>
+<a href="https://github.com/atharvacoolkarni/flight-analysis" class="btn btn-info" target="_blank">View GitHub</a>
+</div>
+</div>
+
+### Traffic Prediction Model
+
+<div class="project-content">
+<div class="project-excerpt project-excerpt--purple">
+Deep learning and machine learning models for traffic flow prediction using real-time traffic data and neural networks.
+</div>
+
+<div class="project-buttons">
+<a href="projects/traffic-prediction.html" class="btn btn-success">View Project</a>
+<a href="https://github.com/atharvacoolkarni/traffic-prediction" class="btn btn-info" target="_blank">View GitHub</a>
+</div>
+</div>

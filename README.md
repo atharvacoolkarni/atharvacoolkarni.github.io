@@ -7,11 +7,11 @@ Welcome to my personal website! I'm Atharva Kulkarni, a passionate economist and
 ### What You'll Find Here
 
 This website showcases my journey in economics and data science through various sections:
-- **[Projects](/projects/)** - Explore my portfolio of data science and economics projects
-- **[Interests](/interests/)** - Learn about my research interests and academic pursuits  
-- **[Blog Posts](/blog-posts/)** - Read my thoughts on economics, data science, and current research
-- **[CV](/cv/)** - View my academic and professional experience
-- **[About Me](/about-me/)** - Get to know me better and my background
+- **[Projects](projects.qmd)** - Explore my portfolio of data science and economics projects
+- **[Interests](interests.qmd)** - Learn about my research interests and academic pursuits  
+- **[Blog Posts](blog.qmd)** - Read my thoughts on economics, data science, and current research
+- **[CV](cv.qmd)** - View my academic and professional experience
+- **[About Me](about.qmd)** - Get to know me better and my background
 
 ### Current Focus
 

@@ -1,0 +1,31 @@
+---
+title: "Flight Analysis"
+---
+
+<div class="project-excerpt project-excerpt--orange">
+Exploratory data and machine learning analysis of flight delays and prediction patterns using commercial flight data.
+</div>
+
+<div class="notice">
+  <strong>Note:</strong><br>
+  <br>
+  1. This project only uses two years (2004 and 2005) out of all the years available in the dataset (1987 - 2008) due to memory and performance constraints. I will be redoing this analysis for the entire dataset soon using big data tools and updating it here.<br>
+  <br>
+  2. Few of the reference links have also shut down or moved away from their domain so the references used will also be updated soon.<br>
+  <br>
+  3. The explanations presented here and in the actual report may differ due to code changes done recently which are more efficient and calculate correctly.<br>
+  <br>
+  Stay tuned!
+</div>
+
+## Project Overview
+
+[Your project content here...]
+
+## Methodology
+
+[Your methodology content...]
+
+## Results
+
+[Your results content...]

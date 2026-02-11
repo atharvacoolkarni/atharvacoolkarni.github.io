@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: ""
+  title: "Atharva Kulkarni"
   navbar:
     background: secondary
     left:
@@ -14,8 +14,21 @@ website:
         text: Blog
       - href: interests.qmd
         text: Interests
+      - href: cv.qmd
+        text: CV
       - href: about.qmd
         text: About Me
+    right:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/atharva-kulkarni-5588081bb/
+        target: _blank
+        aria-label: LinkedIn
+      - icon: github
+        href: https://github.com/atharvacoolkarni
+        target: _blank
+        aria-label: GitHub
+      - icon: envelope-at
+        href: mailto:atharva.kulkarni.2024@sse.ac.in
 
 format:
   html:
