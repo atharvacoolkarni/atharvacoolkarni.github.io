@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-09-19">
+<meta name="description" content="An in-depth analysis of Pune’s public transportation challenges, examining the causes of overcrowded PMPML buses and proposing data-driven solutions for improving urban mobility.">
+
+<title>Pune’s Transportation Problem: Overcrowded PMPML Buses – Atharva Kulkarni</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0ce6ba98a21ec5e20e41792abd6e3e30.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Atharva Kulkarni</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../interests.html"> 
+<span class="menu-text">Interests</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/atharva-kulkarni-5588081bb/" target="_blank"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/atharvacoolkarni" target="_blank"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:atharva.kulkarni.2024@sse.ac.in"> <i class="bi bi-envelope-at" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#a-deep-dive-into-the-problem" id="toc-a-deep-dive-into-the-problem" class="nav-link" data-scroll-target="#a-deep-dive-into-the-problem">2. A Deep Dive into the Problem</a>
+  <ul class="collapse">
+  <li><a href="#the-causes" id="toc-the-causes" class="nav-link" data-scroll-target="#the-causes">2.1 The Causes</a>
+  <ul class="collapse">
+  <li><a href="#not-enough-buses" id="toc-not-enough-buses" class="nav-link" data-scroll-target="#not-enough-buses">2.1.1 Not Enough Buses</a></li>
+  <li><a href="#availability-to-commuters" id="toc-availability-to-commuters" class="nav-link" data-scroll-target="#availability-to-commuters">2.1.2 Availability to Commuters</a></li>
+  <li><a href="#tight-schedule-lax-implementation" id="toc-tight-schedule-lax-implementation" class="nav-link" data-scroll-target="#tight-schedule-lax-implementation">2.1.3 Tight Schedule, Lax Implementation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#what-the-government-can-do" id="toc-what-the-government-can-do" class="nav-link" data-scroll-target="#what-the-government-can-do">3. What the Government Can Do</a>
+  <ul class="collapse">
+  <li><a href="#increase-the-fleet-and-number-of-buses-along-major-hotspots" id="toc-increase-the-fleet-and-number-of-buses-along-major-hotspots" class="nav-link" data-scroll-target="#increase-the-fleet-and-number-of-buses-along-major-hotspots">3.1 Increase the Fleet and Number of Buses Along Major Hotspots</a></li>
+  <li><a href="#pune-metro" id="toc-pune-metro" class="nav-link" data-scroll-target="#pune-metro">3.2 Pune Metro</a></li>
+  <li><a href="#peak-hour-adjustments" id="toc-peak-hour-adjustments" class="nav-link" data-scroll-target="#peak-hour-adjustments">3.3 Peak Hour Adjustments</a></li>
+  <li><a href="#restrictions-on-vehicles" id="toc-restrictions-on-vehicles" class="nav-link" data-scroll-target="#restrictions-on-vehicles">3.4 Restrictions on Vehicles</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">4. Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Pune’s Transportation Problem: Overcrowded PMPML Buses</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Urban planning</div>
+    <div class="quarto-category">Public transport</div>
+    <div class="quarto-category">Data analysis</div>
+    <div class="quarto-category">Pune</div>
+    <div class="quarto-category">Transportation policy</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An in-depth analysis of Pune’s public transportation challenges, examining the causes of overcrowded PMPML buses and proposing data-driven solutions for improving urban mobility.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 19, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
+<p>Pune is a large city and along with its satellite city, Pimpri-Chinchwad, have an estimated population of 7 million people. The transport needs for the two cities and various villages surrounding the cities are immense. Pune, like every other city, faces the monumental task of ensuring that people move from one place to another efficiently.</p>
+<p>Plenty of people use two-wheelers and cars but just as many if not more use public transport especially buses and metro. However, the existing bus and metro systems are inadequate. While metro line 1 and 2 have been built and are attracting an increasing number of passengers, metro can only serve the major hubpoints. The last mile connectivity within public transport still depends on buses.</p>
+<p>The population of Pune has exploded over the last few years. This combines with the increase in two- and four-wheelers which end up crowding the roads. This report will detail the problems, their main causes, and the solutions can be undertaken to solve this problem.</p>
+</section>
+<section id="a-deep-dive-into-the-problem" class="level1">
+<h1>2. A Deep Dive into the Problem</h1>
+<p>Pune’s population has exploded over the past couple of years. We can see in the table and chart below that Pune’s population has increased from 12 lakhs to over an estimated 44.3 lakhs. There is a steep increase in population for Pune and has reached an estimated 45 lakhs in 2024.</p>
+<table class="caption-top table">
+<caption>Table 1: Population of Pune (lakhs), 1981 to 2011</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Year</th>
+<th>Population (lakhs)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1981</td>
+<td>12.0</td>
+</tr>
+<tr class="even">
+<td>1991</td>
+<td>18.7</td>
+</tr>
+<tr class="odd">
+<td>2001</td>
+<td>25.4</td>
+</tr>
+<tr class="even">
+<td>2011</td>
+<td>31.3</td>
+</tr>
+<tr class="odd">
+<td>2024*</td>
+<td>44.3</td>
+</tr>
+</tbody>
+</table>
+<p><em>Sources: 1981 to 2011 data is from 1981 to 2011 census. The 2024 data is estimated by <a href="https://www.census2011.co.in/">Census 2011</a>.</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="..\assets\blogs\pune-transportation\Pune_population_chart.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Figure 1: Population of Pune (lakhs), 1981 to 2011</figcaption>
+</figure>
+</div>
+<p><em>Sources: 1981 to 2011 data is from 1981 to 2011 census. The 2024 data is estimated by <a href="https://www.census2011.co.in/">Census 2011</a>.</em></p>
+<p>Due to the increasing population, the population density of both cities has also increased. The only anomaly is Pune’s population density decreasing but this is because of the inclusion of more than 20 villages within the Pune Municipal Corporation’s (PMC) limits.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/blogs/pune-transportation/Pune population (with villages).png" width="900" height="500" class="figure-img"></p>
+<figcaption>Figure 2: Population density of Pune (with new villages), 1981 - 2024</figcaption>
+</figure>
+</div>
+<p><em>Sources: Final calculations by author. 1981, 1991, 2001, and 2011 Pune area data taken from census. 2024 Pune area data taken from Capacity Building Commission (CBC).</em></p>
+<p>Without the new villages, the population density of Pune is closer to around 18,000 per square kilometre. There is still a problem of congestion of people. As such, the need for a proper public transport system has become much more essential as well.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pune_transportation_analysis/Pune population (without villages).png" width="900" height="500" class="figure-img"></p>
+<figcaption>Figure 3: Population density of Pune (without new villages), 1981 - 2024</figcaption>
+</figure>
+</div>
+<p><em>Sources: Final calculations by author. 1981, 1991, 2001, and 2011 Pune area data taken from census. 2024 Pune area is taken same as 2011 area.</em></p>
+<p>There are around <strong>1932 total buses</strong> within all depots as reported in August 2024 by PMPML. This is an increase from July 2024 but a decrease from August 2023. According to PMPML depotwise statistics, the number of buses is decreasing. Around August 2020, there were close to 2500 buses but this number has been slowly decreasing and now sits at 1932 buses. There is more news that PMPML’s fleet will shrink even more (Bengur, 2024). This is catastrophic as this means that the already congested buses will be even more congested if more buses are not quickly added to the fleet.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pune_transportation_analysis/PMPML fleet.png" width="900" height="500" class="figure-img"></p>
+<figcaption>Figure 4: The number of buses, total and per day, in PMPML’s fleet from 2020 to 2024</figcaption>
+</figure>
+</div>
+<p><em>Source: PMPML’s depotwise statistics, August 2020 to August 2024. August 2022 data is from August 2023 statistics.</em></p>
+<section id="the-causes" class="level2">
+<h2 class="anchored" data-anchor-id="the-causes">2.1 The Causes</h2>
+<section id="not-enough-buses" class="level3">
+<h3 class="anchored" data-anchor-id="not-enough-buses">2.1.1 Not Enough Buses</h3>
+<p>One of the main causes of overcongestion in buses is that there are just not enough buses that are operating on some of the routes. The following table shows the number of buses that flow to and from the major bus stations or depots. This data, which has been calculated from PMPML bus timings, is the expected number of buses that should be flowing down the routes.</p>
+<table class="caption-top table">
+<caption>Table 2: Total number of buses on 7 major routes in Pune</caption>
+<colgroup>
+<col style="width: 65%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Route</th>
+<th>Number of Buses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pune Station to/from Swargate</td>
+<td>420</td>
+</tr>
+<tr class="even">
+<td>Shivajinagar to/from Swargate</td>
+<td>406</td>
+</tr>
+<tr class="odd">
+<td>Katraj to/from Nigdi</td>
+<td>384</td>
+</tr>
+<tr class="even">
+<td>Bhosari to/from Pune station</td>
+<td>302</td>
+</tr>
+<tr class="odd">
+<td>Manapa to/from Lohegaon</td>
+<td>250</td>
+</tr>
+<tr class="even">
+<td>Narhegaon to/from Swargate</td>
+<td>232</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: Final calculations by author. Bus and route timings provided by PMPML.</em></p>
+<p>However, PMPML’s own statistics show that only <strong>1566 buses</strong> are on all the routes compared to the full fleet of 1932 buses. As such, many of the busy routes as shown below as well as the other routes which have been allocated fewer buses are getting even lower amount of buses than allotted. This means that:</p>
+<ol type="a">
+<li>There are already a lower number of buses overall due to the shrinking fleet compared to past years.<br></li>
+<li>There is also a lower number of buses on average on road per day.</li>
+</ol>
+<p>This means that there is a double effect on severity of the situation where one is occurring over the long run and one is persisting over the short run.</p>
+<p>An example of this is <strong>Senapati Bapat Road</strong> and subsequently Law College road which connects from Pune University Road down to the SNDT college bus stop that is under Nal Stop metro station.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pune_transportation_analysis/SB Road.png" width="450" height="250" class="figure-img"></p>
+<figcaption>Figure 5: Senapati Bapat Road to SNDT College route</figcaption>
+</figure>
+</div>
+<p><em>Source: Google Maps</em></p>
+<p>The route is only served by two buses, 276 and 277, which come from Chinchwad and Bhosari respectively. Both of them are filled to the brim by the time they reach anywhere close to Senapati Bapat road. It also does not help the fact that 277 is scheduled every hour and 276, which is scheduled every 15 minutes, fails to meet its timetable leading large gaps between the previous and the next bus.</p>
+</section>
+<section id="availability-to-commuters" class="level3">
+<h3 class="anchored" data-anchor-id="availability-to-commuters">2.1.2 Availability to Commuters</h3>
+<p>Public buses are incredibly cheap to ride on. According to PMPML’s fare calculator, a journey of 20 kilometers will only cost a consumer <strong>25 rupees</strong>. One of the busiest routes within PMPML’s routes is Katraj – Nigdi as shown in table 2. The route is around 34 kilometres. It will cost only <strong>35 rupees</strong> to go from one depot to another.</p>
+<p>This is one of the main reasons as to why commuters flock to public buses. It is cheap and has an extensive route network. As such, even if there is congestion on buses, commuters do not think of the alternative which is either an auto-rickshaw or a 2/4-wheeler if they have one. Based on Government of Maharashtra’s traffic card, an auto-rickshaw will register around <strong>500 rupees</strong> for a trip like Katraj – Nigdi.</p>
+</section>
+<section id="tight-schedule-lax-implementation" class="level3">
+<h3 class="anchored" data-anchor-id="tight-schedule-lax-implementation">2.1.3 Tight Schedule, Lax Implementation</h3>
+<p>A tight bus schedule will only ever be as good as the bus drivers that follow it. Clearly, based on the example given earlier and many instances faced by commuters, the non-compliance to the schedule leads to immense delays in commuters’ journeys. There is a complaint system that has been set up where a commuter can call a hotline to inform that a bus did not arrive. However, the fact that this responsibility has been given to the commuters just shows the organizational holes in PMPML’s management.</p>
+</section>
+</section>
+</section>
+<section id="what-the-government-can-do" class="level1">
+<h1>3. What the Government Can Do</h1>
+<section id="increase-the-fleet-and-number-of-buses-along-major-hotspots" class="level2">
+<h2 class="anchored" data-anchor-id="increase-the-fleet-and-number-of-buses-along-major-hotspots">3.1 Increase the Fleet and Number of Buses Along Major Hotspots</h2>
+<p>An obvious solution is to increase the fleet and simultaneously increase the number of buses along crowded routes. However, it seems to be more complicated than it should be considering that PMPML has delayed bus purchase decision as of August 2024 (PunePulse, 2024). It is imperative that the fleet size is increased to well beyond <strong>2500 buses</strong> at least and many of them to be deployed in the major routes.</p>
+<p>PMPML has already identified that there are four major routes:</p>
+<ul>
+<li><strong>Warje – Kharadi</strong></li>
+<li><strong>Kothrud – Vishrantwadi</strong> - <strong>Dhayari – Hadapsar</strong></li>
+<li><strong>Aundh – Katraj</strong> (which can extend ahead of Aundh towards Kalewadi and Bhosari)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pune_transportation_analysis/possible routes.png" width="600" height="330" class="figure-img"></p>
+<figcaption>Figure 6: 4 major corridors that have been identified by PMPML</figcaption>
+</figure>
+</div>
+<p><em>Source: PMPML</em></p>
+<p>The addition of buses in the fleet should focus on these major corridors to alleviate traffic.</p>
+</section>
+<section id="pune-metro" class="level2">
+<h2 class="anchored" data-anchor-id="pune-metro">3.2 Pune Metro</h2>
+<p>One major addition in Pune’s public transport is the Pune metro. However, it should not be mistaken as the savior of Pune’s public transport woes. It will not reduce traffic but merely redirect it in the slightest. One major reason for this is due to <strong>induced demand</strong>. Since the metro has been developed, commuters expect others to use the metro and as such may choose to take 2-wheelers or 4-wheelers expecting for the roads to have less traffic.</p>
+<p>Two major areas where the Pune metro does not serve yet are <strong>Katraj and Hadapsar</strong>. Although the detailed project report for Swargate – Katraj metro extension has been released, the commencement of operations is in 2027 (PuneMetroRail, 2024). There is also consideration to extend Line 3, which starts from Hinjewadi, towards Hadapsar.</p>
+</section>
+<section id="peak-hour-adjustments" class="level2">
+<h2 class="anchored" data-anchor-id="peak-hour-adjustments">3.3 Peak Hour Adjustments</h2>
+<p>PMPML should also learn from Pune metro’s lessons of increasing the rate of metro during peak hours while slowing it down during off-peak hours. This will cater to the higher number of commuters during morning and evening peak hours where as opposed to constant number of buses as it is in the present, there are higher rates of buses taking commuters which will reduce the stress on the latter buses that will run through the route.</p>
+</section>
+<section id="restrictions-on-vehicles" class="level2">
+<h2 class="anchored" data-anchor-id="restrictions-on-vehicles">3.4 Restrictions on Vehicles</h2>
+<p>According to PunekarNews (2022), the number of vehicles is similar to the city’s population. The number of two-wheelers in 2018 was around <strong>26 lakhs</strong> which is close to half of the city’s population in 2024. This means that there is an even higher number of two-wheelers in 2024.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/pune_transportation_analysis/Pune's vehicle population.png" width="900" height="500" class="figure-img"></p>
+<figcaption>Figure 7: Pune’s Vehicle Population, 2000 - 2018</figcaption>
+</figure>
+</div>
+<p><em>Source: Statistics compiled by Regional Transport Office (RTO), data released by Pune Data Store</em></p>
+<p>As such, there must be restrictions enacted on vehicles, especially on 2-wheelers. One such restriction is the <strong>driving restriction policy (DPR)</strong> which has significant effect in improving public transport (Zhang, Long, &amp; Chen, 2019). Zhang et al.&nbsp;found that around 5-25% of public transport passenger volume increased due to DPRs. This can be tried in certain areas of Pune to test its effectiveness.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>4. Conclusion</h1>
+<p>In conclusion, Pune’s public buses face overcongestion due to lack of number of buses which are both due to long term decline in fleet size and short term sub-optimal number of buses running every day. It is also due to the cheap fares that attract large number of commuters. This combined with low number of buses is a big problem. At last, there is also lax implementation.</p>
+<p>Overall, the solutions are that PMPML and Pune metro must tackle this problem together as this is not a standalone effort. There must also be better road planning including the design of flyovers and taking into account the choke points. Lastly, peak hour adjustments and driving restriction policies must be tried and tested within certain areas. If successful, the policies can be taken citywide.</p>
+<hr>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>Bengur, D. (2024, June 17). Pax demand more buses as PMPML fleet shrinks. <em>Hindustan Times.</em> <a href="https://www.hindustantimes.com/cities/pune-news/pax-demand-more-buses-as-pmpml-fleet-shrinks-101718563117101.html">Link</a></p>
+<p>Capacity Building Commission. (2023). <em>Annual Capacity Building Plan 2023-24.</em> <a href="https://cbc.gov.in/sites/default/files/completed-acbps/Pune_Municipal_Corporation_ACBP.pdf">Link</a></p>
+<p>Census of India. (1991). <em>Census Population Data 1991.</em> Pune Municipal Corporation. <a href="https://www.pmc.gov.in/sites/default/files/census-population-data-1991.pdf">Link</a></p>
+<p>Census of India. (2001). <em>Census Population Data 2001.</em> Pune Municipal Corporation. <a href="https://pmc.gov.in/sites/default/files/census-population-data-2001.pdf">Link</a></p>
+<p>Census of India. (2011). <em>Census Population Data 2011.</em> Pune Municipal Corporation. <a href="https://pmc.gov.in/sites/default/files/census-population-data-2011.pdf">Link</a></p>
+<p>Census2011. (2022). <em>Pune Population 2024.</em> <a href="https://www.census2011.co.in/census/city/375-pune.html">Link</a></p>
+<p>Google Maps. (2024). <em>Google Maps Directions.</em> <a href="https://www.google.com/maps/dir/Sai+Crane+Service,+Range+Hill+Corner,+Chattushringi,+Gokhalenagar,+Pune,+Maharashtra+411038/Sndt+Over+Bridge,+Pandurang+Colony,+Erandwane,+Pune,+Maharashtra+411004/@18.5236229,73.8087533,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!">Link</a></p>
+<p>Mahatme, A. W. (2021, May 28). <em>District Census Handbook, Pune – Census 1981.</em> Census India. <a href="https://censusindia.gov.in/nada/index.php/catalog/29711">Link</a></p>
+<p>Motor Vehicles Department, Maharashtra. (2022). <em>Revised Tariff Card Auto Rickshaw (English).</em> <a href="https://transport.maharashtra.gov.in/Site/Upload/GR/Auto%20English%201.pdf">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (2020). <em>Depotwise Monthly Statistical Report August 2020.</em> Open Data Pune Corporation. <a href="http://opendata.punecorporation.org/Citizen/CitizenDatasets/Index?categoryId=19">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (2022, February 4). <em>Depotwise Monthly Statistical Report August 2021.</em> Open Data Pune Corporation. <a href="http://opendata.punecorporation.org/Citizen/CitizenDatasets/Index?categoryId=19">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (2023, October 13). <em>Depotwise Statistical Report for the month of August 2023.</em> PMPML. <a href="https://pmpml.org/assets/media_center/1698209633966e17937455c15c2ef8bed3c48a8972.pdf">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (2024, October 10). <em>Depotwise Statistical Report for the month of August 2024.</em> PMPML. <a href="https://pmpml.org/assets/media_center/172855449144de55410b031492390c01315e8e7d90.pdf">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (2024). <em>Route Map Image.</em> PMPML. <a href="https://pmpml.org/plugins/images/home/route_map_image.png">Link</a></p>
+<p>Pune Mahanagar Parivahan Mahamandal Limited. (n.d.). <em>Route No.</em> PMPML. <a href="https://pmpml.org/assets/schedule/170866629042bbb3b37009c5fd5bea2b0df59c1b62.pdf">Link</a></p>
+<p>Pune Metro. (2024, September). <em>Swargate-Katraj DPR.</em> Pune Metro Rail. <a href="https://punemetrorail.org/download/Swargate-Katraj%20DPR.pdf">Link</a></p>
+<p>Punekar News. (2022, October 25). <em>Number of vehicles in Pune almost matches city’s population.</em> Punekar News. <a href="https://www.punekarnews.in/number-of-vehicles-in-pune-almost-matches-citys-population/">Link</a></p>
+<p>PunePulse. (2024, August 10). <em>Pune PMPML delays bus purchase decision.</em> Pune Pulse. <a href="https://www.mypunepulse.com/pune-pmpml-delays-bus-purchase-decision/">Link</a></p>
+<p>Regional Transport Office. (n.d.). <em>Vehicle Population Statistics for RTO Pune – 2000–2018.</em> Open Data Pune Corporation. <a href="http://opendata.punecorporation.org/Citizen/CitizenDatasets/Index?categoryId=51">Link</a></p>
+<p>Zhang, L., Long, R., &amp; Chen, H. (2019). Do car restriction policies effectively promote the development of public transport? <em>World Development.</em> [DOI/Link if available]</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
