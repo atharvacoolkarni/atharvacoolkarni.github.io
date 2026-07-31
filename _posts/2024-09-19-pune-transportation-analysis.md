@@ -170,7 +170,7 @@ PMPML should also learn from Pune metro's lessons of increasing the rate of metr
 
 According to PunekarNews (2022), the number of vehicles is similar to the city's population. The number of two-wheelers in 2018 was around **26 lakhs** which is close to half of the city's population in 2024. This means that there is an even higher number of two-wheelers in 2024.
 
-![Pune's vehicle population]({{ '/assets/posts/pune_transportation_analysis/Pune's vehicle population.png' | relative_url }}){: width="900" height="500"}
+![Pune's vehicle population]({{ "/assets/posts/pune_transportation_analysis/Pune's vehicle population.png" | relative_url }}){: width="900" height="500"}
 
 **Figure 7: Pune’s Vehicle Population, 2000 - 2018**<br>
 _Source: Statistics compiled by Regional Transport Office (RTO), data released by Pune Data Store_
