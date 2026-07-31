@@ -53,28 +53,28 @@ Pune's population has exploded over the past couple of years. We can see in the 
 **Table 1: Population of Pune (lakhs), 1981 to 2011**<br>
 _Sources: 1981 to 2011 data is from 1981 to 2011 census. The 2024 data is estimated by [Census 2011](https://www.census2011.co.in/)._
 
-![Pune population](/assets/posts/pune_transportation_analysis/Pune population chart.png){: width="900" height="500"}
+![Pune population]({{ '/assets/posts/pune_transportation_analysis/Pune population chart.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 1: Population of Pune (lakhs), 1981 to 2011**<br>
 _Sources: 1981 to 2011 data is from 1981 to 2011 census. The 2024 data is estimated by [Census 2011](https://www.census2011.co.in/)._
 
 Due to the increasing population, the population density of both cities has also increased. The only anomaly is Pune's population density decreasing but this is because of the inclusion of more than 20 villages within the Pune Municipal Corporation's (PMC) limits.
 
-![Pune population](/assets/posts/pune_transportation_analysis/Pune population (with villages).png){: width="900" height="500"}
+![Pune population]({{ '/assets/posts/pune_transportation_analysis/Pune population (with villages' | relative_url }}).png){: width="900" height="500"}
 
 **Figure 2: Population density of Pune (with new villages), 1981 - 2024**<br>
 _Sources: Final calculations by author. 1981, 1991, 2001, and 2011 Pune area data taken from census. 2024 Pune area data taken from Capacity Building Commission (CBC)._
 
 Without the new villages, the population density of Pune is closer to around 18,000 per square kilometre. There is still a problem of congestion of people. As such, the need for a proper public transport system has become much more essential as well.
 
-![Pune population](/assets/posts/pune_transportation_analysis/Pune population (without villages).png){: width="900" height="500"}
+![Pune population]({{ '/assets/posts/pune_transportation_analysis/Pune population (without villages' | relative_url }}).png){: width="900" height="500"}
 
 **Figure 3: Population density of Pune (without new villages), 1981 - 2024**<br>
 _Sources: Final calculations by author. 1981, 1991, 2001, and 2011 Pune area data taken from census. 2024 Pune area is taken same as 2011 area._
 
 There are around **1932 total buses** within all depots as reported in August 2024 by PMPML. This is an increase from July 2024 but a decrease from August 2023. According to PMPML depotwise statistics, the number of buses is decreasing. Around August 2020, there were close to 2500 buses but this number has been slowly decreasing and now sits at 1932 buses. There is more news that PMPML's fleet will shrink even more (Bengur, 2024). This is catastrophic as this means that the already congested buses will be even more congested if more buses are not quickly added to the fleet.
 
-![PMPML fleet](/assets/posts/pune_transportation_analysis/PMPML fleet.png){: width="900" height="500"}
+![PMPML fleet]({{ '/assets/posts/pune_transportation_analysis/PMPML fleet.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 4: The number of buses, total and per day, in PMPML’s fleet from 2020 to 2024**<br>
 _Source: PMPML’s depotwise statistics, August 2020 to August 2024. August 2022 data is from August 2023 statistics._
@@ -120,7 +120,7 @@ This means that there is a double effect on severity of the situation where one 
 
 An example of this is **Senapati Bapat Road** and subsequently Law College road which connects from Pune University Road down to the SNDT college bus stop that is under Nal Stop metro station. 
 
-![SB Road](/assets/posts/pune_transportation_analysis/SB Road.png){: width="450" height="250"}
+![SB Road]({{ '/assets/posts/pune_transportation_analysis/SB Road.png' | relative_url }}){: width="450" height="250"}
 
 **Figure 5: Senapati Bapat Road to SNDT College route**<br>
 _Source: Google Maps_
@@ -149,7 +149,7 @@ PMPML has already identified that there are four major routes:
 - **Dhayari – Hadapsar**
 - **Aundh – Katraj** (which can extend ahead of Aundh towards Kalewadi and Bhosari)
 
-![Possible routes](/assets/posts/pune_transportation_analysis/possible routes.png){: width="600" height="330"}
+![Possible routes]({{ '/assets/posts/pune_transportation_analysis/possible routes.png' | relative_url }}){: width="600" height="330"}
 
 **Figure 6: 4 major corridors that have been identified by PMPML**<br>
 _Source: PMPML_
@@ -170,7 +170,7 @@ PMPML should also learn from Pune metro's lessons of increasing the rate of metr
 
 According to PunekarNews (2022), the number of vehicles is similar to the city's population. The number of two-wheelers in 2018 was around **26 lakhs** which is close to half of the city's population in 2024. This means that there is an even higher number of two-wheelers in 2024.
 
-![Pune's vehicle population](/assets/posts/pune_transportation_analysis/Pune's vehicle population.png){: width="900" height="500"}
+![Pune's vehicle population]({{ '/assets/posts/pune_transportation_analysis/Pune's vehicle population.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 7: Pune’s Vehicle Population, 2000 - 2018**<br>
 _Source: Statistics compiled by Regional Transport Office (RTO), data released by Pune Data Store_
