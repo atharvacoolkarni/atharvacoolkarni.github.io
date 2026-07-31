@@ -60,7 +60,7 @@ John Taylor has been quite critical about the Federal Reserve's policies. Accord
 
 This deviation was a major source of the housing bubble and other financial excesses. Taylor also asserts that the Federal Reserve's monetary policy since the financial crisis has not been sufficiently rule-like. Had they been following the Taylor rule, it would have ended its policy of near-zero interest rates several years ago (Bernanke, 2015).
 
-![Classic Taylor Rule](/assets/projects/taylor-rule-brazil/classic taylor rule.png){: width="900" height="500"}
+![Classic Taylor Rule]({{ '/assets/projects/taylor-rule-brazil/classic taylor rule.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 1: The Classic Taylor Rule from 1982 to 2002. Source: (Orphanides, 2003)**
 
@@ -74,11 +74,11 @@ Brazil is an excellent country to do Taylor Rule analysis on mainly due to:
 
 2. In the past, Brazil has faced heavy inflation especially two periods of hyperinflation around 1990 and then around 1993. The Real plan of 1996 which also introduced the inflation-targeting regime and set up the monetary policy committee (COPOM) to monitor it. We can see that since then, inflation has been consistently kept low in comparison to the hyperinflation that was experienced.
 
-![Brazil Inflation](/assets/projects/taylor-rule-brazil/Brazil Inflation.png){: width="900" height="500"}
+![Brazil Inflation]({{ '/assets/projects/taylor-rule-brazil/Brazil Inflation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 2: Inflation rate in Brazil (Source: Central Bank of Brazil)**
 
-![Brazil GDP percent](/assets/projects/taylor-rule-brazil/Brazil GDP percent.png){: width="900" height="500"}
+![Brazil GDP percent]({{ '/assets/projects/taylor-rule-brazil/Brazil GDP percent.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 3: Real GDP Percent Change of Brazil (Source: System of Quarterly National Accounts - IBGE)**
 
@@ -162,7 +162,7 @@ $$\hat{y_t} = 0.4 \cdot \hat{c_t} - 0.6 \cdot \hat{u_t}$$
 
 We just need to find the capacity utilization gap and the unemployment rate gap. Figure 4 shows how capacity utilization and NAICU change for Brazil over time. The data for capacity utilization is reported monthly. The monthly data is plotted and then the HP filter was applied to calculate $$C_t^n$$ (NAICU). To then align with other data which were in annual terms, yearly averages were taken for $$C_t^n$$ (NAICU). The reason why we applied the HP filter first to monthly data was to prevent the loss of short-term fluctuations in monthly data. The calculation for this was done in Python.
 
-![Monthly CU](/assets/projects/taylor-rule-brazil/Monthly CU.png){: width="900" height="500"}
+![Monthly CU]({{ '/assets/projects/taylor-rule-brazil/Monthly CU.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 4: Monthly industrial capacity utilization and NAICU in Brazil from 2003 to 2023. Source: BCB and author's calculations**
 
@@ -170,7 +170,7 @@ The HP smoothing parameter, $$\lambda$$, is suggested to be 1600 for quarterly a
 
 Figure 5 shows the unemployment rate for Brazil from 2003 to 2023. The data is already provided in annual terms. We can see that unemployment was falling until 2014 – 2015 when it picked up again.
 
-![Unemp rate](/assets/projects/taylor-rule-brazil/Unemp rate.png){: width="900" height="500"}
+![Unemp rate]({{ '/assets/projects/taylor-rule-brazil/Unemp rate.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 5: Yearly unemployment rate and NAIRU in Brazil from 2003 to 2023. Source: World Bank and author's calculations**
 
@@ -178,11 +178,11 @@ This is indicative of the 2014 – 2016 crisis that the Brazilian economy was go
 
 The capacity utilization and unemployment rate gaps are simply percentage deviations of the real value against the trend value. These gaps are shown in figures 6 and 7 respectively.
 
-![CU pct](/assets/projects/taylor-rule-brazil/CU pct.png){: width="900" height="500"}
+![CU pct]({{ '/assets/projects/taylor-rule-brazil/CU pct.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 6: Capacity Utilization Gap (%) in Brazil from 2003 to 2023. Source: Author's calculations**
 
-![Unemp gap](/assets/projects/taylor-rule-brazil/Unemp gap.png){: width="900" height="500"}
+![Unemp gap]({{ '/assets/projects/taylor-rule-brazil/Unemp gap.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 7: Unemployment Gap (%) in Brazil from 2003 to 2023. Source: Author's calculations**
 
@@ -192,7 +192,7 @@ $$\hat{y_t} = 0.4 \cdot \hat{c_t} - 0.6 \cdot \hat{u_t}$$
 
 Hence, we get the output gap as shown in figure 8.
 
-![Outuput gap](/assets/projects/taylor-rule-brazil/Output gap.png){: width="900" height="500"}
+![Outuput gap]({{ '/assets/projects/taylor-rule-brazil/Output gap.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 8: Output Gap (%) in Brazil from 2003 to 2023. Source: Author's calculations**
 
@@ -200,13 +200,13 @@ We can see the clear decrease in output gap during the 2015 – 2016 recession a
 
 We now need to find the deviation from inflation. The inflation data is provided by the Extended National Consumer Price Index (IPCA). The target inflation rate is set by the National Monetary Council (CMN). A tolerance limit of ± 1.5% is followed to create a range within which inflation is tolerable. This is shown in figure 9.
 
-![Inflation rate](/assets/projects/taylor-rule-brazil/Inflation rate.png){: width="900" height="500"}
+![Inflation rate]({{ '/assets/projects/taylor-rule-brazil/Inflation rate.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 9: Yearly mean and target inflation rate in Brazil for 2003 to 2023. Source: BCB**
 
 From this, we can calculate the inflation gap by subtracting the target inflation rate from the IPCA inflation rate. This is shown in figure 10.
 
-![Inflation gap](/assets/projects/taylor-rule-brazil/Inflation gap.png){: width="900" height="500"}
+![Inflation gap]({{ '/assets/projects/taylor-rule-brazil/Inflation gap.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 10: Deviation from target inflation in Brazil for 2003 to 2023. Source: Author's calculations**
 
@@ -218,7 +218,7 @@ We now have all the terms in the Taylor Rule equation to estimate the nominal in
 
 Since Brazil has dealt with some tumultuous inflation in the past, the weight of deviation of inflation has been taken as $$a_\pi = 1.2$$. This is to account for the heavy influence of hyperinflation and the central bank's strict adherence to an inflation targeting framework. The weight of output gap has been taken as $$a_y = 0.5$$. After calculating this through Python, we can plot the SELIC rate and the estimated nominal interest rate.
 
-![TR interest rate](/assets/projects/taylor-rule-brazil/TR interest rate.png){: width="900" height="500"}
+![TR interest rate]({{ '/assets/projects/taylor-rule-brazil/TR interest rate.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 11: Average SELIC rate and the estimated nominal interest rate in Brazil from 2003 to 2023. Source: BCB and author's calculations**
 
@@ -239,13 +239,13 @@ Where:
 
 The yearly average of the expected inflation for the next 12 months is shown in the figure below.
 
-![Expected inflation](/assets/projects/taylor-rule-brazil/expected inflation.png){: width="900" height="500"}
+![Expected inflation]({{ '/assets/projects/taylor-rule-brazil/expected inflation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 12: Yearly average of the expected inflation of next 12 months for Brazil (2003 to 2023). Source: BCB**
 
 After adjusting for expected inflation, the Taylor Rule estimated nominal interest rates changes as shown in figure 13.
 
-![TR interest rate 2](/assets/projects/taylor-rule-brazil/TR interest rate 2.png){: width="900" height="500"}
+![TR interest rate 2]({{ '/assets/projects/taylor-rule-brazil/TR interest rate 2.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 13: Average SELIC rate and the estimated nominal interest rate with expected inflation in Brazil from 2003 to 2023. Source: BCB and author's calculations**
 

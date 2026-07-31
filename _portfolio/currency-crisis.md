@@ -125,7 +125,7 @@ Performance is assessed using:
 
 The pooled model across countries has a cross-validation AUC of 0.676 and AUC of 0.944 for the test data. The results indicate a solid fit within the sample data but imperfect performance when generalized to the test data, likely from a low number of crisis years experienced by countries after 2010. The best predictor variable was the 2-year lagged overvaluation (overval_pct_lag2, importance = 0.79), then lagged short-term debt and reserves (see Figure 1).
 
-![Pooled model results](/assets/projects/currency-crisis/pooled model results.png){: width="900" height="500"}
+![Pooled model results]({{ '/assets/projects/currency-crisis/pooled model results.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 1: Pooled model feature importance and confusion matrix**
 
@@ -161,7 +161,7 @@ These results support previous findings that a real exchange rate misalignment i
 **Indonesia:**
 - There is not enough crisis data to allow for a reliable model estimation.
 
-![Country feature importance](/assets/projects/currency-crisis/country feature importance.png)
+![Country feature importance]({{ '/assets/projects/currency-crisis/country feature importance.png' | relative_url }})
 
 **Figure 2: Country Feature Importance**
 
@@ -171,27 +171,27 @@ Figures 3-7 show the time series overvaluation of the real exchange rate for all
 
 Below is the overvaluation of the real exchange rate for Argentina. We can see clear rise in overvaluations during multiple crises: mid-1970s, mid-1980s, 1990, mid-2000s, and a couple of small crises just recently.
 
-![Argentina overvaluation](/assets/projects/currency-crisis/argentina overvaluation.png){: width="900" height="500"}
+![Argentina overvaluation]({{ '/assets/projects/currency-crisis/argentina overvaluation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 3: Argentina overvaluation from HP trend**
 
 Similarly, we can also see Brazil and Indonesia's overvaluation from the HP trend. We can see that Brazil had multiple crises with the most disastrous happening in 1994. Indonesia only faced one crisis which is why country specific analysis was not possible however, it was devastating enough that it was important to include for the pooled model.
 
-![Brazil overvaluation](/assets/projects/currency-crisis/brazil overvaluation.png){: width="900" height="500"}
+![Brazil overvaluation]({{ '/assets/projects/currency-crisis/brazil overvaluation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 4: Brazil overvaluation from the HP trend**
 
-![Indonesia overvaluation](/assets/projects/currency-crisis/indonesia overvaluation.png){: width="900" height="500"}
+![Indonesia overvaluation]({{ '/assets/projects/currency-crisis/indonesia overvaluation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 5: Indonesia overvaluation from the HP trend**
 
 The same can be seen for Mexico and Turkey. Mexico had multiple large crises in the 1970s, 1980s, and the 1990s after which the scale of the crises had actually calmed down. In comparison, Turkey's Lira has had a volatile past which still seems to be continuing into the present. The volatile nature of the Lira from the start has been a main reason as to including Turkey for this research.
 
-![Mexico overvaluation](/assets/projects/currency-crisis/mexico overvaluation.png){: width="900" height="500"}
+![Mexico overvaluation]({{ '/assets/projects/currency-crisis/mexico overvaluation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 6: Mexico overvaluation from HP trend**
 
-![Turkey overvaluation](/assets/projects/currency-crisis/turkey overvaluation.png){: width="900" height="500"}
+![Turkey overvaluation]({{ '/assets/projects/currency-crisis/turkey overvaluation.png' | relative_url }}){: width="900" height="500"}
 
 **Figure 7: Turkey overvaluation from HP trend**
 

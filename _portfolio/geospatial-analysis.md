@@ -17,7 +17,7 @@ Sankey diagram for borough
 <div class="viz-container" style="width: 100%; max-width: 1200px;">
   <div class="iframe-wrapper">
     <iframe 
-      src="/assets/projects/geospatial-analysis/sankey_borough_flow.html"
+      src="{{ '/assets/projects/geospatial-analysis/sankey_borough_flow.html' | relative_url }}"
       width="100%"
       height="800"
       style="height: 800px; min-height: 800px; width: 100%; border: none;">
@@ -29,7 +29,7 @@ Sankey diagram for borough
 Sankey diagram for zone
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/geospatial-analysis/sankey_zone_flow.html"></iframe>
+    <iframe src="{{ '/assets/projects/geospatial-analysis/sankey_zone_flow.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -37,7 +37,7 @@ Sankey diagram for zone
 Hotspot/Coldspot map
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/geospatial-analysis/interactive_hotspot_map.html"></iframe>
+    <iframe src="{{ '/assets/projects/geospatial-analysis/interactive_hotspot_map.html' | relative_url }}"></iframe>
   </div>
 </div>
 

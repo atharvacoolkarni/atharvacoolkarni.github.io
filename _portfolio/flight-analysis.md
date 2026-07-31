@@ -33,7 +33,7 @@ The main goals were:
 
 The analysis is based on commercial flight data and combines statistical analysis and machine learning to obtain meaningful insights.
 
-This project was done for University of London's third year course 'Programming for Data Science' during my BSc. Economics degree. The full coursework question set can be found here [ST2195_Coursework (PDF)](/assets/projects/flight_analysis/st2195_coursework.pdf){:target="_blank" rel="noopener"}.
+This project was done for University of London's third year course 'Programming for Data Science' during my BSc. Economics degree. The full coursework question set can be found here [ST2195_Coursework (PDF)]({{ '/assets/projects/flight_analysis/st2195_coursework.pdf' | relative_url }}){:target="_blank" rel="noopener"}.
 
 The questions are:
 1. When is the 
@@ -77,13 +77,13 @@ _Table 1: Selected variables_
 
 The reason for this selection is because these variables were the only ones determined to be crucial in answering the questions posed. We can also see that it is quite a large dataset since it is reading 3.5 gigabytes even when only 12 (actually 13 including plane manufacture year) variables were selected, so determining the important variables and selecting only those helps with reducing memory errors. The last variable, year of manufacture, is from the `plane-data` file.
 
-<img src="/assets/projects/flight_analysis/images/info_light.png" alt="Data information" class="theme-image">
+<img src="{{ '/assets/projects/flight_analysis/images/info_light.png' | relative_url }}" alt="Data information" class="theme-image">
 
 _Table 2: Data information_
 
 The main dataset is first checked for NA/missing values. There are missing values in the variables `DepTime`, `ArrTime`, `ArrDelay`, and `DepDelay`. We can check how many NA values there are and see the percentage of them compared to the total amount of data. As a rule of thumb, dropping NA values that are less than 5% of the respective observations is acceptable [[3]]. As we can see, the variables that have NA values have them for less than 5% of their observations and hence, the NA values will be dropped.
 
-<img src="/assets/projects/flight_analysis/images/NA percentage.png" alt="NA percentage" class="theme-image">
+<img src="{{ '/assets/projects/flight_analysis/images/NA percentage.png' | relative_url }}" alt="NA percentage" class="theme-image">
 
 _Table 2: NA percentage values_
 
@@ -103,7 +103,7 @@ As shown in the hourly delay chart, the lowest mean arrival delay occurs at 6:00
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q1/hourly_delay_plot.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q1/hourly_delay_plot.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -119,7 +119,7 @@ The weekly delay chart shows that Saturday has the lowest average delays, making
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q1/weekly_delay_plot.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q1/weekly_delay_plot.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -133,7 +133,7 @@ According to the monthly delay chart, September has the lowest average delays, f
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q1/monthly_delay_plot.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q1/monthly_delay_plot.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -149,7 +149,7 @@ The regression plots split the data by year of manufacture (pre-1980 and post-19
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q2/plane_age_plot.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q2/plane_age_plot.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -165,7 +165,7 @@ DTW – SBN (Detroit, Michigan – South Bend, Indiana) and LGA – STT (Queens,
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q3/select5_airports.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q3/select5_airports.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -173,7 +173,7 @@ _Figure 7: Top 5 connections by total flights (Python)_
 
 The R visualization is quite interesting, almost resembling a step graph. The largest change is, of course, between MSY – SLC (New Orleans, Louisiana – Salt Lake, Utah) where the percentage change is 100% which means that the flights in 2005 are double of those in 2004. The second largest is between GSO – TPA (Greensboro, North Carolina – Port Alsworth, Alaska) where there was an increase from 25% to 75% of total flights. There is a similar increase between GRB – MQT (Green Bay, Wisconsin – Gwinn, Michigan) where it increased from about 30% to 70% from 2004 to 2005. The connection between AKN – ANC (King Salmon, Alaska – Anchorage, Alaska) had almost no change at all with the percentage increasing from just below 50% to just a little over 50% from 2004 to 2005. A similar change is noted in BDL – IAH (Windsor Locks, Connecticut – Houston, Texas) with the increase being from about 45% to 55%.
 
-<img src="/assets/projects/flight_analysis/images/Q3 R.png" 
+<img src="{{ '/assets/projects/flight_analysis/images/Q3 R.png' | relative_url }}" 
      alt="Top 5 connections" 
      class="theme-image">
 
@@ -185,7 +185,7 @@ For Question 4, two different data subsets were taken for Python and R. For Pyth
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q4/correlation_matrix.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q4/correlation_matrix.html' | relative_url }}"></iframe>
   </div>
 </div>
 _Figure 13: Triangle correlation heatmap of top 5 airports (Python)_
@@ -220,7 +220,7 @@ The train-test split is 80-20. A large sample was used in order to improve accur
 
 <div class="viz-container">
   <div class="iframe-wrapper">
-    <iframe src="/assets/projects/flight_analysis/plots/q5/machine_learning.html"></iframe>
+    <iframe src="{{ '/assets/projects/flight_analysis/plots/q5/machine_learning.html' | relative_url }}"></iframe>
   </div>
 </div>
 
@@ -229,7 +229,7 @@ _Figure 15: Machine learning model (Python)_
 On the left is the graph visualizing the various mean squared error (MSE) values for the regression models. The values for each model are given in the table below. As we can see, the MSE values vary quite a bit. The random forest model has the highest MSE with the most range as well. Its mean MSE value is 26.6. The second highest is the ridge regression without any tuning. The third highest is the lasso regression without any tuning. The lowest is the linear regression. A MSE value of zero would imply a perfect model [[7]]. We cannot conclude this with the linear regression as such a small value when variables like `Origin` and `Dest` were dropped. It also threw a warning message that the “prediction from a rank deficient fit may be misleading”. This means that the test data did not work well with the regression [[8]]. The ridge and lasso regressions without tuning are more believable but these are without tuning. Their penalty terms, also called lambdas, have not been calculated when benchmarking [[9]]. We can (see) with the penalty terms that their MSE values fall drastically. We can improve upon the model by including more variables, especially origin and destination.
 
 <div class="theme-image">
-  <img src="/assets/projects/flight_analysis/images/Q5 R.png" 
+  <img src="{{ '/assets/projects/flight_analysis/images/Q5 R.png' | relative_url }}" 
        alt="AUC score">
 </div>
 
@@ -263,9 +263,9 @@ Overall, we were able to analyse when delays occur, changes in flight connection
 
 
 ## 📂 Project Files
-- [📄 Full Report (PDF)](/assets/projects/flight_analysis/flight_analysis_report.pdf){:target="_blank"}
-- <a href="/assets/projects/flight_analysis/flight_analysis.Rmd" download>📓 R Markdown (RMD)</a>
-- <a href="/assets/projects/flight_analysis/flight_analysis.ipynb" download>📔 Jupyter Notebook (IPYNB)</a>
+- [📄 Full Report (PDF)]({{ '/assets/projects/flight_analysis/flight_analysis_report.pdf' | relative_url }}){:target="_blank"}
+- <a href="{{ '/assets/projects/flight_analysis/flight_analysis.Rmd' | relative_url }}" download>📓 R Markdown (RMD)</a>
+- <a href="{{ '/assets/projects/flight_analysis/flight_analysis.ipynb' | relative_url }}" download>📔 Jupyter Notebook (IPYNB)</a>
 - [📂 Dataset (CSV)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HG7NV7){:target="_blank"}
 
 ## 🔗 Repository

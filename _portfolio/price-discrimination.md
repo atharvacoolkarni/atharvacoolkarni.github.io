@@ -61,7 +61,7 @@ The data for price discrimination analysis was taken from Kaggle, which was scra
 
 To reduce the complexity of the analysis and focus on price discrimination, we have chosen Air India and Vistara as the airline companies and the Delhi-Mumbai route (and vice versa) for analysis. The two companies were chosen as they provide business and economy class seats on the Delhi-Mumbai route. The other four airline companies only provide economy flights. As such, to keep the analysis consistent, we chose the two companies that provided both ticket classes. Air India and Vistara also account for 70% of the flights along this route. As such, it was clear to choose the two companies for analysis. Figure 1 shows a snippet of the sample data.
 
-![Data](/assets/projects/price_discrimination/images/dataset.png)
+![Data]({{ '/assets/projects/price_discrimination/images/dataset.png' | relative_url }})
 
 **Figure 1: A snapshot of the data used**<br>
 _Source: Dataset taken from Kaggle, data was scraped from Ease My Trip_
@@ -72,7 +72,7 @@ Hence, the research question is **"How do the factors influencing airlines' pric
 
 We can first start with observing the trends of the average prices of both classes plotted against the days remaining before the flight. Figure 2 shows the average price of economy class plotted against the days remaining before the departure.
 
-![Economy Price](/assets/projects/price_discrimination/images/economy class price.png)
+![Economy Price]({{ '/assets/projects/price_discrimination/images/economy class price.png' | relative_url }})
 
 **Figure 2: Average price of an economy class ticket as departure day draws closer**<br>
 _Source: Coded in Python by authors_
@@ -81,21 +81,21 @@ We can see that the average price has stayed relatively low, between ₹2,500 to
 
 We can also look at the average prices within the business class. Figure 3 shows the average price of business against days remaining to the flight. We can see that the average price hikes just 5 days before the flight. This is expected as there are fewer number of people that choose business class and the demand for it will only heighten within the last one week or so. We can see that the average price remained relatively steady around ₹43,000 to ₹45,000 but then jumped dramatically to ₹52,000 within the span of 3 – 4 days.
 
-![Business Price](/assets/projects/price_discrimination/images/business class price.png)
+![Business Price]({{ '/assets/projects/price_discrimination/images/business class price.png' | relative_url }})
 
 **Figure 3: Average price of a business class ticket as departure day draws closer**<br>
 _Source: Coded in Python by authors_
 
 We can also check how the price changes for both the classes based on the duration of the flight. Figure 4 shows the scatterplot and average price of economy class with respect to the duration of the flight.
 
-![Economy Price Duration](/assets/projects/price_discrimination/images/economy price duration.png)
+![Economy Price Duration]({{ '/assets/projects/price_discrimination/images/economy price duration.png' | relative_url }})
 
 **Figure 4: Price of economy class depending on flight duration**
 _Source: Coded in Python by authors_
 
 We can see that there is quite the scatter of prices and that the prices slightly increase as the duration of the flight increases. This is represented by the upward sloping trendline for average prices. This is expected as higher duration of a flight will represent higher fuel and operational costs. The data also contains stops which is counted in the duration. As such, the higher duration flights most likely have stops and as such will have higher costs.
 
-![Business Price Duration](/assets/projects/price_discrimination/images/business price duration.png)
+![Business Price Duration]({{ '/assets/projects/price_discrimination/images/business price duration.png' | relative_url }})
 
 **Figure 5: Price for business class depending on flight duration**<br>
 _Source: Coded in Python by authors_
@@ -120,7 +120,7 @@ The price ratio is much lower for business class when compared with economy clas
 
 In general, it is observed that prices are lower for connecting flights than direct flights. Figure 6 shows the average prices by number of stops. We can see that the average prices are higher when there is a stop compared to when there is not one. This is expected as stops will be associated with higher costs as it may be perceived as inconvenient. However, it must be noted that this is not always the case. Sometimes, connecting flights are priced lower by the airline in order to attract customers since it takes longer and is less convenient. According to the data, connecting flights have been priced higher.
 
-![Prices by stops](/assets/projects/price_discrimination/images/stop prices.png)
+![Prices by stops]({{ '/assets/projects/price_discrimination/images/stop prices.png' | relative_url }})
 
 **Figure 6: Average prices of flight based on the number of stops**<br>
 _Source: Coded in Python by authors_
@@ -206,7 +206,7 @@ $$\begin{align}
 
 We have omitted afternoon since it is the reference category in order to avoid multicollinearity. We can now conduct regression on this in Python. The regression results are as shown below in Figure 7.
 
-![Regression results](/assets/projects/price_discrimination/images/regression.png)
+![Regression results]({{ '/assets/projects/price_discrimination/images/regression.png' | relative_url }})
 
 **Figure 7: Regression results**<br>
 _Source: Coded in Python by authors_
