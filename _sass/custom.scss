@@ -1,0 +1,204 @@
+/* Sidebar icon overrides */
+
+/* Default (light mode) */
+.author__urls .fa-github,
+.author__urls .fa-linkedin {
+  color: #000000; /* black for light mode */
+}
+
+/* Dark mode */
+[data-theme="dark"] .author__urls .fa-github,
+[data-theme="dark"] .author__urls .fa-linkedin {
+  color: #ffffff; /* white for dark mode */
+}
+
+.table-container {
+  max-width: 500px;       /* limit width */
+  margin: 0;
+  margin-left: 0;         /* left align */
+  overflow-x: auto;       /* horizontal scroll if needed */
+  padding-left: 0;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;    /* respect colgroup widths */
+}
+
+/* spacing between table and caption */
+.table-container caption {
+  caption-side: bottom;   /* put caption below */
+  text-align: left;       /* align with table */
+  margin-top: 0.5rem;     /* gap from table */
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.table-container th,
+.table-container td {
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+/* Meta line: Updated date + read time */
+.page__meta {
+  display: flex;                  /* keep inline */
+  align-items: center;            /* vertically align nicely */
+  gap: 0rem;                    /* small space around the separator */
+  margin-bottom: 0.5rem;         /* space below meta block */
+  font-size: 0.9rem;
+  color: var(--global-text-color-dark);
+}
+
+/* Explicit separator (|) styling */
+.page__meta::before {
+  content: "";                    /* no prefix for first item */
+}
+
+.page__meta span + span::before {
+  content: "|";                   /* insert | between items */
+  margin: 0 0.25rem;              /* space around the pipe */
+  color: var(--global-text-color-light);
+}
+
+/* Add more breathing room before intro text */
+.page__content {
+  margin-top: 1rem;               /* ensures extra gap after meta block */
+}
+
+.theme-image {
+  transition: filter 0.05s ease;
+  filter: none;
+}
+
+/* Test one selector at a time */
+html[data-theme="dark"] .theme-image {
+  filter: invert(1) brightness(1) contrast(1);
+}
+
+/* Make the Updated: line follow theme text color, with dark-mode overrides */
+/* Covers both Minimal Mistakes selectors often used: .page__date and .page__meta */
+
+.page__date,
+.page__meta {
+  color: var(--global-text-color);        /* black in light, white in dark if your variable switches */
+}
+
+/* Ensure children (icons, <time>, <strong>) inherit the container color */
+.page__date time,
+.page__date strong,
+.page__date i,
+.page__meta i {
+  color: inherit;
+}
+
+/* Align the "Updated" line with the title and tighten spacing */
+
+/* 1) Make the "Updated" line line up with the H1 title */
+.page__header .page__date,
+.page__header .page__meta {
+  /* kill any default left padding/margins */
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+
+  /* keep icon + text inline and neatly spaced */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ensure the calendar icon doesn't introduce extra indent and matches text color */
+.page__header .page__date i,
+.page__header .page__date svg,
+.page__header .page__meta i,
+.page__header .page__meta svg {
+  margin-left: 0;
+  color: inherit;
+  fill: currentColor;
+}
+
+/* 2) Reduce the gap between "Updated" and the content that follows */
+.page__header {
+  margin-bottom: 0.75rem; /* tighten the header’s bottom spacing */
+}
+
+/* Also reduce the top margin of the very first H2 in the content */
+.page__content > h2:first-of-type {
+  margin-top: 0.5rem;     /* was likely ~1.5–2rem */
+}
+
+/* If you use dark mode, ensure the "Updated" text follows theme text color */
+html[data-theme="dark"] .page__header .page__date,
+html[data-theme="dark"] .page__header .page__meta {
+  color: #ffffff;
+}
+
+/* Light mode (default) */
+.archive__subtitle {
+  color: var(--global-text-color) !important; /* matches body text */
+  font-weight: 600;
+}
+
+/* Dark mode override */
+html[data-theme="dark"] .archive__subtitle {
+  color: var(--global-text-color) !important; /* uses theme accent (link) color */
+}
+
+.site-header .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header .nav-icons {
+  display: flex;
+  gap: 12px; /* spacing between menu + theme toggle */
+}
+
+#theme-toggle {
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.MathJax, .katex-display {
+  overflow-x: auto;
+  white-space: normal !important;
+  max-width: 100% !important;
+}
+
+.iframe-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; // Prevent any scrollbars!
+}
+
+.iframe-wrapper iframe {
+  width: 100%;
+  max-width: 100%;
+  height: 520px;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .iframe-wrapper iframe {
+    height: 500px; // Less tall for tablets/mobiles
+  }
+}
+
+@media (max-width: 480px) {
+  .iframe-wrapper iframe {
+    height: 400px; // Even less tall for narrow phones
+  }
+}
+
+.plot-container,
+#plot1 {
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  height: auto !important;
+  overflow: hidden;
+}

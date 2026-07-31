@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hourly Flight Delay Analysis</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body[data-theme="dark"],
+    html[data-theme="dark"] {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    #plot1 {
+      width: 100% !important;
+      max-width: 100%;
+      min-width: 0;
+      height: 500px !important; /* desktop default */
+      overflow: hidden;
+      padding-left: 8px;
+      padding-right: 8px;
+      padding-bottom: 12px;
+      box-sizing: border-box;
+    }
+    @media (max-width: 768px) {
+      #plot1 {
+        height: 500px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      #plot1 {
+        height: 400px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="plot1"></div>
+
+  <script>
+    function isDarkMode() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const pd = window.parent.document;
+          if (pd.documentElement.classList.contains('dark') || pd.documentElement.getAttribute('data-theme')==='dark') return true;
+          if (pd.body.classList.contains('dark') || pd.body.getAttribute('data-theme')==='dark') return true;
+          if (window.parent.localStorage && window.parent.localStorage.getItem('theme')==='dark') return true;
+        }
+      } catch(e){}
+      return document.documentElement.classList.contains('dark') ||
+             document.body.classList.contains('dark') ||
+             localStorage.getItem('theme')==='dark';
+    }
+
+    function getLayout(darkMode) {
+      return {
+        title: {
+          text: 'Hourly Flight Delay Analysis',
+          font: { size: 20, color: darkMode ? '#fff' : '#000' },
+          x: 0.5,
+          xanchor: 'center',
+        },
+        barmode: 'group',
+        plot_bgcolor: darkMode ? '#000' : '#fff',
+        paper_bgcolor: darkMode ? '#000' : '#fff',
+        font: { color: darkMode ? '#fff' : '#000' },
+        xaxis: { title: 'Hour of Day', dtick: 2, color: darkMode ? '#fff' : '#000', automargin: true },
+        yaxis: { title: 'Average Delay (minutes)', color: darkMode ? '#fff' : '#000', automargin: true },
+        legend: {
+          orientation: 'h',
+          yanchor: 'top',
+          y: 1.025, // just below title, adjust as needed
+          xanchor: 'center',
+          x: 0.485,
+          font: { size: 14 }
+        },
+        margin: { t: 80, b: 40, l: 48, r: 24 },
+        autosize: true
+      };
+    }
+
+    function resizePlot(plotDiv, traces, config) {
+      const darkMode = isDarkMode();
+      Plotly.react(plotDiv, traces, getLayout(darkMode), config);
+    }
+
+    fetch("q1_time_analysis.json")
+      .then(res => res.json())
+      .then(data => {
+        const hourlyData = data.hourly;
+        const darkMode = isDarkMode();
+
+        const trace1 = { x: hourlyData.hours, y: hourlyData.departure_delays, name:'Departure Delay', type:'bar', marker:{color: darkMode ? '#4fc3f7':'#17a2b8'} };
+        const trace2 = { x: hourlyData.hours, y: hourlyData.arrival_delays, name:'Arrival Delay', type:'bar', marker:{color: darkMode ? '#fbc02d':'#dc3545'} };
+
+        const traces = [trace1, trace2];
+        const layout = getLayout(darkMode);
+        const config = { responsive: true, displayModeBar: false };
+        const plotDiv = document.getElementById('plot1');
+
+        Plotly.newPlot(plotDiv, traces, layout, config);
+
+        window.addEventListener('resize', () => resizePlot(plotDiv, traces, config));
+      });
+  </script>
+</body>
+</html>
