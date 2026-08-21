@@ -6,10 +6,14 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'jekyll-redirect-from'
   gem 'jemoji'
+  gem 'jekyll-gist'
+  gem 'jekyll-paginate'
+  gem 'tzinfo-data'
   gem 'webrick', '~> 1.8'
 end
 
 gem 'github-pages'
 gem 'connection_pool', '2.5.0'
 
-gem "jekyll-last-modified-at", "~> 1.3"
+gem 'jekyll-last-modified-at', '~> 1.3'
+gem 'tzinfo', '~> 1.2'
